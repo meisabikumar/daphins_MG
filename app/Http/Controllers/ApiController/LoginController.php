@@ -43,8 +43,6 @@ class LoginController extends Controller
                 return response()->json(['error' =>"Wrong OTP"],400);
             }
 
-
-
             //verify OTP sent from user == OTP send to user mobile and stored in temporary table
             if( $request->otp==$temp_user->otp){
 
@@ -76,14 +74,12 @@ class LoginController extends Controller
         //If user already exist
         if(!empty($user)){
 
-            
-
             //search the user and verfity OTP
             $user  = User::where([['mobile','=',request('mobile')],['otp','=',request('otp')]])->first();
 
             //if OTP not verfied
             if (!$user) {
-                return response()->json(['error' =>"Wrong credentials"],400);
+                return response()->json(['error' =>"Wrong OTP"],400);
             }
 
             //if OTP verfied
