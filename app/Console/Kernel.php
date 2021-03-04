@@ -14,6 +14,11 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+          
+            Commands\fixins::class,
+            Commands\fixdel::class,
+        // Commands\FixtureDataUpdate::class,
+
     ];
 
     /**
@@ -24,7 +29,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('fixture:delete')->dailyAt('1:00');
+        $schedule->command('fixture:update')->dailyAt('1:10');
+        // $schedule->command('fixture:update')->everyMinute()->runInBackground();
+        // $schedule->command('fixture:delete')->everyTwoMinutes()->runInBackground();
+        
+        
     }
 
     /**
