@@ -25,3 +25,8 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:api'], function() {
     Route::Post('profile-update', [ProfileController::class, 'update']);
 });
+
+// Routes By Aamir
+
+
+// ENds
