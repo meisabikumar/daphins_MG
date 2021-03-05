@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController\LoginController;
 use App\Http\Controllers\ApiController\ProfileController;
 use App\Http\Controllers\ApiController\FixtureController;
+use App\Http\Controllers\ApiController\MatchesController;
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -29,5 +30,5 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 // Routes By Aamir
 Route::get('/GetFixture',[FixtureController::class,'getFixtureByRange']);
-
+Route::get('/TeamOne',[MatchesController::class,'getTeamone']);
 // ENds

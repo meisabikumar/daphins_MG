@@ -583,10 +583,13 @@ class ComposerStaticInit71d6eb7a9bd6c29a7d698ca8aaf407d1
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\fixdel' => __DIR__ . '/../..' . '/app/Console/Commands/fixdel.php',
+        'App\\Console\\Commands\\fixins' => __DIR__ . '/../..' . '/app/Console/Commands/fixins.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ApiController\\FixtureController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiController/FixtureController.php',
         'App\\Http\\Controllers\\ApiController\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiController/LoginController.php',
+        'App\\Http\\Controllers\\ApiController\\MatchesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiController/MatchesController.php',
         'App\\Http\\Controllers\\ApiController\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiController/ProfileController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -600,6 +603,7 @@ class ComposerStaticInit71d6eb7a9bd6c29a7d698ca8aaf407d1
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\ApiModel\\FixtureModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/FixtureModel.php',
         'App\\Models\\ApiModel\\LoginModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/LoginModel.php',
+        'App\\Models\\ApiModel\\MatchesModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/MatchesModel.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\temp_user' => __DIR__ . '/../..' . '/app/Models/temp_user.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
