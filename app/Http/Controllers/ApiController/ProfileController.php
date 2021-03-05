@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $data->name=$request->name;
         $data->email=$request->email;
         $data->save();
-        return response()->json(['success' =>"Profile Updated"],200);
+        return response()->json(['success' =>"Profile Updated","data"=>$data],200);
     }
 
 

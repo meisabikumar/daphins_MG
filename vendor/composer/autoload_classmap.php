@@ -6,11 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\fixdel' => $baseDir . '/app/Console/Commands/fixdel.php',
+    'App\\Console\\Commands\\fixins' => $baseDir . '/app/Console/Commands/fixins.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\ApiController\\FixtureController' => $baseDir . '/app/Http/Controllers/ApiController/FixtureController.php',
     'App\\Http\\Controllers\\ApiController\\LoginController' => $baseDir . '/app/Http/Controllers/ApiController/LoginController.php',
     'App\\Http\\Controllers\\ApiController\\ProfileController' => $baseDir . '/app/Http/Controllers/ApiController/ProfileController.php',
+    'App\\Http\\Controllers\\ApiController\\RoanuzApiController' => $baseDir . '/app/Http/Controllers/ApiController/RoanuzApiController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
@@ -23,6 +26,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\ApiModel\\FixtureModel' => $baseDir . '/app/Models/ApiModel/FixtureModel.php',
     'App\\Models\\ApiModel\\LoginModel' => $baseDir . '/app/Models/ApiModel/LoginModel.php',
+    'App\\Models\\ApiModel\\roanuz_tournaments' => $baseDir . '/app/Models/ApiModel/roanuz_tournaments.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\temp_user' => $baseDir . '/app/Models/temp_user.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

@@ -1,1 +1,10 @@
 php artisan passport:install
+
+
+  curl -X POST \
+    -d "access_key=72f44464a24650ee6c0da5ee93ce5ecd" \
+    -d "secret_key=ae8dee4499e678bef75682d709279550" \
+    -d "app_id=com.saisupp" \
+    -d "device_id=developer" \
+    https://rest.cricketapi.com/rest/v2/auth/
+  access token = 2s1356950676474826774s1368094204621892912
