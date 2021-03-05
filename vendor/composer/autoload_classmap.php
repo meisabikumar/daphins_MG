@@ -27,11 +27,10 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\ApiModel\\FixtureModel' => $baseDir . '/app/Models/ApiModel/FixtureModel.php',
     'App\\Models\\ApiModel\\LoginModel' => $baseDir . '/app/Models/ApiModel/LoginModel.php',
-<<<<<<< HEAD
     'App\\Models\\ApiModel\\MatchesModel' => $baseDir . '/app/Models/ApiModel/MatchesModel.php',
-=======
+    'App\\Models\\ApiModel\\roanuz_team_players_details' => $baseDir . '/app/Models/ApiModel/roanuz_team_players_details.php',
+    'App\\Models\\ApiModel\\roanuz_tournament_teams_details' => $baseDir . '/app/Models/ApiModel/roanuz_tournament_teams_details.php',
     'App\\Models\\ApiModel\\roanuz_tournaments' => $baseDir . '/app/Models/ApiModel/roanuz_tournaments.php',
->>>>>>> 460e72e7e54d012cd2a6cb1336d7daf77974c059
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\temp_user' => $baseDir . '/app/Models/temp_user.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

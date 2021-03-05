@@ -15,7 +15,7 @@ class CreateRoanuzTournamentsTable extends Migration
     {
         Schema::create('roanuz_tournaments', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->nullable();
+            $table->string('tournament_key')->nullable();
             $table->string('name')->nullable();
             $table->string('short_name')->nullable();
             $table->string('start_date')->nullable();

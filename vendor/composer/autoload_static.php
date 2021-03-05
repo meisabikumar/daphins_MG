@@ -604,11 +604,10 @@ class ComposerStaticInit71d6eb7a9bd6c29a7d698ca8aaf407d1
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\ApiModel\\FixtureModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/FixtureModel.php',
         'App\\Models\\ApiModel\\LoginModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/LoginModel.php',
-<<<<<<< HEAD
         'App\\Models\\ApiModel\\MatchesModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/MatchesModel.php',
-=======
+        'App\\Models\\ApiModel\\roanuz_team_players_details' => __DIR__ . '/../..' . '/app/Models/ApiModel/roanuz_team_players_details.php',
+        'App\\Models\\ApiModel\\roanuz_tournament_teams_details' => __DIR__ . '/../..' . '/app/Models/ApiModel/roanuz_tournament_teams_details.php',
         'App\\Models\\ApiModel\\roanuz_tournaments' => __DIR__ . '/../..' . '/app/Models/ApiModel/roanuz_tournaments.php',
->>>>>>> 460e72e7e54d012cd2a6cb1336d7daf77974c059
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\temp_user' => __DIR__ . '/../..' . '/app/Models/temp_user.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
