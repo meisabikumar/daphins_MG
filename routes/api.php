@@ -41,6 +41,7 @@ Route::get('/team_players_details',[RoanuzApiController::class,'team_players_det
 // Routes By Aamir
 Route::get('/GetFixture',[FixtureController::class,'getFixtureByRange']);
 Route::get('/TeamOne',[MatchesController::class,'getTeamone']);
+
 // ENds
 
 
