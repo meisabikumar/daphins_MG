@@ -37,6 +37,10 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::get('/roanuzAuth',[RoanuzApiController::class,'roanuzAuth']);
 Route::get('/recent_tournaments',[RoanuzApiController::class,'recent_tournaments']);
 Route::get('/tournament_teams_details',[RoanuzApiController::class,'tournament_teams_details']);
+Route::get('/tournament_rounds_list',[RoanuzApiController::class,'tournament_rounds_list']);
+Route::get('/match_list',[RoanuzApiController::class,'match_list']);
+
+
 Route::get('/team_players_details',[RoanuzApiController::class,'team_players_details']);
 
 // -----------------------------------------
