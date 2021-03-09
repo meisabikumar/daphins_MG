@@ -51,7 +51,7 @@ class RoanuzApiController extends Controller
 
             // save Data to Database
             $data=new roanuz_tournaments;
-            $data->key=$value['key'];
+            $data->tournament_key=$value['key'];
             $data->name=$value['name'];
             $data->short_name=$value['short_name'];
             $data->start_date=$value['start_date']['gmt'];
@@ -80,7 +80,7 @@ class RoanuzApiController extends Controller
         foreach ($tournaments as $value) {
 
             // Api Url
-            $url="https://api.footballapi.com/v1/tournament/".$value["key"]."/?access_token=".$api_token;
+            $url="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/?access_token=".$api_token;
 
             // response From Api
             $response = Http::get($url);
