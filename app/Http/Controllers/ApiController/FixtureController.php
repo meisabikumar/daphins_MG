@@ -31,7 +31,22 @@ class FixtureController extends Controller
             // Model Obeject
             $FixtureModel=new FixtureModel();
             // Model Function Call
-            $res=$FixtureModel->getFixtureModel($value); 
+            // return $value['time'];
+            // $value['time']['starting_at']['date_time'];
+            // return $value['time']['status'];
+            
+            $time=array(
+                'status'=>$value['time']['status'],
+                'starting_date'=>$value['time']['starting_at']['date'],
+                "starting_time"=>$value['time']['starting_at']['time'],
+            );
+                // print_r($time['data_time']);
+                    // return $time['date_time'];
+                
+            
+            $res=$FixtureModel->getFixtureModel($value,$time);
+            // $res=$FixtureModel->getFixtureModel($time);
+             
         }
         // Checking data feeding
         if($res>0)

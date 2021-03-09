@@ -55,8 +55,14 @@ class fixins extends Command
         foreach ($response['data'] as $value) {
             // Model Obeject
             $FixtureModel=new FixtureModel();
+            // Array for time
+            $time=array(
+                'status'=>$value['time']['status'],
+                'starting_date'=>$value['time']['starting_at']['date'],
+                "starting_time"=>$value['time']['starting_at']['time'],
+            );
             // Model Function Call
-            $res=$FixtureModel->getFixtureModel($value); 
+            $res=$FixtureModel->getFixtureModel($value,$time); 
         }
         echo "Updated";
     }

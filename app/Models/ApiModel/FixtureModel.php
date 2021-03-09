@@ -9,9 +9,12 @@ class FixtureModel extends Model
 {
     use HasFactory;
 
-    public function getFixtureModel($data)
+    public function getFixtureModel($data,$time)
     {
         // Object of array
+        // $$time=(object)$time;
+        $date=strtotime($time['starting_date']);
+		$starting_date=date('d-m-Y',$date);
         $data=(object)$data;
         // Inserting data
         $ret=DB::table('fixture')->insert(array(
@@ -34,8 +37,13 @@ class FixtureModel extends Model
             'leg'=>$data->leg,
             'colors'=>$data->colors,
             'deleted'=>$data->deleted,
+            'status'=>$time['status'],
+            'starting_date'=>$starting_date,
+            'starting_time'=>$time['starting_time'],
 
         )); 
-        return $ret;  
+        return $ret;
+                
+        
     }
 }

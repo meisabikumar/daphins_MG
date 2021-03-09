@@ -35,6 +35,9 @@ class Fixture extends Migration
             $table->string('leg',50)->nullable();
             $table->string('colors',50)->nullable();
             $table->string('deleted',50)->nullable();
+            $table->string('status',50)->nullable();
+            $table->string('starting_date',50)->nullable();
+            $table->string('starting_time',50)->nullable();
             $table->timestamps();
         });
     }
