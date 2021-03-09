@@ -6,7 +6,10 @@ use App\Http\Controllers\ApiController\LoginController;
 use App\Http\Controllers\ApiController\ProfileController;
 use App\Http\Controllers\ApiController\FixtureController;
 use App\Http\Controllers\ApiController\MatchesController;
+use App\Http\Controllers\ApiController\PlayerController;
 use App\Http\Controllers\ApiController\RoanuzApiController;
+use App\Http\Controllers\ApiController\AppResController;
+
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -40,8 +43,13 @@ Route::get('/team_players_details',[RoanuzApiController::class,'team_players_det
 
 // Routes By Aamir
 Route::get('/GetFixture',[FixtureController::class,'getFixtureByRange']);
-Route::get('/TeamOne',[MatchesController::class,'getTeamone']);
-
+Route::get('/Team',[MatchesController::class,'getTeamone']);
+Route::get('/Player',[PlayerController::class,'getPlayer']);
+// App Response Json
+Route::get('/FixtureData',[AppResController::class,'FixtureRes']);
+Route::get('/TeamData',[AppResController::class,'TeamRes']);
+Route::get('/PlayerData',[AppResController::class,'PlayerRes']);
+// Ends
 // ENds
 
 

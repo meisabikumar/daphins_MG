@@ -46,4 +46,5 @@ class FixtureModel extends Model
                 
         
     }
+    
 }

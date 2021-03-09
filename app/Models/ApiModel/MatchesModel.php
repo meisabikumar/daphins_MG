@@ -55,4 +55,9 @@ class MatchesModel extends Model
     ));
     return $rt;
    }
+   public function TeamData()
+   {
+       $ret=DB::table('teams')->get();
+       return $ret;
+   }
 }
