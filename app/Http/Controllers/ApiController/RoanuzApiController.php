@@ -39,10 +39,6 @@ class RoanuzApiController extends Controller
     // Function to get recent tournaments
     public function recent_tournaments(){
 
-        // $start_date=date("Y-m-d");
-        // $date=date_create($start_date);
-        // date_add($date,date_interval_create_from_date_string("5 days"));
-        // $end_date=date_format($date,"Y-m-d");
 
         //calling roanuzAuth() to get api_access token
         $api_token=$this->roanuzAuth();
@@ -56,24 +52,34 @@ class RoanuzApiController extends Controller
         //empty tournamnets table to avoid repeted data
         roanuz_tournaments::truncate();
 
+        $start_date=date("Y-m-d");
+        $date=date_create($start_date);
+        date_add($date,date_interval_create_from_date_string("5 days"));
+        $end_date=date_format($date,"Y-m-d");
+
         //Loop through recived data
         foreach ($response["data"]["tournaments"] as $value) {
 
+
+            $tournament_start_date = new DateTime($value['start_date']['gmt'], new DateTimeZone('GMT'));
+            $tournament_start_date = $tournament_start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+
+            $tournament_end_date = new DateTime($value['end_date']['gmt'], new DateTimeZone('GMT'));
+            $tournament_end_date = $tournament_end_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+
+            if($tournament_end_date >= $start_date){
+                $data=new roanuz_tournaments;
+                $data->tournament_key=$value['key'];
+                $data->competition_key=$value['competition']['key'];
+                $data->tournament_name=$value['name'];
+                $data->tournament_short_name=$value['short_name'];
+                $data->start_date=$tournament_start_date;
+                $data->end_date = $tournament_end_date;
+                $data->save();
+
+            }
             // save Data to Database
-            $data=new roanuz_tournaments;
-            $data->tournament_key=$value['key'];
-            $data->competition_key=$value['competition']['key'];
 
-            $data->tournament_name=$value['name'];
-            $data->tournament_short_name=$value['short_name'];
-
-            $start_date = new DateTime($value['start_date']['gmt'], new DateTimeZone('GMT'));
-            $data->start_date=$start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
-
-            $end_date = new DateTime($value['end_date']['gmt'], new DateTimeZone('GMT'));
-            $data->end_date=$end_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
-
-            $data->save();
         }
 
         return response()->json(['success' =>"saved"],200);
@@ -140,6 +146,8 @@ class RoanuzApiController extends Controller
         // empty Teams table to avoid repeted data
         roanuz_tournament_rounds_list::truncate();
 
+
+
         // Loop through each tournaments present in database
         foreach ($tournaments as $value) {
 
@@ -185,7 +193,12 @@ class RoanuzApiController extends Controller
         $rounds=roanuz_tournament_rounds_list::select('round_key','tournament_key')->get();
 
         //empty Players table to avoid repeted data
-        // roanuz_match_list::truncate();
+        roanuz_match_list::truncate();
+
+        $start_date=date("Y-m-d");
+        $date=date_create($start_date);
+        date_add($date,date_interval_create_from_date_string("5 days"));
+        $end_date=date_format($date,"Y-m-d");
 
         // Loop through Teams present in Database
         foreach ($rounds as $round) {
@@ -200,7 +213,11 @@ class RoanuzApiController extends Controller
             // loop through players in Team
             foreach ($response["data"]["round"]["matches"] as $value) {
 
-                // save players Data to Database
+                $match_start_date = new DateTime($value['match']['start_date']['gmt'], new DateTimeZone('GMT'));
+                $match_start_date = $match_start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+
+                if ($match_start_date  >= $start_date && $match_start_date  <= $end_date ) {
+                    // save players Data to Database
                 $data=new roanuz_match_list;
 
                 $data->match_key=$value['match']['key'];
@@ -208,7 +225,7 @@ class RoanuzApiController extends Controller
                 $data->match_home_team=$value['match']['home'];
                 $data->match_name=$value['match']['name'];
                 $data->match_short_name=$value['match']['short_name'];
-                $data->match_start_date=$value['match']['start_date']['gmt'];
+                $data->match_start_date=$match_start_date;
                 $data->match_status=$value['match']['status'];
                 $data->match_result=$value['result']['title'];
 
@@ -219,6 +236,10 @@ class RoanuzApiController extends Controller
 
 
                 $data->save();
+
+                }
+
+
             }
 
         }
