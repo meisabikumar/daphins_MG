@@ -207,7 +207,7 @@ class RoanuzApiController extends Controller
             $url="https://api.footballapi.com/v1/tournament/".$round["tournament_key"]."/round-detail/".$round["round_key"]."/?access_token=".$api_token;
 
             // Response from Api
-           $response = Http::get($url);
+         return  $response = Http::get($url);
 
 
             // loop through players in Team
@@ -232,7 +232,9 @@ class RoanuzApiController extends Controller
                 $data->round_key=$response["data"]["round"]['key'];
                 $data->round_name=$response["data"]["round"]['name'];
 
-                $data->tournament_key=$round["tournament_key"];
+                $data->tournament_key=$value['match']['tournament']['key'];
+                $data->tournament_name=$value['match']['tournament']['name'];
+                $data->tournament_short_name=$value['match']['tournament']['short_name'];
 
 
                 $data->save();

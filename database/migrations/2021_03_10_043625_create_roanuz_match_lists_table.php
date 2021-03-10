@@ -26,6 +26,8 @@ class CreateRoanuzMatchListsTable extends Migration
             $table->string('round_key')->nullable();
             $table->string('round_name')->nullable();
             $table->string('tournament_key')->nullable();
+            $table->string('tournament_name')->nullable();
+            $table->string('tournament_short_name')->nullable();
 
             $table->timestamps();
         });
