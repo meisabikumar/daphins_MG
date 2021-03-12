@@ -49,6 +49,7 @@ Route::get('/team_players_details',[RoanuzApiController::class,'team_players_det
 Route::get('/GetFixture',[FixtureController::class,'getFixtureByRange']);
 Route::get('/Team',[MatchesController::class,'getTeamone']);
 Route::get('/Player',[PlayerController::class,'getPlayer']);
+Route::get('/Testingstr',[MatchesController::class,'TestAlgo']);
 // App Response Json
 Route::get('/FixtureData',[AppResController::class,'FixtureRes']);
 Route::get('/TeamData',[AppResController::class,'TeamRes']);

@@ -26,6 +26,7 @@ class FixtureController extends Controller
 
         // Response
         $response = Http::withToken($api_token)->get($url);
+        // return $response;
         // Feeding Data in Database
         foreach ($response['data'] as $value) {
             // Model Obeject

@@ -48,6 +48,30 @@ class MatchesController extends Controller
         
         
     }
+    // Testing Algoritham
+    public function TestAlgo()
+    {
+        $date_one="10-10-2021";
+        $date_two="10-10-2021";
+        $teamOne="INDIA";
+        $teamTwo="ndia";
+
+        $comp=strcasecmp($teamOne,$teamTwo);
+        if($date_one==$date_two)
+        {
+            if($comp==0)
+        {
+            return "Same Hai";
+
+        }else{
+            
+            return "Everything is fine date is same but match is not present";
+        }
+        }else{
+                return "Date same nai hai, so we can add match";
+        }
+        
+    }
     
 
     
