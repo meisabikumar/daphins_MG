@@ -49,10 +49,12 @@ class MatchesController extends Controller
         
     }
     // Testing Algoritham
+    // Match Feeding Algo
     public function TestAlgo()
     {
         $date_one="10-10-2021";
         $date_two="10-10-2021";
+        // using Short Name of Team
         $teamOne="INDIA";
         $teamTwo="ndia";
 
