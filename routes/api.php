@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiController\MatchesController;
 use App\Http\Controllers\ApiController\PlayerController;
 use App\Http\Controllers\ApiController\RoanuzApiController;
 use App\Http\Controllers\ApiController\AppResController;
+use App\Http\Controllers\ApiController\filteringController;
 
 
 
@@ -36,12 +37,15 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 Route::get('/roanuzAuth',[RoanuzApiController::class,'roanuzAuth']);
 Route::get('/recent_tournaments',[RoanuzApiController::class,'recent_tournaments']);
-Route::get('/tournament_teams_details',[RoanuzApiController::class,'tournament_teams_details']);
+// Route::get('/tournament_teams_details',[RoanuzApiController::class,'tournament_teams_details']);
 Route::get('/tournament_rounds_list',[RoanuzApiController::class,'tournament_rounds_list']);
 Route::get('/match_list',[RoanuzApiController::class,'match_list']);
+Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_list']);
 
 
 Route::get('/team_players_details',[RoanuzApiController::class,'team_players_details']);
+// -----------------
+Route::get('/filter_match',[filteringController::class,'filter_match']);
 
 // -----------------------------------------
 
@@ -50,6 +54,7 @@ Route::get('/GetFixture',[FixtureController::class,'getFixtureByRange']);
 Route::get('/Team',[MatchesController::class,'getTeamone']);
 Route::get('/Player',[PlayerController::class,'getPlayer']);
 Route::get('/Testingstr',[MatchesController::class,'TestAlgo']);
+
 // App Response Json
 Route::get('/FixtureData',[AppResController::class,'FixtureRes']);
 Route::get('/TeamData',[AppResController::class,'TeamRes']);

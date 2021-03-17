@@ -9,6 +9,8 @@ use App\Models\ApiModel\FixtureModel;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use App\Models\ApiModel\MatchesModel;
+use App\Models\ApiModel\sportsmonk_match_list;
+
 
 class MatchesController extends Controller
 {
@@ -48,6 +50,51 @@ class MatchesController extends Controller
 
 
     }
+
+    public function sportsmonk_match_list(){
+
+        $api_token="CcP4ZFsZBYTETwlUf96ICZwMccTk5NJVXlq2meeTzAI2gD3gOt89moKYy5uD";
+
+       $fixtures=FixtureModel::get();
+
+       sportsmonk_match_list::truncate();
+
+
+        foreach($fixtures as $fixture){
+
+            $localteam="https://soccer.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token;
+            $visitorteam="https://soccer.sportmonks.com/api/v2.0/teams/".$fixture['visitorteam_id']."?api_token=".$api_token;
+
+            // Response
+            $localteam_res = Http::get($localteam);
+            $visitorteam_res = Http::get($visitorteam);
+
+            $data=new sportsmonk_match_list;
+            $data->fixture_id= $fixture['fixture_id'];
+            $data->league_id= $fixture['league_id'];
+            $data->season_id= $fixture['season_id'];
+            $data->round_id= $fixture['round_id'];
+            $data->group_id= $fixture['group_id'];
+
+            $data->match_home_team= $fixture['localteam_id'];
+            $data->match_away_team= $fixture['visitorteam_id'];
+
+            $data->match_name=$localteam_res['data']['name']." vs ".$visitorteam_res['data']['name'];
+            $data->match_short_name= $localteam_res['data']['short_code']." vs ".$visitorteam_res['data']['short_code'];
+            $date=date_create($fixture['starting_date']);
+            $data->match_start_date= date_format($date,"Y-m-d");
+            // $data->match_start_time= $fixture['starting_time'];
+
+            $data->save();
+        }
+
+        return "done";
+    }
+
+
+
+
+
     // Testing Algoritham
     public function TestAlgo()
     {
