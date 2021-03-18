@@ -1,6 +1,16 @@
 php artisan passport:install
 
 
+git add .
+git commit -m "added postgres database configuration"
+git push heroku master
+
+heroku run php artisan migrate
+$ heroku run php artisan db: seed
+
+heroku pg:psql
+
+
   curl -X POST \
     -d "access_key=72f44464a24650ee6c0da5ee93ce5ecd" \
     -d "secret_key=ae8dee4499e678bef75682d709279550" \
