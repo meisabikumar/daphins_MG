@@ -10,6 +10,7 @@ use App\Models\ApiModel\roanuz_tournaments;
 use App\Models\ApiModel\roanuz_tournament_teams_details;
 use App\Models\ApiModel\roanuz_tournament_rounds_list;
 use App\Models\ApiModel\roanuz_match_list;
+use App\Models\ApiModel\roanuz_match_teams_list;
 use App\Models\ApiModel\roanuz_team_players_details;
 
 use DateTime;
@@ -61,20 +62,24 @@ class RoanuzApiController extends Controller
         foreach ($response["data"]["tournaments"] as $value) {
 
 
-            $tournament_start_date = new DateTime($value['start_date']['gmt'], new DateTimeZone('GMT'));
-            $tournament_start_date = $tournament_start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+            $tournament_start_date_GMT = new DateTime($value['start_date']['gmt'], new DateTimeZone('GMT'));
+            $tournament_start_date_IST = $tournament_start_date_GMT->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+            $tournament_start_time_IST = $tournament_start_date_GMT->setTimezone(new DateTimeZone('IST'))->format('g:i A');
 
-            $tournament_end_date = new DateTime($value['end_date']['gmt'], new DateTimeZone('GMT'));
-            $tournament_end_date = $tournament_end_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+            $tournament_end_date_GMT = new DateTime($value['end_date']['gmt'], new DateTimeZone('GMT'));
+            $tournament_end_date_IST = $tournament_end_date_GMT->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+            $tournament_end_time_IST = $tournament_end_date_GMT->setTimezone(new DateTimeZone('IST'))->format('g:i A');
 
-            if($tournament_end_date >= $start_date){
+            if($tournament_end_date_IST >= $start_date){
                 $data=new roanuz_tournaments;
                 $data->tournament_key=$value['key'];
                 $data->competition_key=$value['competition']['key'];
                 $data->tournament_name=$value['name'];
                 $data->tournament_short_name=$value['short_name'];
-                $data->start_date=$tournament_start_date;
-                $data->end_date = $tournament_end_date;
+                $data->start_date=$tournament_start_date_IST;
+                $data->start_time=$tournament_start_time_IST;
+                $data->end_date=$tournament_end_date_IST;
+                $data->end_time=$tournament_end_time_IST;
                 $data->save();
 
             }
@@ -86,56 +91,7 @@ class RoanuzApiController extends Controller
 
     }
 
-    // Function to get Teams playing in tournaments
-    public function tournament_teams_details(){
-
-        // calling roanuzAuth() to get api_access token
-        $api_token=$this->roanuzAuth();
-
-        // get all the Tournaments from Database
-        $tournaments=roanuz_tournaments::all();
-
-        // empty Teams table to avoid repeted data
-        roanuz_tournament_teams_details::truncate();
-
-        // Loop through each tournaments present in database
-        foreach ($tournaments as $value) {
-
-            // Api Url
-            $url="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/?access_token=".$api_token;
-
-            // response From Api
-            $response = Http::get($url);
-
-
-            // Loop through Teams playing in Tournament
-            foreach ($response["data"]["tournament"]["teams"] as $value) {
-
-                // Teams Data to Data Base
-                $data=new roanuz_tournament_teams_details;
-                $data->tournament_key=$response["data"]["tournament"]['key'];
-                $data->tournament_name=$response["data"]["tournament"]['name'];
-                $data->tournament_short_name=$response["data"]["tournament"]['short_name'];
-
-                $start_date = new DateTime($response["data"]["tournament"]['start_date']['gmt'], new DateTimeZone('GMT'));
-                $data->tournament_start_date=$start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
-
-                $end_date = new DateTime($response["data"]["tournament"]['end_date']['gmt'], new DateTimeZone('GMT'));
-                $data->tournament_end_date=$end_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
-
-                $data->competition_key=$response["data"]["tournament"]['competition']['key'];
-
-                $data->team_key=$value['key'];
-                $data->team_code=$value['code'];
-                $data->team_name=$value['name'];
-                $data->save();
-            }
-
-        }
-        // return roanuz_tournament_teams_details::orderBy('team_code')->get();
-        return response()->json(['success' =>"saved"],200);
-    }
-
+    //get Rounds --
     public function tournament_rounds_list(){
         // calling roanuzAuth() to get api_access token
         $api_token=$this->roanuzAuth();
@@ -145,8 +101,6 @@ class RoanuzApiController extends Controller
 
         // empty Teams table to avoid repeted data
         roanuz_tournament_rounds_list::truncate();
-
-
 
         // Loop through each tournaments present in database
         foreach ($tournaments as $value) {
@@ -183,8 +137,8 @@ class RoanuzApiController extends Controller
 
     }
 
-      // Function to get Players Playing in Teams
-      public function match_list(){
+    // --(Tournament Round API)
+    public function match_list(){
 
         // calling roanuzAuth() to get api_access token
         $api_token=$this->roanuzAuth();
@@ -207,16 +161,17 @@ class RoanuzApiController extends Controller
             $url="https://api.footballapi.com/v1/tournament/".$round["tournament_key"]."/round-detail/".$round["round_key"]."/?access_token=".$api_token;
 
             // Response from Api
-         $response = Http::get($url);
+            $response = Http::get($url);
 
 
             // loop through players in Team
             foreach ($response["data"]["round"]["matches"] as $value) {
 
-                $match_start_date = new DateTime($value['match']['start_date']['gmt'], new DateTimeZone('GMT'));
-                $match_start_date = $match_start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+                $match_start_date_GMT = new DateTime($value['match']['start_date']['gmt'], new DateTimeZone('GMT'));
+                $match_start_date_IST = $match_start_date_GMT->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+                $match_start_time_IST = $match_start_date_GMT->setTimezone(new DateTimeZone('IST'))->format('g:i A');
 
-                if ($match_start_date  >= $start_date && $match_start_date  <= $end_date ) {
+                if ($match_start_date_IST  >= $start_date && $match_start_date_IST  <= $end_date ) {
                     // save players Data to Database
                 $data=new roanuz_match_list;
 
@@ -225,7 +180,8 @@ class RoanuzApiController extends Controller
                 $data->match_home_team=$value['match']['home'];
                 $data->match_name=$value['match']['name'];
                 $data->match_short_name=$value['match']['short_name'];
-                $data->match_start_date=$match_start_date;
+                $data->match_start_date=$match_start_date_IST;
+                $data->match_start_time=$match_start_time_IST;
                 $data->match_status=$value['match']['status'];
                 $data->match_result=$value['result']['title'];
 
@@ -235,7 +191,6 @@ class RoanuzApiController extends Controller
                 $data->tournament_key=$value['match']['tournament']['key'];
                 $data->tournament_name=$value['match']['tournament']['name'];
                 $data->tournament_short_name=$value['match']['tournament']['short_name'];
-
 
                 $data->save();
 
@@ -249,47 +204,145 @@ class RoanuzApiController extends Controller
         return response()->json(['success' =>"saved"],200);
     }
 
-
-    // Function to get Players Playing in Teams
-    public function team_players_details(){
+    public function match_teams_list(){
 
         // calling roanuzAuth() to get api_access token
         $api_token=$this->roanuzAuth();
 
-        // get all the Teams from Database
-        $teams=roanuz_tournament_teams_details::select('team_key','tournament_key')->groupBy('team_key')->get();
+        // get all the Tournaments from Database
+        $matchs=roanuz_match_list::all();
 
-        //empty Players table to avoid repeted data
-        roanuz_team_players_details::truncate();
+        // empty Teams table to avoid repeted data
+        roanuz_match_teams_list::truncate();
 
-        // Loop through Teams present in Database
-        foreach ($teams as $value) {
+        // Loop through each tournaments present in database
+        foreach ($matchs as $value) {
 
             // Api Url
-            $url="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/team/".$value["team_key"]."/?access_token=".$api_token;
+            $team_away="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/team/".$value["match_away_team"]."?access_token=".$api_token;
+            // response From Api
+            $team_away_response = Http::get($team_away);
 
-            // Response from Api
-            $response = Http::get($url);
+            $data = new roanuz_match_teams_list;
+            $data->match_key = $value["match_key"];
+            $data->team_key = $team_away_response["data"]["team"]["key"];
+            $data->team_name = $team_away_response["data"]["team"]["name"];
+            $data->team_short_name = $team_away_response["data"]["team"]["code"];
+            $data->players = $team_away_response["data"]["team"]["players"];
+            $data-> save();
 
-            // loop through players in Team
-            foreach ($response["data"]["team"]["players"] as $value) {
+            // -----------------------
 
-                // save players Data to Database
-                $data=new roanuz_team_players_details;
-                $data->team_key=$response["data"]["team"]['key'];
-                // $data->team_code=$value["data"]["team"]['code'];
-                // $data->team_name=$value["data"]["team"]['name'];
-                $data->player_key=$value['key'];
-                $data->player_name=$value['name'];
-                $data->player_role=$value['role'];
-                $data->jersey_number=$value['jersey_number'];
-                $data->jersey_name=$value['jersey_name'];
-                $data->save();
-            }
+            $team_home="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/team/".$value["match_home_team"]."?access_token=".$api_token;
+
+            $team_home_response = Http::get($team_home);
+
+            $data = new roanuz_match_teams_list;
+            $data->match_key = $value["match_key"];
+            $data->team_key = $team_home_response["data"]["team"]["key"];
+            $data->team_name = $team_home_response["data"]["team"]["name"];
+            $data->team_short_name = $team_home_response["data"]["team"]["code"];
+            $data->players = $team_home_response["data"]["team"]["players"];
+            $data-> save();
 
         }
 
-        return response()->json(['success' =>"saved"],200);
+
     }
+
+
+    //----------------------------------------------------------------------------------------------------
+    
+    // // Function to get Teams playing in tournaments
+    // public function tournament_teams_details(){
+
+    //     // calling roanuzAuth() to get api_access token
+    //     $api_token=$this->roanuzAuth();
+
+    //     // get all the Tournaments from Database
+    //     $tournaments=roanuz_tournaments::all();
+
+    //     // empty Teams table to avoid repeted data
+    //     roanuz_tournament_teams_details::truncate();
+
+    //     // Loop through each tournaments present in database
+    //     foreach ($tournaments as $value) {
+
+    //         // Api Url
+    //         $url="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/?access_token=".$api_token;
+
+    //         // response From Api
+    //         $response = Http::get($url);
+
+
+    //         // Loop through Teams playing in Tournament
+    //         foreach ($response["data"]["tournament"]["teams"] as $value) {
+
+    //             // Teams Data to Data Base
+    //             $data=new roanuz_tournament_teams_details;
+    //             $data->tournament_key=$response["data"]["tournament"]['key'];
+    //             $data->tournament_name=$response["data"]["tournament"]['name'];
+    //             $data->tournament_short_name=$response["data"]["tournament"]['short_name'];
+
+    //             $start_date = new DateTime($response["data"]["tournament"]['start_date']['gmt'], new DateTimeZone('GMT'));
+    //             $data->tournament_start_date=$start_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+
+    //             $end_date = new DateTime($response["data"]["tournament"]['end_date']['gmt'], new DateTimeZone('GMT'));
+    //             $data->tournament_end_date=$end_date->setTimezone(new DateTimeZone('IST'))->format('Y-m-d');
+
+    //             $data->competition_key=$response["data"]["tournament"]['competition']['key'];
+
+    //             $data->team_key=$value['key'];
+    //             $data->team_code=$value['code'];
+    //             $data->team_name=$value['name'];
+    //             $data->save();
+    //         }
+
+    //     }
+    //     // return roanuz_tournament_teams_details::orderBy('team_code')->get();
+    //     return response()->json(['success' =>"saved"],200);
+    // }
+
+    // // Function to get Players Playing in Teams
+    // public function team_players_details(){
+
+    //     // calling roanuzAuth() to get api_access token
+    //     $api_token=$this->roanuzAuth();
+
+    //     // get all the Teams from Database
+    //     $teams=roanuz_tournament_teams_details::select('team_key','tournament_key')->groupBy('team_key')->get();
+
+    //     //empty Players table to avoid repeted data
+    //     roanuz_team_players_details::truncate();
+
+    //     // Loop through Teams present in Database
+    //     foreach ($teams as $value) {
+
+    //         // Api Url
+    //         $url="https://api.footballapi.com/v1/tournament/".$value["tournament_key"]."/team/".$value["team_key"]."/?access_token=".$api_token;
+
+    //         // Response from Api
+    //         $response = Http::get($url);
+
+    //         // loop through players in Team
+    //         foreach ($response["data"]["team"]["players"] as $value) {
+
+    //             // save players Data to Database
+    //             $data=new roanuz_team_players_details;
+    //             $data->team_key=$response["data"]["team"]['key'];
+    //             // $data->team_code=$value["data"]["team"]['code'];
+    //             // $data->team_name=$value["data"]["team"]['name'];
+    //             $data->player_key=$value['key'];
+    //             $data->player_name=$value['name'];
+    //             $data->player_role=$value['role'];
+    //             $data->jersey_number=$value['jersey_number'];
+    //             $data->jersey_name=$value['jersey_name'];
+    //             $data->save();
+    //         }
+
+    //     }
+
+    //     return response()->json(['success' =>"saved"],200);
+    // }
 
 }

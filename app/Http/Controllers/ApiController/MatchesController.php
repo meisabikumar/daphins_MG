@@ -83,7 +83,7 @@ class MatchesController extends Controller
             $data->match_short_name= $localteam_res['data']['short_code']." vs ".$visitorteam_res['data']['short_code'];
             $date=date_create($fixture['starting_date']);
             $data->match_start_date= date_format($date,"Y-m-d");
-            // $data->match_start_time= $fixture['starting_time'];
+            $data->match_start_time= $fixture['starting_time'];
 
             $data->save();
         }

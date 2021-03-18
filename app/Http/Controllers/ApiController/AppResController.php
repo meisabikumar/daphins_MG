@@ -11,13 +11,16 @@ use Illuminate\Support\Facades\Http;
 use App\Models\ApiModel\PlayerModel;
 use App\Models\ApiModel\MatchesModel;
 
+use App\Models\ApiModel\final_match_list;
+use App\Models\ApiModel\roanuz_match_teams_list;
+
 class AppResController extends Controller
 {
-    
+
     public function FixtureRes()
     {
         $MatchesModel=new MatchesModel();
-        $res=$MatchesModel->getTeamOne_Model();   
+        $res=$MatchesModel->getTeamOne_Model();
         $resobj=json_encode($res);
         return $resobj;
     }
@@ -35,4 +38,18 @@ class AppResController extends Controller
         $resobj=json_encode($res);
         return $resobj;
     }
+
+
+    public function MatchDataRes()
+    {
+        $data=final_match_list::all();
+        return response()->json($data);
+    }
+
+    public function TeamDataRes()
+    {
+        $data=roanuz_match_teams_list::all();
+        return response()->json($data);
+    }
+
 }

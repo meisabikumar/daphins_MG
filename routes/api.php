@@ -40,12 +40,17 @@ Route::get('/recent_tournaments',[RoanuzApiController::class,'recent_tournaments
 // Route::get('/tournament_teams_details',[RoanuzApiController::class,'tournament_teams_details']);
 Route::get('/tournament_rounds_list',[RoanuzApiController::class,'tournament_rounds_list']);
 Route::get('/match_list',[RoanuzApiController::class,'match_list']);
+Route::get('/match_teams_list',[RoanuzApiController::class,'match_teams_list']);
+
 Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_list']);
 
 
-Route::get('/team_players_details',[RoanuzApiController::class,'team_players_details']);
+// Route::get('/team_players_details',[RoanuzApiController::class,'team_players_details']);
 // -----------------
 Route::get('/filter_match',[filteringController::class,'filter_match']);
+
+Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
+Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
 
 // -----------------------------------------
 
@@ -57,7 +62,7 @@ Route::get('/Testingstr',[MatchesController::class,'TestAlgo']);
 
 // App Response Json
 Route::get('/FixtureData',[AppResController::class,'FixtureRes']);
-Route::get('/TeamData',[AppResController::class,'TeamRes']);
+// Route::get('/TeamData',[AppResController::class,'TeamRes']);
 Route::get('/PlayerData',[AppResController::class,'PlayerRes']);
 // Ends
 // ENds
