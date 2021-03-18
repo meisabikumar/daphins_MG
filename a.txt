@@ -2,12 +2,12 @@ php artisan passport:install
 
 
 git add .
-git commit -m "added postgres database configuration"
+git commit -m "filter done"
 git push heroku master
 
-heroku run php artisan migrate
-$ heroku run php artisan db: seed
-
+heroku run php artisan migrate:refresh
+heroku run artisan passport:install
+heroku run php artisan db: seed
 heroku pg:psql
 
 
