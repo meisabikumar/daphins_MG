@@ -43,7 +43,26 @@ class AppResController extends Controller
     public function MatchDataRes()
     {
         $data=final_match_list::all();
-        return response()->json($data);
+
+        $result = array();
+
+        foreach($data as $val){
+            $arr = array(
+            "id"=> $val->id,
+            "title"=> $val->match_name,
+            "short_title" => $val->match_short_name,
+            "start_date" => $val->match_start_date,
+            "start_time" => $val->match_start_time);
+            $result[]=$arr;
+        }
+        // var_dump($result);
+        // $result_json = json_encode($result);
+
+        return response()->json([
+            "status"=>1,
+            "message"=>"Success",
+            "result"=>$result
+        ]);
     }
 
     public function TeamDataRes()
