@@ -12,7 +12,7 @@ use App\Models\ApiModel\PlayerModel;
 use App\Models\ApiModel\MatchesModel;
 
 use App\Models\ApiModel\final_match_list;
-use App\Models\ApiModel\roanuz_match_teams_list;
+use App\Models\ApiModel\final_team_list;
 
 class AppResController extends Controller
 {
@@ -48,7 +48,7 @@ class AppResController extends Controller
 
     public function TeamDataRes()
     {
-        $data=roanuz_match_teams_list::all();
+        $data=final_team_list::all();
         return response()->json($data);
     }
 

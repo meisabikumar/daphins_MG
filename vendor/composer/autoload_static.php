@@ -612,6 +612,7 @@ class ComposerStaticInit71d6eb7a9bd6c29a7d698ca8aaf407d1
         'App\\Models\\ApiModel\\PlayerModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/PlayerModel.php',
         'App\\Models\\ApiModel\\VirtualMoneyModel' => __DIR__ . '/../..' . '/app/Models/ApiModel/VirtualMoneyModel.php',
         'App\\Models\\ApiModel\\final_match_list' => __DIR__ . '/../..' . '/app/Models/ApiModel/final_match_list.php',
+        'App\\Models\\ApiModel\\final_team_list' => __DIR__ . '/../..' . '/app/Models/ApiModel/final_team_list.php',
         'App\\Models\\ApiModel\\roanuz_match_list' => __DIR__ . '/../..' . '/app/Models/ApiModel/roanuz_match_list.php',
         'App\\Models\\ApiModel\\roanuz_match_teams_list' => __DIR__ . '/../..' . '/app/Models/ApiModel/roanuz_match_teams_list.php',
         'App\\Models\\ApiModel\\roanuz_team_players_details' => __DIR__ . '/../..' . '/app/Models/ApiModel/roanuz_team_players_details.php',

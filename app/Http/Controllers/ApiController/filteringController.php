@@ -4,9 +4,15 @@ namespace App\Http\Controllers\ApiController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\ApiModel\sportsmonk_match_list;
 use App\Models\ApiModel\roanuz_match_list;
+
+use App\Models\ApiModel\roanuz_match_teams_list;
+use App\Models\ApiModel\sportsmonk_team_list;
+
 use App\Models\ApiModel\final_match_list;
+use App\Models\ApiModel\final_team_list;
 
 
 
@@ -21,7 +27,6 @@ class filteringController extends Controller
 
 
         foreach($roanuz_table as $value){
-
             // return $roanuz_table;
             $data = new final_match_list;
             $data->match_key = $value->match_key;
@@ -73,6 +78,45 @@ class filteringController extends Controller
                 }
 
         }
+
+
+    }
+
+
+    public function filter_team(){
+
+        $sportsmonk_teams_table=sportsmonk_team_list::get();
+        $roanuz_teams_table=roanuz_match_teams_list::get();
+
+        final_team_list::truncate();
+
+        foreach($roanuz_teams_table as $value){
+        //    return $value;
+            $data = new final_team_list;
+            $data->team_key = $value->team_key;
+            $data->team_name = $value->team_name;
+            $data->team_short_name = $value->team_short_name;
+            // $data->logo_path = null;
+            // $data->players = $value->players;
+            $data->API = 'roanuz';
+            $data->save();
+        }
+
+
+
+        foreach($sportsmonk_teams_table as $value){
+                $data = new final_team_list;
+                $data->team_key = $value->teamId;
+                $data->team_name = $value->name;
+                $data->team_short_name = $value->short_code;
+                $data->logo_path = $value->logo_path;
+                // $data->players = $value->players;
+                $data->API = 'sportsmonk';
+                $data->save();
+            }
+
+        return response()->json("done");
+
 
 
     }

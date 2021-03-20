@@ -48,6 +48,7 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
 // Route::get('/team_players_details',[RoanuzApiController::class,'team_players_details']);
 // -----------------
 Route::get('/filter_match',[filteringController::class,'filter_match']);
+Route::get('/filter_team',[filteringController::class,'filter_team']);
 
 Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
 Route::get('/TeamData',[AppResController::class,'TeamDataRes']);

@@ -35,6 +35,7 @@ return array(
     'App\\Models\\ApiModel\\PlayerModel' => $baseDir . '/app/Models/ApiModel/PlayerModel.php',
     'App\\Models\\ApiModel\\VirtualMoneyModel' => $baseDir . '/app/Models/ApiModel/VirtualMoneyModel.php',
     'App\\Models\\ApiModel\\final_match_list' => $baseDir . '/app/Models/ApiModel/final_match_list.php',
+    'App\\Models\\ApiModel\\final_team_list' => $baseDir . '/app/Models/ApiModel/final_team_list.php',
     'App\\Models\\ApiModel\\roanuz_match_list' => $baseDir . '/app/Models/ApiModel/roanuz_match_list.php',
     'App\\Models\\ApiModel\\roanuz_match_teams_list' => $baseDir . '/app/Models/ApiModel/roanuz_match_teams_list.php',
     'App\\Models\\ApiModel\\roanuz_team_players_details' => $baseDir . '/app/Models/ApiModel/roanuz_team_players_details.php',
