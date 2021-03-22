@@ -51,8 +51,8 @@ class AppResController extends Controller
             "id"=> $val->id,
             "title"=> $val->match_name,
             "short_title" => $val->match_short_name,
-            "start_date" => $val->match_start_date,
-            "start_time" => $val->match_start_time);
+            "start_date" => $val->match_start_date." ". $val->match_start_time
+            );
             $result[]=$arr;
         }
         // var_dump($result);

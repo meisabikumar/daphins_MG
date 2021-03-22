@@ -11,6 +11,12 @@ use App\Http\Controllers\ApiController\RoanuzApiController;
 use App\Http\Controllers\ApiController\AppResController;
 use App\Http\Controllers\ApiController\filteringController;
 
+// -----
+use App\Http\Controllers\ApiController\Cricket\Cricket_Data_Controller;
+use App\Http\Controllers\ApiController\Cricket\Cricket_AppResController;
+
+// -----
+
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -52,6 +58,14 @@ Route::get('/filter_team',[filteringController::class,'filter_team']);
 
 Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
 Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
+
+// -------Cricket------------
+Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
+Route::get('/cricket/all_teams',[Cricket_Data_Controller::class,'all_teams']);
+// ---Criket App Response ---
+
+Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
+// -------------------------
 
 // -----------------------------------------
 
