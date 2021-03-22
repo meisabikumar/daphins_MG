@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFinalTeamListsTable extends Migration
+class CreateUniqueTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFinalTeamListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('final_team_lists', function (Blueprint $table) {
+        Schema::create('unique_teams', function (Blueprint $table) {
             $table->id();
 
             $table->string('team_key')->nullable();
@@ -22,7 +22,7 @@ class CreateFinalTeamListsTable extends Migration
             $table->string('logo_path')->nullable();
             $table->json('players')->nullable();
             $table->string('API')->nullable();
-            
+
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateFinalTeamListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('final_team_lists');
+        Schema::dropIfExists('unique_teams');
     }
 }

@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers\ApiController;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class VirtualMoneyController extends Controller
 {
-       
 
-    
+
+
 }

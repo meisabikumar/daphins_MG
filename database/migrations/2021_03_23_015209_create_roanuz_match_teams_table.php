@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFinalTeamListsTable extends Migration
+class CreateRoanuzMatchTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateFinalTeamListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('final_team_lists', function (Blueprint $table) {
+        Schema::create('roanuz_match_teams', function (Blueprint $table) {
             $table->id();
-
+            $table->string('match_key')->nullable();
             $table->string('team_key')->nullable();
             $table->string('team_name')->nullable();
             $table->string('team_short_name')->nullable();
-            $table->string('logo_path')->nullable();
             $table->json('players')->nullable();
-            $table->string('API')->nullable();
-            
+
+            $table->string('tournament_key')->nullable();
+            $table->string('tournament_name')->nullable();
+            $table->string('tournament_short_name')->nullable();
+            $table->string('tournament_legal_name')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ class CreateFinalTeamListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('final_team_lists');
+        Schema::dropIfExists('roanuz_match_teams');
     }
 }

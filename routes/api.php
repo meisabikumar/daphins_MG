@@ -11,10 +11,14 @@ use App\Http\Controllers\ApiController\RoanuzApiController;
 use App\Http\Controllers\ApiController\AppResController;
 use App\Http\Controllers\ApiController\filteringController;
 
+// ---
+use App\Http\Controllers\ApiController\Football\Roanuz\Roanuz_Api_Controller;
+use App\Http\Controllers\ApiController\Football\Foolball_Filtering_Controller;
+// ----
+
 // -----
 use App\Http\Controllers\ApiController\Cricket\Cricket_Data_Controller;
 use App\Http\Controllers\ApiController\Cricket\Cricket_AppResController;
-
 // -----
 
 
@@ -50,11 +54,22 @@ Route::get('/match_teams_list',[RoanuzApiController::class,'match_teams_list']);
 
 Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_list']);
 
+// --- v2 ---
+Route::get('/roanuz_Auth',[Roanuz_Api_Controller::class,'roanuz_Auth']);
+Route::get('/roanuz_recent_tournament',[Roanuz_Api_Controller::class,'roanuz_recent_tournament']);
+Route::get('/roanuz_tournament_rounds',[Roanuz_Api_Controller::class,'roanuz_tournament_rounds']);
+Route::get('/roanuz_matchs',[Roanuz_Api_Controller::class,'roanuz_matchs']);
+Route::get('/roanuz_match_teams',[Roanuz_Api_Controller::class,'roanuz_match_teams']);
+// -------
 
-// Route::get('/team_players_details',[RoanuzApiController::class,'team_players_details']);
 // -----------------
 Route::get('/filter_match',[filteringController::class,'filter_match']);
 Route::get('/filter_team',[filteringController::class,'filter_team']);
+
+Route::get('/filter_unique_match',[Foolball_Filtering_Controller::class,'filter_unique_match']);
+Route::get('/filter_unique_team',[Foolball_Filtering_Controller::class,'filter_unique_team']);
+
+
 
 Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
 Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
