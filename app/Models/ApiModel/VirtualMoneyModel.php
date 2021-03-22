@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models\ApiModel;
@@ -10,5 +9,5 @@ class VirtualMoneyModel extends Model
 {
     use HasFactory;
 
-    
+
 }

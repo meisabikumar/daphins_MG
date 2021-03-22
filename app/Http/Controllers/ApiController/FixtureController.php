@@ -19,10 +19,10 @@ class FixtureController extends Controller
         // Date Automatation
         $start_date=date("Y-m-d");
         $date=date_create($start_date);
-        date_add($date,date_interval_create_from_date_string("5 days"));
+        date_add($date,date_interval_create_from_date_string("15 days"));
         $end_date=date_format($date,"Y-m-d");
         // Http Clinet Response
-        $url="https://soccer.sportmonks.com/api/v2.0/fixtures/between/".$start_date."/".$end_date."?api_token=".$api_token;
+        return $url="https://soccer.sportmonks.com/api/v2.0/fixtures/between/".$start_date."/".$end_date."?api_token=".$api_token;
         // $url="https://soccer.sportmonks.com/api/v2.0/fixtures/between/".$start_date."/".$end_date;
 
         // Response

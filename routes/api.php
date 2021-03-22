@@ -21,6 +21,11 @@ use App\Http\Controllers\ApiController\Cricket\Cricket_Data_Controller;
 use App\Http\Controllers\ApiController\Cricket\Cricket_AppResController;
 // -----
 
+// -----
+use App\Http\Controllers\AdminController\Cricket\Cricket_Contest_Controller;
+use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
+// -------
+
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -45,13 +50,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::Post('profile-update', [ProfileController::class, 'update']);
 });
 
-Route::get('/roanuzAuth',[RoanuzApiController::class,'roanuzAuth']);
-Route::get('/recent_tournaments',[RoanuzApiController::class,'recent_tournaments']);
-// Route::get('/tournament_teams_details',[RoanuzApiController::class,'tournament_teams_details']);
-Route::get('/tournament_rounds_list',[RoanuzApiController::class,'tournament_rounds_list']);
-Route::get('/match_list',[RoanuzApiController::class,'match_list']);
-Route::get('/match_teams_list',[RoanuzApiController::class,'match_teams_list']);
-
 Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_list']);
 
 // --- v2 ---
@@ -63,13 +61,8 @@ Route::get('/roanuz_match_teams',[Roanuz_Api_Controller::class,'roanuz_match_tea
 // -------
 
 // -----------------
-Route::get('/filter_match',[filteringController::class,'filter_match']);
-Route::get('/filter_team',[filteringController::class,'filter_team']);
-
 Route::get('/filter_unique_match',[Foolball_Filtering_Controller::class,'filter_unique_match']);
 Route::get('/filter_unique_team',[Foolball_Filtering_Controller::class,'filter_unique_team']);
-
-
 
 Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
 Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
@@ -78,9 +71,13 @@ Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
 Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
 Route::get('/cricket/all_teams',[Cricket_Data_Controller::class,'all_teams']);
 // ---Criket App Response ---
-
 Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
 // -------------------------
+
+// ------ Admin ---------
+Route::get('/admin/football/create-contest',[Football_Contest_Controller::class,'store']);
+Route::get('/admin/cricket/create-contest',[Cricket_Contest_Controller::class,'store']);
+// ----------------------
 
 // -----------------------------------------
 

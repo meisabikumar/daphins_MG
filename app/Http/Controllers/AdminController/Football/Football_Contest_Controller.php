@@ -27,5 +27,7 @@ class Football_Contest_Controller extends Controller
         $data->winning_amt = $request->winning_amt;
         $data->is_featured = $request->is_featured;
         $data->save();
+
+        return "done";
     }
 }
