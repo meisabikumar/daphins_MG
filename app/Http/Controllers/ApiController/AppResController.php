@@ -11,8 +11,14 @@ use Illuminate\Support\Facades\Http;
 use App\Models\ApiModel\PlayerModel;
 use App\Models\ApiModel\MatchesModel;
 
+use App\Models\ApiModel\football\roanuz\roanuz_match_teams;
+use App\Models\ApiModel\sportsmonk_team_list;
+
 use App\Models\ApiModel\football\unique_data\unique_matchs;
 use App\Models\ApiModel\football\unique_data\unique_teams;
+
+
+
 class AppResController extends Controller
 {
 
@@ -45,19 +51,59 @@ class AppResController extends Controller
 
         $result = array();
 
-        $array=array("Ligue 1","Bundesliga","Premier League","Champions League","LaLiga","Serie A","UEFA Nations League","Europa League","FIFA World Cup");
+        // $array=array("Ligue 1","Bundesliga","Premier League","Champions League","LaLiga","Serie A","UEFA Nations League","Europa League","FIFA World Cup");
 
         foreach($data as $val){
-            $k = array_rand($array);
-            $v = $array[$k];
+            // $k = array_rand($array);
+            // $v = $array[$k];
+
+            if($val->API=='roanuz'){
+               $visitorteam =  roanuz_match_teams::where('team_key',$val->match_away_team)->first();
+                $localteam =  roanuz_match_teams::where('team_key',$val->match_home_team)->first();
+
+                $teams = array(
+                    array(
+                        "id"=>$visitorteam->id,
+                        "team_id"=>$visitorteam->team_key,
+                        "name"=>$visitorteam->team_name,
+                        "short_name"=>$visitorteam->team_short_name,
+                        "flag"=>null),
+                        array(
+                            "id"=>$localteam->id,
+                            "team_id"=>$localteam->team_key,
+                            "name"=>$localteam->team_name,
+                            "short_name"=>$localteam->team_short_name,
+                            "flag"=>null));
+            }
+
+            if($val->API=='sportsmonk'){
+                // return  $val->match_away_team;
+                $visitorteam =  sportsmonk_team_list::where('teamId',$val->match_away_team)->first();
+                $localteam =  sportsmonk_team_list::where('teamId',$val->match_home_team)->first();
+
+                $teams = array(
+                    array(
+                        "id"=>$visitorteam->id,
+                        "team_id"=>$visitorteam->teamId,
+                        "name"=>$visitorteam->name,
+                        "short_name"=>$visitorteam->short_code,
+                        "flag"=>$visitorteam->logo_path),
+                        array(
+                            "id"=>$localteam->id,
+                            "team_id"=>$localteam->teamId,
+                            "name"=>$localteam->name,
+                            "short_name"=>$localteam->short_code,
+                            "flag"=>$localteam->logo_path));
+            }
 
             $arr = array(
             "id"=> $val->id,
             "title"=> $val->match_name,
             "short_title" => $val->match_short_name,
             "start_date" => $val->match_start_date." ". $val->match_start_time,
-            "type"=> $v
-            );
+            "type"=> $val->tournament_name,
+            "teams"=>$teams,
+            "API"=> $val->API);
             $result[]=$arr;
         }
         // var_dump($result);

@@ -22,8 +22,10 @@ class Cricket_AppResController extends Controller
 
         foreach($data as $val){
 
+            // return $val;
+
             $visitorteam =cricket_all_teams::where('team_id',$val->visitorteam_id)->first();
-            $localteam = cricket_all_teams::where('team_id',$val->visitorteam_id)->first();
+            $localteam = cricket_all_teams::where('team_id',$val->localteam_id)->first();
 
             $arr = array(
                 "id"=> $val->id,
@@ -40,8 +42,7 @@ class Cricket_AppResController extends Controller
                         array(
                             "team_id"=>$localteam->id,
                             "name"=>$localteam->name,
-                            "flag"=>$localteam->image_path)
-                )
+                            "flag"=>$localteam->image_path))
 
             );
             $result[]=$arr;

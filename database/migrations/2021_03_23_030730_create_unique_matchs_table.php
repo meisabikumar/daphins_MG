@@ -23,6 +23,12 @@ class CreateUniqueMatchsTable extends Migration
             $table->string('match_short_name')->nullable();
             $table->string('match_start_date')->nullable();
             $table->string('match_start_time')->nullable();
+
+            $table->string('match_status')->nullable();
+            $table->string('match_result')->nullable();
+            $table->string('tournament_key')->nullable();
+            $table->string('tournament_name')->nullable();
+
             $table->string('API')->nullable();
 
             $table->timestamps();

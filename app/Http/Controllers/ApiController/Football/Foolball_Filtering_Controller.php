@@ -37,11 +37,11 @@ class Foolball_Filtering_Controller extends Controller
             $data->match_start_date = $value->match_start_date;
             $data->match_start_time = $value->match_start_time;
 
-            // $data->match_status = $value->match_status;
-            // $data->match_result = $value->null;
+            $data->match_status = $value->match_status;
+            $data->match_result = $value->null;
 
-            // $data->tournament_key = $value->tournament_key;
-            // $data->tournament_name = $value->tournament_name;
+            $data->tournament_key = $value->tournament_key;
+            $data->tournament_name = $value->tournament_name;
 
             $data->API = "roanuz";
             $data->save();
