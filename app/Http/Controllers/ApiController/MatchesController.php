@@ -55,7 +55,7 @@ class MatchesController extends Controller
 
         $api_token="CcP4ZFsZBYTETwlUf96ICZwMccTk5NJVXlq2meeTzAI2gD3gOt89moKYy5uD";
 
-       $fixtures=FixtureModel::get();
+      $fixtures=FixtureModel::get();
 
        sportsmonk_match_list::truncate();
 

@@ -27,7 +27,6 @@ use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
 // -------
 
 
-
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
@@ -52,32 +51,54 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_list']);
 
-// --- v2 ---
-Route::get('/roanuz_Auth',[Roanuz_Api_Controller::class,'roanuz_Auth']);
-Route::get('/roanuz_recent_tournament',[Roanuz_Api_Controller::class,'roanuz_recent_tournament']);
-Route::get('/roanuz_tournament_rounds',[Roanuz_Api_Controller::class,'roanuz_tournament_rounds']);
-Route::get('/roanuz_matchs',[Roanuz_Api_Controller::class,'roanuz_matchs']);
-Route::get('/roanuz_match_teams',[Roanuz_Api_Controller::class,'roanuz_match_teams']);
-// -------
+// --- Football ---
+
+    // Roanuz-----
+    Route::get('/roanuz_Auth',[Roanuz_Api_Controller::class,'roanuz_Auth']);
+    Route::get('/roanuz_recent_tournament',[Roanuz_Api_Controller::class,'roanuz_recent_tournament']);
+    Route::get('/roanuz_tournament_rounds',[Roanuz_Api_Controller::class,'roanuz_tournament_rounds']);
+    Route::get('/roanuz_matchs',[Roanuz_Api_Controller::class,'roanuz_matchs']);
+    Route::get('/roanuz_match_teams',[Roanuz_Api_Controller::class,'roanuz_match_teams']);
+    // -------------------------------------------------------------------------------
+
+    // Filteing ---
+    Route::get('/filter_unique_match',[Foolball_Filtering_Controller::class,'filter_unique_match']);
+    Route::get('/filter_unique_team',[Foolball_Filtering_Controller::class,'filter_unique_team']);
+    // -------------------------------------------------------------------------------------------
+
+    // Football App response
+    Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
+    Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
+    Route::get('/football/get-contest',[AppResController::class,'football_contest_response']);
+    // -----------------------------------------------------------------------
 
 // -----------------
-Route::get('/filter_unique_match',[Foolball_Filtering_Controller::class,'filter_unique_match']);
-Route::get('/filter_unique_team',[Foolball_Filtering_Controller::class,'filter_unique_team']);
 
-Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
-Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
+
 
 // -------Cricket------------
 Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
 Route::get('/cricket/all_teams',[Cricket_Data_Controller::class,'all_teams']);
 // ---Criket App Response ---
 Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
+Route::get('/cricket/get-contest',[Cricket_AppResController::class,'cricket_contest_response']);
 // -------------------------
 
-// ------ Admin ---------
-Route::get('/admin/football/create-contest',[Football_Contest_Controller::class,'store']);
-Route::get('/admin/cricket/create-contest',[Cricket_Contest_Controller::class,'store']);
-// ----------------------
+
+
+// ------ Admin --------------------------------------------------------------------
+    // Footaball-----------------------------------------------------------------
+        // --- Create Contest --------------------------------------------------
+        Route::get('/admin/football/create-contest',[Football_Contest_Controller::class,'store']);
+        // ------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
+
+    // Cricket---------------------------------------------------------------------
+        // -----create contest-----------------------------------------------------
+        Route::get('/admin/cricket/create-contest',[Cricket_Contest_Controller::class,'store']);
+        // --------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
 
 // -----------------------------------------
 

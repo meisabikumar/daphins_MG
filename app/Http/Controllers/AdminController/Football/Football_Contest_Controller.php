@@ -16,16 +16,24 @@ class Football_Contest_Controller extends Controller
         $data = new football_contest;
         $data->match_id = $request->match_id;
         $data->contest_name = $request->contest_name;
-        $data->contest_category = $request->contest_category;
+        $data->category = $request->category;
         $data->game_type = $request->game_type;
-        $data->entry_fee = $request->entry_fee;
+        $data->tagline = $request->tagline;
+        $data->start_date = $request->start_date;
+        $data->max_remaining_entry = $request->max_remaining_entry;
         $data->entry_per_user = $request->entry_per_user;
+        $data->entry_fee = $request->entry_fee;
         $data->min_entry = $request->min_entry;
         $data->max_entry = $request->max_entry;
-        $data->breakdown_amt = $request->breakdown_amt;
-        $data->is_free = $request->is_free;
+        $data->admin_per = $request->admin_per;
+        $data->admin_amt = $request->admin_amt;
         $data->winning_amt = $request->winning_amt;
+        $data->is_free = $request->is_free;
         $data->is_featured = $request->is_featured;
+        $data->game_status = $request->game_status;
+        $data->is_confirmed = $request->is_confirmed;
+        $data->is_cancelled = $request->is_cancelled;
+        $data->breakdown = $request->breakdown;
         $data->save();
 
         return "done";

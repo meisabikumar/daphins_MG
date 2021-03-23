@@ -72,7 +72,7 @@ class Foolball_Filtering_Controller extends Controller
 
             if($flag=='unique'){
                 $data = new unique_matchs;
-                $data->match_key = $sportsmonk_match->match_key;
+                $data->match_key = $sportsmonk_match->fixture_id;
                 $data->match_away_team = $sportsmonk_match->match_away_team;
                 $data->match_home_team = $sportsmonk_match->match_home_team;
                 $data->match_name = $sportsmonk_match->match_name;
