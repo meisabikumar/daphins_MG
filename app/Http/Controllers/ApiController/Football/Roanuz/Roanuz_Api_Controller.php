@@ -48,7 +48,7 @@ class Roanuz_Api_Controller extends Controller
         $response = Http::get($url);
 
         //empty tournamnets table to avoid repeted data
-        // roanuz_tournaments::truncate();
+        roanuz_tournaments::truncate();
 
         $start_date=date("Y-m-d");
         $date=date_create($start_date);

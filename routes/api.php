@@ -12,6 +12,7 @@ use App\Http\Controllers\ApiController\AppResController;
 use App\Http\Controllers\ApiController\filteringController;
 
 // ---
+use App\Http\Controllers\ApiController\Football\Sportsmonk\Sportsmonk_Api_Controller;
 use App\Http\Controllers\ApiController\Football\Roanuz\Roanuz_Api_Controller;
 use App\Http\Controllers\ApiController\Football\Foolball_Filtering_Controller;
 // ----
@@ -53,7 +54,13 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
 
 // --- Football ---
 
-    // Roanuz-----
+    // SportsMonk Data Feeding--------
+    Route::get('/sportsmonk_fixture',[Sportsmonk_Api_Controller::class,'sportsmonk_get_fixtureByRange']);
+    Route::get('/sportsmonk_fixture_teams',[Sportsmonk_Api_Controller::class,'sportsmonk_get_teamsByFixture']);
+    Route::get('/sportsmonk_match',[Sportsmonk_Api_Controller::class,'make_fixture_data_similar_to_other_API']);
+    // ---------------------------------------------------------------------------------------------
+
+    // Roanuz Data Feeding-----
     Route::get('/roanuz_Auth',[Roanuz_Api_Controller::class,'roanuz_Auth']);
     Route::get('/roanuz_recent_tournament',[Roanuz_Api_Controller::class,'roanuz_recent_tournament']);
     Route::get('/roanuz_tournament_rounds',[Roanuz_Api_Controller::class,'roanuz_tournament_rounds']);
@@ -69,19 +76,20 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
     // Football App response
     Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
     Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
-    Route::get('/football/get-contest',[AppResController::class,'football_contest_response']);
+    Route::post('/football/get-contest',[AppResController::class,'football_contest_response']);
     // -----------------------------------------------------------------------
+
 
 // -----------------
 
 
 
 // -------Cricket------------
-Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
-Route::get('/cricket/all_teams',[Cricket_Data_Controller::class,'all_teams']);
-// ---Criket App Response ---
-Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
-Route::get('/cricket/get-contest',[Cricket_AppResController::class,'cricket_contest_response']);
+    Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
+    Route::get('/cricket/cricket_fixture_teams',[Cricket_Data_Controller::class,'cricket_fixture_teams']);
+    // ---Criket App Response ---
+    Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
+    Route::post('/cricket/get-contest',[Cricket_AppResController::class,'cricket_contest_response']);
 // -------------------------
 
 
@@ -89,13 +97,13 @@ Route::get('/cricket/get-contest',[Cricket_AppResController::class,'cricket_cont
 // ------ Admin --------------------------------------------------------------------
     // Footaball-----------------------------------------------------------------
         // --- Create Contest --------------------------------------------------
-        Route::get('/admin/football/create-contest',[Football_Contest_Controller::class,'store']);
+        Route::post('/admin/football/create-contest',[Football_Contest_Controller::class,'store']);
         // ------------------------------------------------------------------------
     // ---------------------------------------------------------------------------
 
     // Cricket---------------------------------------------------------------------
         // -----create contest-----------------------------------------------------
-        Route::get('/admin/cricket/create-contest',[Cricket_Contest_Controller::class,'store']);
+        Route::post('/admin/cricket/create-contest',[Cricket_Contest_Controller::class,'store']);
         // --------------------------------------------------------------------------
     // -------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------

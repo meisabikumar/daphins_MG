@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 use App\Models\ApiModel\Cricket\cricket_fixture;
-use App\Models\ApiModel\Cricket\cricket_all_teams;
+use App\Models\ApiModel\Cricket\cricket_fixture_teams;
 
 class Cricket_Data_Controller extends Controller
 {
@@ -25,7 +25,7 @@ class Cricket_Data_Controller extends Controller
          // Api token
         $api_token="CcP4ZFsZBYTETwlUf96ICZwMccTk5NJVXlq2meeTzAI2gD3gOt89moKYy5uD";
 
-        $url="https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=".$api_token."&filter[starts_between]=2021-03-01,2021-03-28";
+        $url="https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=".$api_token."&filter[starts_between]=2021-03-01,2021-03-28&include=localteam,visitorteam";
 
         //Response from Api
         $response = Http::get($url);
@@ -39,7 +39,9 @@ class Cricket_Data_Controller extends Controller
             $data->stage_id = $value['stage_id'];
             $data->round = $value['round'];
             $data->localteam_id = $value['localteam_id'];
+            $data->localteam_data = $value['localteam'];
             $data->visitorteam_id = $value['visitorteam_id'];
+            $data->visitorteam_data = $value['visitorteam'];
             $data->starting_at = $value['starting_at'];
             $data->type = $value['type'];
             $data->live = $value['live'];
@@ -72,41 +74,53 @@ class Cricket_Data_Controller extends Controller
 
     }
 
-    public function all_teams(){
-
-        //empty tournamnets table to avoid repeted data
-        cricket_all_teams::truncate();
-
-         // Api token
-        $api_token="CcP4ZFsZBYTETwlUf96ICZwMccTk5NJVXlq2meeTzAI2gD3gOt89moKYy5uD";
-
-        $url="https://cricket.sportmonks.com/api/v2.0/teams?api_token=".$api_token;
-
-        //Response from Api
-        $response = Http::get($url);
+    public function cricket_fixture_teams(){
 
 
+        $api_token = "CcP4ZFsZBYTETwlUf96ICZwMccTk5NJVXlq2meeTzAI2gD3gOt89moKYy5uD";
+
+      $fixtures = cricket_fixture::get();
+
+        cricket_fixture_teams::truncate();
+
+        foreach ($fixtures as $fixture) {
 
 
-        foreach($response['data'] as $value){
+            $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token."&include=squad";
 
 
-            $team=cricket_all_teams::where('team_id',$value['id'])->first();
+            $localteam_res = Http::get($localteam);
+            $localteam_data = $localteam_res["data"];
 
-            if(!$team){
-               $data = new cricket_all_teams;
-               $data->team_id = $value['id'];
-               $data->name = $value['name'];
-               $data->code = $value['code'];
-               $data->image_path = $value['image_path'];
-               $data->country_id = $value['country_id'];
-               $data->national_team = $value['national_team'];
-               $data->save();
-            }
+            $data = new cricket_fixture_teams;
+            $data->team_id = $localteam_data["id"];
+            $data->fixture_id = $fixture->fixture_id;
+            $data->name = $localteam_data["name"];
+            $data->code = $localteam_data["code"];
+            $data->image_path = $localteam_data["image_path"];
+            $data->country_id = $localteam_data["country_id"];
+            $data->national_team = $localteam_data["national_team"];
+            $data->players = $localteam_data["squad"];
+            $data->save();
 
+            // ---------------------------------
+            $visitorteam = "https://cricket.sportmonks.com/api/v2.0/teams/" . $fixture['visitorteam_id'] . "?api_token=" . $api_token . "&include=squad";
 
+            $visitorteam_res = Http::get($visitorteam);
+            $visitorteam_data = $visitorteam_res["data"];
 
+            $data = new cricket_fixture_teams;
+            $data->team_id = $visitorteam_data["id"];
+            $data->fixture_id = $fixture->fixture_id;
+            $data->name = $visitorteam_data["name"];
+            $data->code = $visitorteam_data["code"];
+            $data->image_path = $visitorteam_data["image_path"];
+            $data->country_id = $visitorteam_data["country_id"];
+            $data->national_team = $visitorteam_data["national_team"];
+            $data->players = $visitorteam_data["squad"];
+            $data->save();
         }
+
         return "done";
 
     }

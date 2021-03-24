@@ -12,6 +12,6 @@ class unique_teams extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'dfdfdfd' => 'array',
+        'players' => 'array',
     ];
 }

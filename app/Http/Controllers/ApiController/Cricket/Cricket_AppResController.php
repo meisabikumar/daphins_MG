@@ -41,10 +41,12 @@ class Cricket_AppResController extends Controller
                     array(
                         "team_id"=>$visitorteam->id,
                         "name"=>$visitorteam->name,
+                        "short_name"=>$visitorteam->code,
                         "flag"=>$visitorteam->image_path),
                         array(
                             "team_id"=>$localteam->id,
                             "name"=>$localteam->name,
+                            "short_name"=>$localteam->code,
                             "flag"=>$localteam->image_path))
 
             );

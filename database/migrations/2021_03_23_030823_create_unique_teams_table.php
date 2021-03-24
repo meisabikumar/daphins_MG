@@ -15,7 +15,7 @@ class CreateUniqueTeamsTable extends Migration
     {
         Schema::create('unique_teams', function (Blueprint $table) {
             $table->id();
-
+            $table->string('match_key')->nullable();
             $table->string('team_key')->nullable();
             $table->string('team_name')->nullable();
             $table->string('team_short_name')->nullable();

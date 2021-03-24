@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Models\ApiModel\Cricket;
+namespace App\Models\ApiModel\football\sportsmonk;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class cricket_fixture extends Model
+class sportsmonk_fixture extends Model
 {
     use HasFactory;
 
-
     protected $guarded = [];
 
-
     protected $casts = [
-        'visitorteam_dl_data' => 'array',
-        'localteam_dl_data' => 'array',
         'weather_report' => 'array',
+        'formations' => 'array',
+        'scores' => 'array',
+        'coaches' => 'array',
+        'standings' => 'array',
+        'assistants' => 'array',
+        'colors' => 'array',
         'localteam_data' => 'array',
         'visitorteam_data' => 'array',
     ];
-
 }

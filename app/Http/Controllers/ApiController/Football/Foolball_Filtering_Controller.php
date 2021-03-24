@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Models\ApiModel\sportsmonk_match_list;
-use App\Models\ApiModel\sportsmonk_team_list;
+use App\Models\ApiModel\football\sportsmonk\sportsmonk_matchs;
+use App\Models\ApiModel\football\sportsmonk\sportsmonk_match_teams;
 
 use App\Models\ApiModel\football\roanuz\roanuz_matchs;
 use App\Models\ApiModel\football\roanuz\roanuz_match_teams;
@@ -26,7 +26,7 @@ class Foolball_Filtering_Controller extends Controller
 
         foreach($roanuz_table as $value){
 
-            // return $roanuz_table;
+            // return $value;
             $data = new unique_matchs;
             $data->match_key = $value->match_key;
             $data->match_away_team = $value->match_away_team;
@@ -38,7 +38,7 @@ class Foolball_Filtering_Controller extends Controller
             $data->match_start_time = $value->match_start_time;
 
             $data->match_status = $value->match_status;
-            $data->match_result = $value->null;
+            $data->match_result = $value->match_result;
 
             $data->tournament_key = $value->tournament_key;
             $data->tournament_name = $value->tournament_name;
@@ -48,9 +48,10 @@ class Foolball_Filtering_Controller extends Controller
         }
 
         $final_match_list=unique_matchs::get();
-        $sportsmonk_match_list=sportsmonk_match_list::get();
+        $sportsmonk_match_list=sportsmonk_matchs::get();
 
         foreach($sportsmonk_match_list as $sportsmonk_match){
+
 
             $flag='';
 
@@ -72,13 +73,21 @@ class Foolball_Filtering_Controller extends Controller
 
             if($flag=='unique'){
                 $data = new unique_matchs;
-                $data->match_key = $sportsmonk_match->fixture_id;
+                $data->match_key = $sportsmonk_match->match_key;
                 $data->match_away_team = $sportsmonk_match->match_away_team;
                 $data->match_home_team = $sportsmonk_match->match_home_team;
                 $data->match_name = $sportsmonk_match->match_name;
                 $data->match_short_name = $sportsmonk_match->match_short_name;
+
                 $data->match_start_date = $sportsmonk_match->match_start_date;
                 $data->match_start_time = $sportsmonk_match->match_start_time;
+
+                $data->match_status = $sportsmonk_match->match_status;
+                $data->match_result = $sportsmonk_match->match_result;
+
+                $data->tournament_key = $sportsmonk_match->tournament_key;
+                $data->tournament_name = $sportsmonk_match->tournament_name;
+
                 $data->API = "sportsmonk";
                 $data->save();
             }
@@ -91,35 +100,39 @@ class Foolball_Filtering_Controller extends Controller
 
     public function filter_unique_team(){
 
-        $sportsmonk_teams_table=sportsmonk_team_list::get();
+       $sportsmonk_teams_table=sportsmonk_match_teams::get();
         $roanuz_teams_table=roanuz_match_teams::get();
 
         unique_teams::truncate();
 
-        foreach($roanuz_teams_table as $value){
-        //    return $value;
+
+        foreach($sportsmonk_teams_table as $value){
             $data = new unique_teams;
+            $data->match_key = $value->fixture_id;
+            $data->team_key = $value->team_id;
+            $data->team_name = $value->name;
+            $data->team_short_name = $value->short_code;
+            $data->logo_path = $value->logo_path;
+            $data->players = $value->players;
+            $data->API = 'sportsmonk';
+            $data->save();
+        }
+
+        foreach($roanuz_teams_table as $value){
+
+            $data = new unique_teams;
+            $data->match_key = $value->match_key;
             $data->team_key = $value->team_key;
             $data->team_name = $value->team_name;
             $data->team_short_name = $value->team_short_name;
-            // $data->logo_path = null;
-            // $data->players = $value->players;
+            $data->logo_path = null;
+            $data->players = $value->players;
             $data->API = 'roanuz';
             $data->save();
         }
 
 
 
-        foreach($sportsmonk_teams_table as $value){
-                $data = new unique_teams;
-                $data->team_key = $value->teamId;
-                $data->team_name = $value->name;
-                $data->team_short_name = $value->short_code;
-                $data->logo_path = $value->logo_path;
-                // $data->players = $value->players;
-                $data->API = 'sportsmonk';
-                $data->save();
-            }
 
         return response()->json("done");
 

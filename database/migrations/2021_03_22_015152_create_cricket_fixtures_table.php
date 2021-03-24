@@ -21,7 +21,9 @@ class CreateCricketFixturesTable extends Migration
             $table->string('stage_id')->nullable();
             $table->string('round')->nullable();
             $table->string('localteam_id')->nullable();
+            $table->json('localteam_data')->nullable();
             $table->string('visitorteam_id')->nullable();
+            $table->json('visitorteam_data')->nullable();
             $table->string('starting_at')->nullable();
             $table->string('type')->nullable();
             $table->string('live')->nullable();
