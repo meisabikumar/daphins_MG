@@ -5,6 +5,8 @@ git add .
 git commit -m "filter done"
 git push heroku master
 
+composer dump-autoload
+
 heroku run php artisan migrate:refresh
 heroku run artisan passport:install
 heroku run php artisan db: seed

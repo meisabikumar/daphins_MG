@@ -630,8 +630,6 @@ class ComposerStaticInit71d6eb7a9bd6c29a7d698ca8aaf407d1
         'App\\Models\\ApiModel\\football\\sportsmonk\\sportsmonk_matchs' => __DIR__ . '/../..' . '/app/Models/ApiModel/football/sportsmonk/sportsmonk_matchs.php',
         'App\\Models\\ApiModel\\football\\unique_data\\unique_matchs' => __DIR__ . '/../..' . '/app/Models/ApiModel/football/unique_data/unique_matchs.php',
         'App\\Models\\ApiModel\\football\\unique_data\\unique_teams' => __DIR__ . '/../..' . '/app/Models/ApiModel/football/unique_data/unique_teams.php',
-        'App\\Models\\ApiModel\\sportsmonk_match_list' => __DIR__ . '/../..' . '/app/Models/ApiModel/sportsmonk_match_list.php',
-        'App\\Models\\ApiModel\\sportsmonk_team_list' => __DIR__ . '/../..' . '/app/Models/ApiModel/sportsmonk_team_list.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\temp_user' => __DIR__ . '/../..' . '/app/Models/temp_user.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

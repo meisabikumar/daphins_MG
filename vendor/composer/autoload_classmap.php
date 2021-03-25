@@ -53,8 +53,6 @@ return array(
     'App\\Models\\ApiModel\\football\\sportsmonk\\sportsmonk_matchs' => $baseDir . '/app/Models/ApiModel/football/sportsmonk/sportsmonk_matchs.php',
     'App\\Models\\ApiModel\\football\\unique_data\\unique_matchs' => $baseDir . '/app/Models/ApiModel/football/unique_data/unique_matchs.php',
     'App\\Models\\ApiModel\\football\\unique_data\\unique_teams' => $baseDir . '/app/Models/ApiModel/football/unique_data/unique_teams.php',
-    'App\\Models\\ApiModel\\sportsmonk_match_list' => $baseDir . '/app/Models/ApiModel/sportsmonk_match_list.php',
-    'App\\Models\\ApiModel\\sportsmonk_team_list' => $baseDir . '/app/Models/ApiModel/sportsmonk_team_list.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\temp_user' => $baseDir . '/app/Models/temp_user.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
