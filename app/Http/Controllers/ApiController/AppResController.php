@@ -49,7 +49,7 @@ class AppResController extends Controller
 
             if ($val->API == 'roanuz') {
 
-                return $visitorteam = roanuz_match_teams::where('team_key', $val->match_away_team)->first();
+                $visitorteam = roanuz_match_teams::where('team_key', $val->match_away_team)->first();
                 $localteam = roanuz_match_teams::where('team_key', $val->match_home_team)->first();
 
                 $teams = array(
@@ -108,10 +108,80 @@ class AppResController extends Controller
 
     }
 
-    public function TeamDataRes()
+    public function football_get_team_by_match_id(Request $request)
     {
-        $data = unique_teams::all();
-        return response()->json($data);
+        $data = unique_teams::where('match_key', $request->match_id)->where('team_key', $request->team_id)->first();
+
+        $players = array();
+
+        if ($data['API'] == 'sportsmonk') {
+
+            $team=array(
+                "id" => $data['API'],
+                "match_id"=> $data['match_key'],
+                "team_id"=> $data['team_key'],
+                "team_name"=> $data['team_name'],
+                "team_short_name"=> $data['team_short_name'],
+                "logo_path"=> $data['logo_path']
+            );
+
+            foreach ($data["players"] as $player) {
+
+                $player = array(
+                    "player_id" => $player["player_id"],
+                    "team_id" => $player["team_id"],
+                    "short_name" => $player["common_name"],
+                    "name" => $player["fullname"],
+                    "player_points" => "22",
+                    "player_credits" => "8.5",
+                    "sel_by" => "21.16",
+                );
+
+                $players[]=$player;
+            }
+        }
+
+
+        if ($data['API'] == 'roanuz') {
+
+
+
+            $team=array(
+                "id" => $data['API'],
+                "match_id"=> $data['match_key'],
+                "team_id"=> $data['team_key'],
+                "team_name"=> $data['team_name'],
+                "team_short_name"=> $data['team_short_name'],
+                "logo_path"=> $data['logo_path']
+            );
+
+            foreach ($data["players"] as $player) {
+
+                $player = array(
+                    "player_id" => $player["key"],
+                    "team_id" => $data['team_key'],
+                    "short_name" => $player["jersey_name"],
+                    "name" => $player["name"],
+                    "player_points" => "22",
+                    "player_credits" => "8.5",
+                    "sel_by" => "21.16",
+                );
+
+                $players[]=$player;
+            }
+        }
+
+        return response()->json([
+            "status" => 1,
+            "message" => "Success",
+            "result"=>array(
+                "team" => $team,
+            "players" => $players
+            )
+
+        ]);
+
+
     }
 
     public function football_contest_response(Request $request)

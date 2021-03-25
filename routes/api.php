@@ -75,7 +75,7 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
 
     // Football App response
     Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
-    Route::get('/TeamData',[AppResController::class,'TeamDataRes']);
+    Route::post('/football/get-teams-data',[AppResController::class,'football_get_team_by_match_id']);
     Route::post('/football/get-contest',[AppResController::class,'football_contest_response']);
     // -----------------------------------------------------------------------
 
@@ -89,6 +89,7 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
     Route::get('/cricket/cricket_fixture_teams',[Cricket_Data_Controller::class,'cricket_fixture_teams']);
     // ---Criket App Response ---
     Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
+    Route::post('/cricket/get-teams-data',[Cricket_AppResController::class,'cricket_get_team_by_match_id']);
     Route::post('/cricket/get-contest',[Cricket_AppResController::class,'cricket_contest_response']);
 // -------------------------
 
