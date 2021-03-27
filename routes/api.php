@@ -1,37 +1,40 @@
 <?php
+// http://127.0.0.1:8000/api/
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController\LoginController;
-use App\Http\Controllers\ApiController\ProfileController;
+
 use App\Http\Controllers\ApiController\FixtureController;
 use App\Http\Controllers\ApiController\MatchesController;
 use App\Http\Controllers\ApiController\PlayerController;
-use App\Http\Controllers\ApiController\RoanuzApiController;
-use App\Http\Controllers\ApiController\AppResController;
-use App\Http\Controllers\ApiController\filteringController;
 
-// ---
+// -- Football Data-
 use App\Http\Controllers\ApiController\Football\Sportsmonk\Sportsmonk_Api_Controller;
 use App\Http\Controllers\ApiController\Football\Roanuz\Roanuz_Api_Controller;
 use App\Http\Controllers\ApiController\Football\Foolball_Filtering_Controller;
+use App\Http\Controllers\ApiController\AppResController;
 // ----
 
-// -----
+// --Cricket Data ---
 use App\Http\Controllers\ApiController\Cricket\Cricket_Data_Controller;
 use App\Http\Controllers\ApiController\Cricket\Cricket_AppResController;
 // -----
 
-// -----
+// -- Admin Contest ---
 use App\Http\Controllers\AdminController\Cricket\Cricket_Contest_Controller;
 use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
 // -------
 
+// -- User ---
+use App\Http\Controllers\User\User_Contest_Controller;
+use App\Http\Controllers\User\Wallet_Transaction_Controller;
+// -------
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::get('/hi', [LoginController::class, 'hi']);
+
 
 // ---------- Routes by Abhishek ---------------
 
@@ -50,9 +53,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::Post('profile-update', [ProfileController::class, 'update']);
 });
 
-Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_list']);
-
-// --- Football ---
+// --- Football API---
 
     // SportsMonk Data Feeding--------
     Route::get('/sportsmonk_fixture',[Sportsmonk_Api_Controller::class,'sportsmonk_get_fixtureByRange']);
@@ -76,21 +77,20 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
     // Football App response
     Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
     Route::post('/football/get-teams-data',[AppResController::class,'football_get_team_by_match_id']);
-    Route::post('/football/get-contest',[AppResController::class,'football_contest_response']);
+    Route::post('/football/get-contest',[AppResController::class,'get_football_contest_response']);
     // -----------------------------------------------------------------------
-
 
 // -----------------
 
 
 
-// -------Cricket------------
+// -------Cricket API------------
     Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
     Route::get('/cricket/cricket_fixture_teams',[Cricket_Data_Controller::class,'cricket_fixture_teams']);
     // ---Criket App Response ---
     Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
     Route::post('/cricket/get-teams-data',[Cricket_AppResController::class,'cricket_get_team_by_match_id']);
-    Route::post('/cricket/get-contest',[Cricket_AppResController::class,'cricket_contest_response']);
+    Route::post('/cricket/get-contest',[Cricket_AppResController::class,'get_cricket_contest_response']);
 // -------------------------
 
 
@@ -103,11 +103,16 @@ Route::get('/sportsmonk_match_list',[MatchesController::class,'sportsmonk_match_
     // ---------------------------------------------------------------------------
 
     // Cricket---------------------------------------------------------------------
-        // -----create contest-----------------------------------------------------
+        // -----Create contest-----------------------------------------------------
         Route::post('/admin/cricket/create-contest',[Cricket_Contest_Controller::class,'store']);
         // --------------------------------------------------------------------------
     // -------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------
+
+// ---- USER ---------------------------------------------------------------------------
+Route::post('/join-contest',[User_Contest_Controller::class,'join_contest']);
+Route::post('/wallet-Transaction',[Wallet_Transaction_Controller::class,'store']);
+// -------------------------------------------------------------------------------------
 
 // -----------------------------------------
 

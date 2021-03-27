@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->unique();
             $table->bigInteger('otp')->nullable();
             $table->string('profile_pic')->nullable();
-            $table->float('wallet')->nullable();
+            $table->float('wallet', 5, 2)->nullable();
             $table->softDeletes('deleted_at');
             $table->rememberToken();
             $table->timestamps();

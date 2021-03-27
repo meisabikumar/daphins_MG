@@ -137,6 +137,7 @@ class AppResController extends Controller
                         "team_code" => $team->team_short_name,
                         "short_name" => $player["common_name"],
                         "name" => $player["fullname"],
+                        "type" => null,
                         "player_points" => "22",
                         "player_credits" => "8.5",
                         "sel_by" => "21.16",
@@ -173,6 +174,7 @@ class AppResController extends Controller
                         "team_code" => $team->team_short_name,
                         "short_name" => $player["jersey_name"],
                         "name" => $player["name"],
+                        "type" => $player["role"],
                         "player_points" => "22",
                         "player_credits" => "8.5",
                         "sel_by" => "21.16",
@@ -198,9 +200,9 @@ class AppResController extends Controller
 
     }
 
-    public function football_contest_response(Request $request)
+    public function get_football_contest_response(Request $request)
     {
-        $data = football_contest::where('match_id', $request->match_id)->get();
+        $data = football_contest::where('match_id', $request->match_id)->first();
 
         if (!$data) {
             return response()->json([

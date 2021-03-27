@@ -80,12 +80,14 @@ class Cricket_AppResController extends Controller
 
             foreach ($team->players as $player) {
 
+                // return $player;
                 $player = array(
                     "player_id" => $player["id"],
                     "team_id" => $team->fixture_id,
                     "team_code" => $team->code,
                     "short_name" => null,
                     "name" => $player["fullname"],
+                    "type" => $player["position"]["name"],
                     "logo_path" => $player["image_path"],
                     "player_points" => "22",
                     "player_credits" => "8.5",
@@ -109,10 +111,11 @@ class Cricket_AppResController extends Controller
         ]);
     }
 
-    public function cricket_contest_response(Request $request)
+    public function get_cricket_contest_response(Request $request)
     {
 
-        $data = cricket_contest::where('match_id', $request->match_id)->get();
+       $data = cricket_contest::where('match_id', $request->match_id)->first();
+
 
         if (!$data) {
             return response()->json([
@@ -122,8 +125,8 @@ class Cricket_AppResController extends Controller
 
         $match = cricket_fixture::where('fixture_id', $request->match_id)->first();
 
-        $visitorteam = cricket_all_teams::where('team_id', $match->visitorteam_id)->first();
-        $localteam = cricket_all_teams::where('team_id', $match->localteam_id)->first();
+        $visitorteam = cricket_fixture_teams::where('team_id', $match->visitorteam_id)->first();
+        $localteam = cricket_fixture_teams::where('team_id', $match->localteam_id)->first();
 
         $series_data = array(
             "id" => $match->id,
@@ -135,11 +138,11 @@ class Cricket_AppResController extends Controller
 
             "teams" => array(
                 array(
-                    "team_id" => $visitorteam->id,
+                    "team_id" => $visitorteam->team_id,
                     "name" => $visitorteam->name,
                     "flag" => $visitorteam->image_path),
                 array(
-                    "team_id" => $localteam->id,
+                    "team_id" => $localteam->team_id,
                     "name" => $localteam->name,
                     "flag" => $localteam->image_path)),
 

@@ -25,7 +25,7 @@ class Cricket_Data_Controller extends Controller
          // Api token
         $api_token="Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
 
-        $url="https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=".$api_token."&filter[starts_between]=2021-03-01,2021-03-28&include=localteam,visitorteam";
+        $url="https://cricket.sportmonks.com/api/v2.0/fixtures?api_token=".$api_token."&filter[starts_between]=2021-03-01,2021-05-15&include=localteam,visitorteam";
 
         //Response from Api
         $response = Http::get($url);
@@ -79,9 +79,9 @@ class Cricket_Data_Controller extends Controller
 
         $api_token = "Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
 
-      $fixtures = cricket_fixture::get();
+     return $fixtures = cricket_fixture::get();
 
-        cricket_fixture_teams::truncate();
+        // cricket_fixture_teams::truncate();
 
         foreach ($fixtures as $fixture) {
 
