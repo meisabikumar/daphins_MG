@@ -45,6 +45,7 @@ class CreateCricketFixturesTable extends Migration
             $table->string('rpc_overs')->nullable();
             $table->string('rpc_target')->nullable();
             $table->json('weather_report')->nullable();
+            $table->boolean('active')->nullable()->default(0);
             $table->timestamps();
         });
     }

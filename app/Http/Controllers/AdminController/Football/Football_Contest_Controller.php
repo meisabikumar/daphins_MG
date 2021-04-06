@@ -9,6 +9,14 @@ use App\Models\AdminModel\Football\football_contest;
 
 class Football_Contest_Controller extends Controller
 {
+
+    public function index()
+    {
+        //
+       $result = football_contest::all();
+        return view('AdminView.show_contest')->with('result',$result);
+    }
+
     //
     public function store(Request $request)
     {

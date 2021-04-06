@@ -20,7 +20,7 @@ class CreateUserContestsTable extends Migration
             $table->string('match_id');
             $table->string('game_type');
             $table->float('entry_fee',5,2);
-            $table->string('players');
+            $table->json('players');
             $table->timestamps();
         });
     }

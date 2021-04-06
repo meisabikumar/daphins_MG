@@ -264,7 +264,7 @@ class AppResController extends Controller
         return response()->json([
             "status" => 1,
             "message" => "Success",
-            "result" => $data,
+            "result" => [$data],
             "series_data" => $series_data,
         ]);
     }

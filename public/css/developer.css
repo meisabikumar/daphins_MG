@@ -1,0 +1,1479 @@
+.navigation.before_login_header {
+    background-color: #0f70b7;
+}
+
+#loader_img {
+    background-color: #000 !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    position: fixed !important;
+    width: 100% !important;
+    z-index: 99999 !important;
+    opacity: 0.5 !important;
+    display: none;
+}
+
+#loader_img img {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.help-inline {
+    color: red;
+}
+
+span.help-inline.error::before {
+    border-bottom: 7px solid #a71515;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    content: "";
+    height: 0;
+    left: 5px;
+    position: absolute;
+    top: -7px;
+    width: 0;
+}
+
+span.help-inline.error {
+    position: relative;
+}
+
+span.help-inline.error {
+    background: #a71515 none repeat scroll 0 0;
+    border: 1px solid #a71515;
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    margin: 5px 0 0;
+    padding: 2px 8px;
+    width: 100%;
+    z-index: 1;
+}
+
+/*temporary contact page css*/
+.loginpage {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 3px 87px 0px rgba(179, 179, 179, 0.35);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.loginpage form {
+    padding: 5% 10%;
+}
+
+.loginpage form label {
+    font-size: 16px;
+}
+
+.loginpage form input[type=text],
+.loginpage form input[type=email],
+.loginpage form input[type=password],
+.loginpage form select,
+.loginpage form textarea {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.loginpage .request {
+    font-size: 16px;
+    color: #1e6f4c;
+}
+
+.modal_logo {
+    max-width: 50px;
+}
+
+.modal-title {
+    line-height: normal;
+}
+
+.popup_bottom_text {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.popup_bottom_text a {
+    color: #0f70b7;
+}
+
+/*.inner_top_banner { min-height: 31rem;}*/
+/* for fixed heaer*/
+.navigation.before_login_header.fixed-top {
+    background-color: #0f70b7;
+}
+
+.logo_white img {
+    width: 17.5rem;
+}
+
+/*.navigation .logo_white,
+.navigation.fixed-top .logo{ display: none; }
+.navigation.fixed-top .logo_white{ display: none;}*/
+.navigation .logo {
+    display: none;
+}
+
+.navigation .logo_white {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.key_features_item_list {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.key_features_item_list li {
+    width: calc(25% - 16px);
+    min-height: 8.5rem;
+    background-color: #ffffff;
+    margin: 8px;
+}
+
+.key_features_item_front {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+}
+
+.key_features_item_heading {
+    font-size: 1.14rem;
+    color: #2c2c2c;
+    font-weight: 600;
+}
+
+.key_features_item_back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    background-color: #0f70b7;
+    opacity: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    padding: 15px;
+    z-index: 2;
+}
+
+.key_features_item_list li:hover .key_features_item_back,
+.key_features_item_list li:hover .key_features_item_back > div {
+    opacity: 1;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.key_features_item_text,
+.key_features_item_back .key_features_item_heading {
+    color: #ffffff;
+}
+
+.key_features_item_back .key_features_item_icon img {
+    max-width: 2.71rem;
+}
+
+.step {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: auto;
+    margin-bottom: 26px;
+}
+
+.steps_two {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: auto;
+    margin-bottom: 26px;
+}
+
+.stepcount {
+    text-align: left;
+}
+
+.step h2 {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #282828;
+    margin-top: 0px;
+    margin-bottom: 4px;
+}
+
+.step_description {
+    font-size: 14px;
+    color: #9b9b9b;
+}
+
+.numbers {
+    line-height: 1;
+    font-size: 3.7rem;
+    font-weight: 600;
+    color: #ababab;
+}
+
+.numbers_two {
+    line-height: 38px;
+    font-size: 2.7rem;
+    font-weight: 600;
+    color: #ababab;
+}
+
+.lets_play a {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    text-align: center;
+    color: #ffffff;
+    background: #0f70b7;
+    border-radius: 4px;
+    text-decoration: none;
+    /*padding: 12px 97px;*/
+    padding: 12px 88px;
+    display: inline-block;
+}
+
+.font-s {
+    font-weight: 600 !important;
+}
+
+.info_links_title {
+    max-width: 6rem;
+    overflow: hidden;
+    display: block;
+    white-space: inherit !important;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.platform_block .register_list_sec {
+    min-height: 100%;
+}
+
+.chooseus_block p {
+    line-height: 1.7;
+}
+
+.main_point {
+    padding-left: 2rem;
+}
+
+.main_point li {
+    list-style: disc outside;
+    font-weight: 500;
+}
+
+.subscribe_block > .container {
+    display: flex;
+    align-items: center;
+    font-size: 1.28rem;
+    font-weight: 500;
+}
+
+/* FAQ's collapse */
+.faq_collapse {
+    margin-top: 1.5rem;
+}
+
+.faq_collapse .card-header {
+    width: 100%;
+    background-color: transparent;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 0rem;
+    padding: 0rem 0rem;
+}
+
+.faq_collapse .card-header a {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.04);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 1.07rem;
+    font-weight: 500;
+    color: #252525;
+    padding: 1rem .8rem;
+    padding-right: 2.8rem;
+}
+
+.collapse_point {
+    background-repeat: no-repeat;
+    background-position: center right .8rem;
+    background-size: 1.14rem;
+    background-image: url(../img/collapse_plus.svg);
+}
+
+.collapse_point[aria-expanded="true"] {
+    background-image: url(../img/collapse_minus.svg);
+}
+
+.faq_collapse .card {
+    background-color: transparent;
+    border: 0px;
+    border-radius: 0rem;
+    margin-bottom: -1px;
+}
+
+.faq_collapse .card-body {
+    width: 100%;
+    float: left;
+    font-size: 1.07rem;
+    line-height: 1.6;
+    padding: 1.3rem .8rem;
+}
+
+/*.faq_collapse .collapse.show{ background-color: rgba(8,184,160,.1);}*/
+/* //FAQ's collapse */
+
+.say_about_client img {
+    max-width: inherit;
+    max-height: inherit;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*For login dropdown css start here*/
+/*.navigation.before_login_header .navbar-nav li a.dropdown-item{
+    color: #000;
+}
+.navigation.before_login_header .nav_custom{
+    padding: 0;
+}
+.navigation.before_login_header .nav_custom li:hover,.navigation.before_login_header .navbar-nav li a.dropdown-item:hover{
+    background-color: #fff;
+    width: 100%;
+    display: block;
+}*/
+/*For login dropdown css finish here*/
+
+
+.faq_collapse {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.highlight_text {
+    text-align: center;
+}
+
+.highlight_text p {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.info_links_title span.d-block {
+    color: #0f70b7;
+    font-size: 24px;
+}
+
+.our_team_social a {
+    background-color: transparent;
+}
+
+.block_title,
+.block_title small {
+    text-transform: capitalize;
+}
+
+.quick_links li {
+    font-size: 0.86rem;
+    color: #ffffff;
+}
+
+.navigation.before_login_header {
+    position: relative;
+}
+
+.top_search_block {
+    width: 18rem;
+}
+
+.top_search_block .form-control {
+    width: 100%;
+    height: 2.85rem;
+    background-color: #f8f8f8;
+    font-size: 1.07rem;
+    color: #858585;
+    border: 0px;
+    padding: .8rem 1.07rem;
+    padding-right: 2.5rem;
+}
+
+.input_search {
+    width: 1.3rem;
+    position: absolute;
+    top: 50%;
+    right: 1.8rem;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+}
+
+.input_search img {
+    max-width: 100%;
+}
+
+a.sorting {
+    color: #fff;
+}
+
+.action_plus_minus {
+    text-align: center;
+}
+
+.action_plus_minus i.add_rem_player.fa-minus,
+.action_plus_minus i.add_rem_player.fa-plus {
+    color: #fc0 !important;
+    font-size: 18px;
+    cursor: pointer !important;
+}
+
+.action_plus_minus i.add_rem_player.fa-plus {
+    color: #7a7a7a !important;
+}
+
+.action_plus_minus span.captonbox,
+.action_plus_minus span.vice_captonbox,
+.captonbox_disabled,
+.vice_captonbox_disabled {
+    width: 2.2rem;
+    height: 1.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    border: 1px solid #6c757d;
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    color: #6c757d;
+    padding: 0.2rem 0.25rem 0px;
+    margin: 0px 3px;
+}
+
+.action_plus_minus .captonbox.captonbox_active,
+.captonbox_active_disabled {
+    background-color: #800080 !important;
+    color: #fff !important;
+    border-color: #800080;
+}
+
+.action_plus_minus .vice_captonbox.vice_captonbox_active,
+.vice_captonbox_active_disabled {
+    background-color: #FFA500 !important;
+    color: #fff !important;
+    border-color: #FFA500;
+}
+
+.grid_view_tab .capt_img,
+.grid_view_tab .vice_capt_img {
+    display: none;
+}
+
+.grid_view_tab .capt_img.capt_img_active,
+.grid_view_tab .vice_capt_img.vice_capt_img_active {
+    display: block;
+}
+
+.list_view_tab .player_heading {
+    background: #eee;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.list_view_tab .player_data {
+    padding: 5px 0px;
+    font-weight: bold;
+    color: #7a7a7a;
+}
+
+.list_view_tab span.vc_text,
+.list_view_tab span.c_text {
+    float: right;
+}
+
+.team-filedview ul li .remove-player {
+    position: absolute;
+    background: #fc0;
+    left: -1px;
+    top: -4px;
+    border-radius: 0px;
+    width: 11px;
+    height: 12px;
+    display: block;
+    cursor: pointer;
+    z-index: 1;
+    color: red;
+}
+
+/* update by 26/08/2019 */
+.help_support_form_sec {
+    border: 1px solid rgb(190, 190, 190);
+    -webkit-box-shadow: -1.414px -1.414px 1.78rem 0rem rgba(117, 117, 117, 0.35);
+    box-shadow: -1.414px -1.414px 1.78rem 0rem rgba(117, 117, 117, 0.35);
+}
+
+.reachus_block {
+    background-color: #0e6fb5;
+}
+
+.reachus_sec {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.reachus_sec li.heading_title {
+    font-size: 1.57rem;
+    color: #ffffff;
+}
+
+.reachus_sec li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 1.14rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.reachus_sec li img {
+    max-width: 1.28rem;
+}
+
+.reachus_sec li a {
+    color: #ffffff;
+}
+
+.articles_btn a {
+    min-width: 10rem;
+    text-align: center;
+    background-color: #ff005a;
+    font-size: 1.28rem;
+    color: #ffffff;
+    padding: .4rem 1.07rem;
+}
+
+
+/* update by 13/09/2019 */
+.pricing_info_block .faq_collapse {
+    max-height: inherit;
+}
+
+.pricing_info_title {
+    font-size: 1.07rem;
+}
+
+.pricing_info_list li {
+    list-style: disc outside;
+}
+
+.join_user_text {
+    font-size: 0.9rem;
+}
+
+.join_user_sec {
+    padding-top: 10rem;
+}
+
+.price_info_title,
+.pricing_info_title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #191919;
+}
+
+.pricing_info_title {
+    background-color: rgba(0, 0, 0, 0.03);
+    font-size: 1.14rem;
+    font-weight: 500;
+    padding: .8rem 1.07rem;
+}
+
+.pricing_info_data .btn {
+    font-size: 1.14rem;
+    font-weight: 400;
+}
+
+.priceing_info_rate {
+    font-size: 1rem;
+    color: #191919;
+    line-height: 1.5;
+}
+
+.priceing_info_rate strong {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.prizes_img {
+    width: 8rem;
+}
+
+.prizes_info {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #868686;
+}
+
+.team-filedview ul li {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.game_user_pic {
+    width: 16.5rem;
+}
+
+.game_user_pic img {
+    max-width: 100%;
+}
+
+.content_block p > strong {
+    font-weight: 500;
+}
+
+.content_block .pricing_info_list a {
+    color: #0f70b7;
+}
+
+.content_block .pricing_info_list a:hover {
+    text-decoration: underline;
+}
+
+.content_table th {
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid #dee2e6;
+    font-size: 1.14rem;
+    font-weight: 500;
+    padding: .5rem 1.07rem;
+}
+
+.content_table td {
+    font-size: 1rem;
+    border: 1px solid #dee2e6;
+    padding: .5rem 1.07rem;
+}
+
+.pricing_info_sublist {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.pricing_info_sublist li {
+    width: 33.3333%;
+    list-style: circle outside;
+    padding: 10px 15px;
+}
+
+span.sponsor {
+    top: 1.07rem;
+    left: 1.5rem;
+    margin-left: 0rem;
+}
+
+.sponsor_right {
+    max-width: 150px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.07rem;
+    text-align: center;
+}
+
+.sponsor_right span {
+    color: #fff !important;
+}
+
+span.sponsor img,
+.sponsor_right img {
+    width: 100%;
+    height: auto;
+}
+
+.top_cricketclub_block img {
+    width: 7.5rem;
+}
+
+.user_pic_after_login img {
+    max-width: inherit;
+    max-height: inherit;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sponsor_bottom_text {
+    width: 100%;
+    position: absolute;
+    bottom: 0rem;
+    left: 0%;
+    font-size: 1.07rem;
+    color: #ffffff;
+    padding: 5px;
+}
+
+
+.status_tab_block .navbar {
+    background: #262a60;
+}
+
+
+.status_tab_block .navbar .navbar-toggler .navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    display: block;
+    background-color: #fff;
+    margin: 6px 0;
+}
+
+
+
+
+
+@media (max-width:1919.98px) {
+    .join_user_sec {
+        padding-top: 4rem;
+    }
+}
+
+@media (max-width:1439.98px) {
+    .join_user_sec {
+        padding-top: 12rem;
+    }
+}
+
+@media (max-width:1365.98px) {
+    .join_user_sec {
+        padding-top: 9rem;
+    }
+}
+
+@media (max-width:1199.98px) {
+    .join_user_sec {
+        padding-top: 6rem;
+    }
+
+    .booster_list li .booster_circle_data,
+    .booster_list li .booster_circle_hoverdata {
+        white-space: normal;
+    }
+}
+
+@media (max-width:991.98px) {
+    .top_social_sec {
+        min-height: 7.5rem;
+    }
+
+    .join_user_sec {
+        padding-top: 0rem;
+    }
+
+    .key_features_item_list li {
+        width: calc(33.33% - 16px);
+    }
+
+    .cricketclub_logo,
+    .top_social_list {
+        display: block;
+        padding-bottom: 10px;
+        border-radius: 0
+    }
+
+    .brought_by_img_block {
+        flex-wrap: wrap;
+    }
+
+    .brought_by_img_block span,
+    .park_viking_sec,
+    .brought_by_img_block {
+        width: 100%;
+    }
+
+    .brought_by_img_block {
+        justify-content: flex-end;
+        -webkit-box-orient: inherit !important;
+        -webkit-box-direction: inherit !important;
+        -ms-flex-direction: inherit !important;
+        flex-direction: inherit !important;
+    }
+
+    .top_cricketclub_block .custom-select {
+        height: 2.5rem;
+        font-weight: 500;
+    }
+
+    .status_tab_block .status_tabs_link {
+        background-color: transparent !important;
+    }
+
+    .status_tab_block .nav-tabs .nav-item {
+        margin: 0;
+        padding: 0;
+    }
+
+    .status_tab_block .nav-tabs .nav-item .nav-link {
+        display: block;
+    }
+
+    .status_tab_block .navbar .navbar-toggler {
+        width: 100%;
+    }
+
+}
+
+@media (max-width:767.98px) {
+    .park_viking_title {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+.top_cricketclub_block {
+    margin-top: 22px;
+}
+    .top_cricketclub_block .custom-select {
+        width: 100%;
+        font-size: 1.14rem;
+        font-weight: 400;
+    }
+
+    .brought_by_img_block span {
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .join_user_sec {
+        padding-top: 2.5rem;
+    }
+
+    .key_features_item_list li {
+        width: calc(50% - 16px);
+    }
+
+    .subscribe_block > .container {
+        text-align: center;
+        display: block;
+        font-size: 1.07rem;
+    }
+
+    .subscribe_block .btn {
+        margin-top: 1.3rem;
+    }
+
+    .pricing_info_sublist li {
+        width: 50%;
+    }
+
+    .sponsor_right {
+        max-width: 130px;
+    }
+}
+
+@media (max-width:575.98px) {
+
+    .top_cricketclub_block {
+        margin-top: 29px;
+    }
+    .park_viking_title {
+        font-size: 1.5rem !important;
+    }
+
+    .dataTables_wrapper th,
+    .dataTables_wrapper td .top_trades_table th,
+    .top_trades_table td,
+    .top_trades_table th,
+    .top_trades_table td {
+        white-space: nowrap;
+    }
+
+    .batsman_info li {
+        font-size: 1rem;
+    }
+
+    .howuse_btn {
+        max-width: inherit !important;
+    }
+
+    .rank_player_info .game_week_info_status {
+        min-width: 7.5rem;
+    }
+}
+
+@media (max-width:479.98px) {
+    .key_features_item_list li {
+        width: calc(100% - 16px);
+    }
+
+    .pricing_info_sublist li {
+        width: 100%;
+    }
+
+    .game_user_pic {
+        width: 7.5rem;
+    }
+}
+
+.game_week_info_status.pl_name {
+    font-size: 1.5rem;
+}
+
+.game_week_info_status.pl_name small {
+    font-size: 1.3rem;
+}
+
+.erro_msg {
+    margin-left: 15px;
+    position: relative;
+    top: -13px;
+    font-size: 12px;
+}
+
+.sponsor_right_power {
+    color: #0f70b7;
+    cursor: default;
+    position: absolute;
+    top: 82px;
+    right: 16px;
+
+
+    width: 50px;
+    height: 50px;
+}
+
+.three_blocks {
+    background-color: #fff;
+    width: 41px;
+    height: 41px;
+    position: absolute;
+    left: 3px;
+    border-radius: 50%;
+    top: 6px;
+    padding: 8px;
+    font-weight: 500;
+}
+
+.compslogo_img {
+    max-width: 50px;
+    overflow: hidden;
+    max-height: 60px;
+
+}
+
+
+.compssl {
+
+    align-items: center;
+}
+
+a.rantbtns,
+a.rantbtns:hover,
+a.rantbtns:focus {
+    background-color: transparent;
+    text-align: left;
+    padding: 0;
+    cursor: pointer;
+
+}
+
+
+li.last_childblock .game_week_info_status {
+    position: relative;
+    overflow: inherit;
+
+
+}
+
+
+li.last_childblock .game_week_info_status a.more_link {
+    position: absolute;
+
+}
+
+
+.player-points-position {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #FFFFFF;
+    font-size: 8px;
+    padding: 2px;
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    border-radius: 3px 3px 0 0;
+    padding: 1px 2px;
+}
+
+
+
+.d-flex {
+    display: flex;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.d-block {
+    display: block;
+}
+
+.f-none {
+    float: none;
+}
+
+.m-0 {
+    margin: 0px;
+}
+
+.p-0 {
+    padding: 0px;
+}
+
+.px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.payment_detail_modal .form-control {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.payment_detail_modal .control-label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.form-group.has-error .form-control {
+    border-color: #f56954 !important;
+    box-shadow: none;
+}
+
+.form-group.has-error label {
+    color: #f56954;
+}
+
+.hide {
+    display: none;
+}
+
+
+/*Chat Page Css*/
+
+.chat {
+    border: 1px solid #d1d1d1;
+}
+.chat_header {
+    text-align: center;
+    padding: 22px 15px;
+    font-weight: 600;
+    margin-bottom: 65px;
+}
+.chat_header h4 {
+    color: #0f70b7;
+    font-size: 18px;
+    font-weight: 600;
+}
+.chat_message {
+    padding: 0 40px;
+    max-height: 750px;
+    overflow-y: auto;
+}
+.outgoing_message {
+    float: right;
+    clear: both;
+    margin-bottom: 25px;
+}
+.one_row {
+    display: flex;
+    align-items: center;
+}
+.actual_mes {
+    background: #f3f3f3;
+    padding: 12px 15px;
+    width: 365px;
+    border-radius: 4px;
+    margin-right: 12px;
+    position: relative;
+}
+.actual_mes p {
+    color: #000000;
+    font-size: 14px;
+    margin: 0;
+}
+.outgoing_message .actual_mes:after {
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 13px solid #f3f3f3;
+    position: absolute;
+    content: "";
+    right: -12px;
+    top: 0;
+}
+.name {
+    margin-top: 30px;
+    width: 45px;
+    height: 45px;
+}
+.name span {
+    width: 40px;
+    height: 40px;
+    background: #0f70b7;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+.time {
+    color: #b0b0b0;
+    font-size: 11px;
+    margin-top: 7px;
+}
+.day_name {
+    clear: both;
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+}
+.day_name span {
+    color: #939393;
+    font-size: 11px;
+    background: #fafafa;
+    display: inline-block;
+    padding: 7px 35px;
+    z-index: 99;
+    position: relative;
+    border-radius: 30px;
+}
+.day_name:after {
+    width: 100%;
+    left: 0;
+    top: 50%;
+    height: 1px;
+    background: #f6f6f6;
+    position: absolute;
+    content: "";
+}
+.incoming_message {
+    clear: both;
+    float: left;
+    margin-bottom: 25px;
+}
+.one_row {
+    display: flex;
+    align-items: center;
+}
+.incoming_message .actual_mes {
+    background: #aeaeae;
+    margin-right: 0;
+    margin-left: 12px;
+}
+.incoming_message .actual_mes p {
+    color: #fff;
+}    
+.incoming_message .actual_mes:after {
+    position: absolute;
+    content: "";
+    left: -12px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: 0 solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 14px solid #aeaeae;
+}
+.incoming_message .time {
+    margin-left: 0;
+    text-align: right;
+    color: #fffefe
+}
+.chat_message h6.user_name {
+    font-size: 12px;
+    margin-bottom: 3px;
+    font-weight: 400;
+    color: #929292;
+}
+
+.outgoing_message .time {
+    color: #8c8c8c;
+    text-align: right;
+}
+.chat_footer {
+    display: flex;
+    clear: both; 
+    align-items: center;
+    background: #f3f3f3;
+    padding: 12px 16px;
+}
+.send_message{
+    width: 45px;
+}
+.type_message {
+    width: calc(100% - 45px);
+}
+.attached_link img {
+    max-width: 28px;
+}
+.type_message textarea {
+    height: 58px;
+    background-color: rgb(255, 255, 255);
+    padding: 16px 25px;
+    border: 0;
+    border-radius: 40px;
+    resize: none;
+    width: 100%;
+}
+.send_message button {
+    color: #0f70b7;
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: 28px;
+    float: right;
+}
+
+.chat_header ul {display: flex; align-items: center;     justify-content: center; margin-top: 6px;}
+.chat_header ul li {
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    margin: 0 2px;
+    background: #0f70b7;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+}
+
+.chat {
+    border: 1px solid #d1d1d1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.chat_message:after {clear: both; display: block; content: ""; }
+
+
+/*REFER FRIEND*/
+
+.refer_frnd_tab {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(190, 190, 190);
+  background-color: rgb(255, 255, 255);
+  box-shadow: -1.414px -1.414px 25px 0px rgba(117, 117, 117, 0.35);
+}
+.refer_frnd_tab .nav-tabs {border: 0; }
+.refer_frnd_tab .nav-tabs .nav-item {margin: 0; width: 50%;  text-align: center; }
+.refer_frnd_tab .nav-tabs .nav-link {border-radius: 0; border: 0; border-bottom: 3px solid transparent; display: block; padding: 20px 15px; }
+.refer_frnd_tab .nav-tabs .nav-link.active, .refer_frnd_tab .nav-tabs .nav-link:hover { border-bottom: 3px solid #0f70b7; color: #0f70b7;  }
+.refer_frnd_tab .tab-content {margin-top: 50px; padding: 20px; padding-top: 0px; }
+.invite_heading {color: #191919; font-size: 16px; margin-bottom: 25px; }
+
+.invite_platform .box  {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 0px 25px 0px rgba(117, 117, 117, 0.35);
+    display: flex; align-items: center; justify-content: center; 
+    color: #191919; font-size: 26px; 
+    padding: 30px 15px; 
+}
+.invite_platform .box span {margin-right: 10px; }
+.invite_platform .link_share span {color: #3c00ff; }
+.invite_platform .facebook span {color: #3b5998; }
+.invite_platform .whatsapp span {color: #29b200; }
+.invite_platform .email span {color: #ff0808; }
+
+.coupon_code {margin-top: 60px;}
+.coupon_box {
+  border-width: 1px;
+  border-color: rgb(59, 89, 152);
+  border-style: dashed;
+  background-color: rgb(255, 255, 255);
+    display: flex; align-items: center; justify-content: center; 
+    max-width: 370px; margin: 0 auto; 
+    min-height: 120px; 
+}
+.coupon_box  h4 {color: #3b5998; font-size: 39px; font-weight: 300; margin: 0; }
+.copy_code {position: absolute; right: 5px; top: 3px; color: rgb(59, 89, 152);}
+.note_share_ref{ margin-top: 12px; }
+.note_share_ref p {text-align: center; margin: 0; color: #8d8d8d; font-size: 12px;  }
+.note_share_ref p span {display: block;color: #191919; font-size: 16px; }
+.refer_frnd_banner h2 {position: absolute; top: 50%; left: 23%; transform: translateY(-50%);  color: #191919; font-size: 44px; font-weight: 400; }
+
+.player_star_info {background:  url(../img/player_star_bg.jpg) no-repeat center top; background-size: cover; display: flex; align-items: center;      padding: 12px; }
+.player_star_pic {margin:0px;  }
+.player_star_name small {color: #fff; }
+.club_logo img {
+    max-height: 140px;
+    border-radius: 6px;
+}
+
+.legend_data_table{ border: 1px solid rgba(0,0,0,0.05);}
+.legend_data_table td{ white-space: nowrap; border: 1px solid rgba(0,0,0,0.05); padding: 5px 10px; }
+
+.game_info_list li{ width: 50%;}
+
+.player_pack_box.liborderblock>li .game_week_info .game_week_info_status{ font-size: 1.14rem;}
+
+.gameweek_day_title{ font-size: 1.5rem; color: #191919;}
+.gameweek_day_title small{ font-size: 65%; color: #191919;}
+
+@media(max-width: 575.98px){
+    .game_info_list li{ width: 100%;}
+}
+
+.chat_image{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+
+.custom_check {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    line-height: 22px;
+    position: relative;
+    padding-left: 30px;
+    margin: 0;
+}
+.custom_check input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    margin: 0px 0px;
+    z-index: 2;
+}   
+.custom_check .check_indicator {
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 0px;
+}
+.custom_check input:checked + .check_indicator:before {
+    width: 7px;
+    height: 12px;
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    border: solid #00cc00;
+    border-width: 0px 2px 2px 0px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    content: "";
+}
+.imageSelected {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+.selected {
+    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.2);
+    border: 3px solid #517cf7;
+}
+
+.team_banner_btn .myclass{
+    min-width: 9rem;
+    background-color: #fff;
+    font-size: 1.36rem;
+    font-weight: 500;
+    color: #191919;
+    padding: 0.6rem 1.07rem;
+}
+
+
+
+
+.club_detail_class span{
+    height: 3.57rem;
+    border-radius: .25rem;
+    font-size: 1rem;
+    color: #8a8a8a;
+    font-size: 1.14rem;
+    color: #353535;
+}
+.player_description{
+    width: calc(100% - 270px);
+}
+.player_description small {
+    display: inline-block;
+    width: 48%;
+}
+
+.rounded-circle-custom{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.cart_count {
+    width: 1.42rem;
+    height: 1.42rem;
+    border-radius: 50%;
+    background-color: #262a60;
+    font-size: .92rem;
+    color: #ffffff;
+    top: -14px;
+    right: -14px;
+}

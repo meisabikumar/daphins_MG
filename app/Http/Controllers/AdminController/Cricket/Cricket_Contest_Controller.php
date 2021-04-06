@@ -10,6 +10,13 @@ use App\Models\AdminModel\Cricket\cricket_contest;
 class Cricket_Contest_Controller extends Controller
 {
     //
+    public function index()
+    {
+        //
+        $result = cricket_contest::all();
+        return view('AdminView.show_contest')->with('result',$result);
+    }
+
     public function store(Request $request)
     {
 
@@ -38,4 +45,10 @@ class Cricket_Contest_Controller extends Controller
 
         return "done";
     }
+
+
+    
+
+
+
 }

@@ -20,9 +20,7 @@ class User_Contest_Controller extends Controller
         if ($request->game_type == "football") {
             $contest = football_contest::where('id', $request->contest_id)->where('match_id', $request->match_id)->first();
         }elseif($request->game_type == "cricket"){
-            $contest = cricket_contest::where('id', $request->contest_id)->where('match_id', $request->match_id)->first();
-        }else{
-            return "unknown request";
+          $contest = cricket_contest::where('id', $request->contest_id)->where('match_id', $request->match_id)->first();
         }
 
         if (!$contest) {
@@ -38,18 +36,19 @@ class User_Contest_Controller extends Controller
 
             if ($user_contest->count() < $contest->entry_per_user) {
 
-                if ($contest->is_free == 1) {
+                if ($contest->is_free == 0) {
 
-                    if ($user->wallet < $contest->entry_fee) {
+
+                    if ($user->wallet > $contest->entry_fee) {
                         $entry_fee = $contest->entry_fee;
-                        $wallet_remaining  = $user->wallet -  $entry_fee ;
+                      $wallet_remaining  = $user->wallet -  $entry_fee ;
                     } else {
                         return "insufficent balance";
                     }
 
                 } else {
                     $entry_fee = 0;
-                    $wallet_remaining  = $user->wallet;
+                     $wallet_remaining  = $user->wallet;
                 }
 
                 $data = new user_contest;
@@ -61,7 +60,12 @@ class User_Contest_Controller extends Controller
                 $data->players = $request->players;
                 $data->save();
 
-                User::find($request->user_id)->update(['wallet' =>$wallet_remaining ]);
+
+
+                $data  = User::find($request->user_id);
+                $data->wallet  = $wallet_remaining;
+                $data->save();
+                // ->update(['wallet' =>$wallet_remaining]);
 
                 $data = new user_wallet_transaction;
                 $data->user_id = $request->user_id;
@@ -79,6 +83,8 @@ class User_Contest_Controller extends Controller
         } else {
             return "Contest Full";
         }
+
+        return "sucess";
 
 
 

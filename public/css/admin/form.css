@@ -1,0 +1,19 @@
+
+.mws-form select.error, 
+.mws-form textarea.error, 
+.mws-form input[type="text"].error, 
+.mws-form input[type="password"].error, 
+.mws-form input[type="datetime"].error, 
+.mws-form input[type="datetime-local"].error, 
+.mws-form input[type="date"].error, 
+.mws-form input[type="month"].error, 
+.mws-form input[type="time"].error,
+.mws-form input[type="week"].error, 
+.mws-form input[type="number"].error, 
+.mws-form input[type="email"].error, 
+.mws-form input[type="url"].error, 
+.mws-form input[type="search"].error, 
+.mws-form input[type="tel"].error, 
+.mws-form input[type="color"].error {
+    border-color: #eb979b;
+}

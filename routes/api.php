@@ -28,6 +28,7 @@ use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
 
 // -- User ---
 use App\Http\Controllers\User\User_Contest_Controller;
+use App\Http\Controllers\User\User_Profile_Controller;
 use App\Http\Controllers\User\Wallet_Transaction_Controller;
 // -------
 
@@ -112,6 +113,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 // ---- USER ---------------------------------------------------------------------------
 Route::post('/join-contest',[User_Contest_Controller::class,'join_contest']);
 Route::post('/wallet-Transaction',[Wallet_Transaction_Controller::class,'store']);
+Route::post('/user-profile',[User_Profile_Controller::class,'update']);
 // -------------------------------------------------------------------------------------
 
 // -----------------------------------------

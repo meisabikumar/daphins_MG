@@ -79,15 +79,14 @@ class Cricket_Data_Controller extends Controller
 
         $api_token = "Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
 
-     return $fixtures = cricket_fixture::get();
+        $fixtures = cricket_fixture::get();
 
-        // cricket_fixture_teams::truncate();
+        cricket_fixture_teams::truncate();
 
         foreach ($fixtures as $fixture) {
 
 
             $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token."&include=squad";
-
 
             $localteam_res = Http::get($localteam);
             $localteam_data = $localteam_res["data"];

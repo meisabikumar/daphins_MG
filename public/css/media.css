@@ -1,0 +1,492 @@
+@media (max-width: 1919.98px){
+.full_container { max-width: 100%;} 
+}
+
+@media (max-width: 1439.98px){
+.top_banner_block { min-height: 48rem;}
+.inner_top_banner { min-height: 28rem;}
+}
+
+@media (max-width: 1365.98px){
+.top_banner_block { min-height: 43rem;}
+.inner_top_banner { min-height: 28rem;}
+}
+
+@media (max-width: 1199.98px){
+html { font-size: 12px;}
+
+.top_banner_block { min-height: 50rem;}
+.block_title { font-size: 3.4rem;}
+.club_video_block video { height: 24.6rem;}
+
+.inner_top_banner { min-height: 30rem;}
+
+.team-tab{ background-position: center;}
+
+.booster_list li .booster_circle_data, 
+.booster_list li .booster_circle_hoverdata{ width: 10.65rem; height: 10.65rem; top: 2rem; left: 1.15rem;}
+.booster_list li .booster_circle_data{ font-size: 1.5rem;}
+}
+
+@media (max-width: 991.98px){
+    
+    .refer_frnd_banner h2 {    font-size: 26px;}
+    .refer_frnd_tab .nav-tabs .nav-link {padding: 15px; }
+    .refer_frnd_tab .tab-content {margin-top: 30px;}
+    .invite_heading {margin-bottom: 20px;}
+    .invite_platform .box {    font-size: 16px;
+    padding: 20px 10px;}
+    .coupon_code {
+    margin-top: 30px;
+}
+    .coupon_box {max-width: 300px; min-height: 100px; }
+    
+    
+.navigation, .navigation.fixed-top, .status_tabs_link { background-color: #000;}
+
+.logo { padding: 0.8rem 0rem;}
+.collapse:not(.show) { display: none !important;}
+.navbar-expand-md .navbar-toggler { display: block !important;}
+.navbar-expand-md .navbar-collapse { width: 100%; -ms-flex-wrap: wrap; flex-wrap: wrap;}
+.navbar-expand-md .navbar-nav { width: 100%; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column;}
+.navigation .navbar-nav li { padding: 0.5rem 0rem;}
+.navigation .navbar-nav li a { color: #fff; padding: 0.5rem 0rem;}
+.home_toggle_block, 
+.home_toggle_block li { margin: 0rem 0rem;}
+.home_toggle_block li .slider { border: 2px solid #fff; background-color: #fff;}
+.navigation .navbar-nav > li.active > a,
+.navigation .navbar-nav li a:hover,
+.navigation li.notification a,
+.home_toggle_block li a,
+.home_toggle_block > li.top_user_profile > a span.user_pic_name, 
+.home_toggle_block > li.top_user_profile > a:after { color: #fff;}
+.home_toggle_block > li.top_user_profile > a { padding-left: 0rem;}
+/*.home_toggle_block > li.top_user_profile .dropdown-menu { left: 0%; right: auto;}
+.home_toggle_block > li.top_user_profile .dropdown-menu:before { right: auto; left: 5px;}*/
+.brought_by_img_block { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-orient: horizontal; -webkit-box-direction: reverse; -ms-flex-direction: row-reverse; flex-direction: row-reverse;}
+.brought_by_img_block span { font-size: 1.07rem;}
+.status_tabs_link li .nav-link:hover, 
+.status_tabs_link li .nav-link.active { color: #1b8ee3;}
+.status_tabs_link li .nav-link::before { background-color: #1b8ee3;}
+.game_week_info_list li { width: calc(50% - 2.14rem);}
+.team_banner_img, .team_banner_btn { width: 100%;}
+.team_banner_img img{ height: 100%; -o-object-fit: cover; object-fit: cover;}
+.team_banner_btn { min-height: 100%; background-color: rgba(0, 0, 0, 0.6); display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -ms-flex-wrap: wrap; flex-wrap: wrap; position: absolute; top: 0%; left: 0%; z-index: 2;}
+
+.block_title { font-size: 2.8rem;}
+.how_play_icon { width: 7rem; height: 7rem;}
+.navigation.before_login_header{     background-color: #0f66b7;
+    border-bottom: 1px solid #2085ce;}
+.top_banner_block{ background-image: none !important;}
+.info_links{ margin-top: 1.5rem;}
+.info_links li { width: calc(25% - 1.6rem);}
+.club_video_block video { height: 21rem;}
+.say_about_sec{ width: 100%;}
+
+.inner_top_banner { min-height: auto;}
+.platform_block .register_list_sec { min-height: 100%;}
+
+.table_bottom_btn{ overflow: auto; -webkit-box-pack: center !important; -ms-flex-pack: center !important; justify-content: center !important;}
+.table_bottom_btn a{ white-space: nowrap;}
+
+.signin_signup_block{ min-height: auto; margin-top: 0rem;}
+
+.lineup-header{ max-width: 350px; margin: 15px auto 0px;}
+
+.booster_list li { width: 33.3333%; margin-top: 2rem;}
+.game_user_name small{ width: 100%;}
+
+.partners_list > li { width: calc(100% - 30px);}
+
+.game_info_block.player_star_data .game_week_info_icon { max-width: 3.8rem;}
+    
+    .rank_list li{ width: calc(100% - 20px);}
+
+    .brought_by_img_block span{ text-align: right;}
+
+    .player_description {
+        width: calc(100% - 130px);
+    }
+}
+
+@media (max-width: 767.98px){
+    .navbar-expand-md { padding: .5rem 0rem;}
+/*add a shadow to the scrollbar here*/
+/*this is the little scrolly dealio in the bar*/
+/*nobody needs this little scrollbar corner, I mean really, get rid of it haha*/
+.status_tab_block ::-webkit-scrollbar, 
+.over_all_team_block ::-webkit-scrollbar, 
+.favorite_players_block ::-webkit-scrollbar { width: 0px; height: 0px; -webkit-box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0); -webkit-border-radius: 5px;
+border-radius: 5px;}
+
+.status_tab_block ::-webkit-scrollbar-track, 
+.over_all_team_block ::-webkit-scrollbar-track, 
+.favorite_players_block ::-webkit-scrollbar-track { -webkit-box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0); -webkit-border-radius: 5px; border-radius: 5px;}
+
+.status_tab_block ::-webkit-scrollbar-thumb, 
+.over_all_team_block ::-webkit-scrollbar-thumb, 
+.favorite_players_block ::-webkit-scrollbar-thumb { border-radius: 5px; background-color: rgba(0, 0, 0, 0); height: 0px;}
+
+.status_tab_block ::-webkit-scrollbar-corner, 
+.over_all_team_block ::-webkit-scrollbar-corner, 
+.favorite_players_block ::-webkit-scrollbar-corner { display: none; height: 0px; width: 0px;}
+
+.gameweek_list, 
+.game_week_info_list { max-height: inherit; flex-wrap: nowrap; overflow: auto;} 
+.gameweek_list li, 
+.game_week_info_list li { width: auto;}
+.gameweek_list li > div, 
+.game_week_info_list li > div { width: 280px !important;}
+.game_week_info_status { font-size: 2rem;}
+.game_week_info_icon img { max-width: inherit; width: 4.6rem;}
+.top_players_slider.owl-carousel .owl-item img { display: inline-block; width: auto;}
+.footer_link_mview [class^="col"] { max-width: 33.3333%; -ms-flex-preferred-size: auto; flex-basis: auto;}
+.footer_logos_sec img { height: 2.14rem;} 
+.my_team_banner_block::before { display: none;}
+
+.register_list_sec { min-height: 25rem;}
+.info_links li { width: calc(50% - 1.6rem);}
+
+.started_tab_list_view.reverse > .row{ -webkit-box-orient: vertical; -webkit-box-direction: reverse; -ms-flex-direction: column-reverse; flex-direction: column-reverse;}
+.started_tab_list_view > .row img{ margin-top: 4rem;}
+.started_tab_list_view.reverse > .row .started_tab_list_data{ -webkit-box-orient: horizontal; -webkit-box-direction: reverse; -ms-flex-direction: row-reverse; flex-direction: row-reverse;}
+.club_video_block video { height: 23.5rem;}
+.started_tabs_links { min-width: 100%; -ms-flex-wrap: nowrap; flex-wrap: nowrap; overflow: auto; white-space: nowrap;}
+.started_tabs_links.nav-tabs li{ min-width: 150px;}
+
+.price_table_block .nav-tabs{ display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: nowrap; flex-wrap: nowrap; overflow: auto;}
+.price_table_block .nav-tabs .nav-link{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.price_table th span{ font-size: 1.43rem;}
+.price_table td{ white-space: nowrap;}
+
+.joins_btns_block{ padding-top: 3.5rem;}
+
+.booster_list{ display: block !important; white-space: nowrap; overflow: auto;}
+.booster_list li { width: auto; margin-left: 0.5rem; margin-right: 0.5rem;}
+.game_info_block .game_week_info_list li,
+.game_progress_info li{ border: 1px solid #dee2e6; -webkit-box-shadow: 0rem 0rem 0rem transparent; box-shadow: 0rem 0rem 0rem transparent;}
+
+.player_star_data.game_info_block .game_week_info_list li{ width: calc(15rem - 1.6rem);}
+.player_star_pic{ width: 100px; height: 100px; margin: -3.5rem auto 0rem;}
+.player_star_pic img {width: 100px; height: 100px;}
+.player_star_name{ font-size: 1.5rem;}
+.statistics_form { min-width: 100%;}
+
+/*--------------------*/
+
+.table-mobile{
+overflow: hidden;
+}
+
+.table-mobile{
+overflow: hidden;
+
+}
+
+.table-mobile tr th,
+.table-mobile tr td{
+word-break: keep-all;
+padding: 3px !important;
+font-size: 12px !important; 
+white-space: normal !important;
+font-weight: 400;
+
+}
+
+.table-mobile .player_name{
+white-space: inherit;
+
+word-break: keep-all;
+font-size: 12px;
+
+
+}
+
+.morlink_mobile{
+display: block;
+
+}
+
+.dsktop_link{
+display: none;
+
+}
+
+.player_pic{
+display: none;
+}
+
+/*------------*/
+
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting{
+
+padding-right: 5px;
+}
+
+.states_table th{
+min-width: inherit;
+}
+
+.mobile_cont{
+padding-left: 0px ;
+padding-right: 0px;
+}
+
+
+.game_week_info_status.pl_name small{
+font-size:0.9rem;
+
+}
+
+.abailability_sec_row{ width: calc(100% + 30px);}
+.player_profile_list_block .game_week_info_list li{ width: calc(33.3333% - 1.6rem); border: 1px solid #dee2e6; -webkit-box-shadow: 0rem 0rem 0rem transparent; box-shadow: 0rem 0rem 0rem transparent;}
+.fixtures_block .states_table th,
+.fixtures_block .states_table td{ min-width: auto; white-space: nowrap;}
+
+    
+    .invite_platform .box {margin-bottom: 20px; }
+    .chat_message {padding: 0 15px; }
+    .chat_header {margin-bottom: 25px;}
+    .outgoing_message {margin-bottom: 10px;}
+    .day_name {padding: 30px 0 40px; }
+    
+	
+   
+}
+
+@media (max-width: 575.98px){
+    .actual_mes {width: 260px; }
+.navigation .navbar { padding-left: 15px; padding-right: 15px;}
+.game_week2_title { font-size: 1.43rem;}
+.cricketclub_logo { max-width: 10rem;}
+.park_viking_title { font-size: 2rem;}
+.footer_logos_sec li { display: inline-block;}
+.top_trades_tabslist { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: nowrap; flex-wrap: nowrap; overflow: auto; white-space: nowrap;}
+.team_banner_btn a { min-width: 13rem;}
+.team_banner_img { overflow: hidden;}
+.team_banner_img img { max-width: inherit; height: 100%;}
+
+.register_list_sec { width: 65%; margin: 0 auto;}
+.club_video_block video { height: auto;}
+
+.game_week_info_list,
+.game_progress_info{ display: block !important; white-space: nowrap; overflow: auto;}
+.game_info_block .game_week_info_list li,
+.game_progress_info li{ width: calc(15rem - 1.6rem);}
+    
+    
+    .how_mobile{
+    display: block;
+    }
+    .howuse_btn{
+    padding: 3px;
+       font-size: 0.9rem;
+        text-align: center;
+    }
+    
+     
+    .mobile_teamdeta{
+        display: flex !important;
+        white-space: inherit;
+        overflow: inherit;
+        flex-wrap: wrap;
+        margin-bottom: 20px !important;
+    }
+ 
+    .mobile_teamdeta >li {
+      background-color: #f6fbff;
+        text-align: center;
+    }
+
+ 
+    .mobile_teamdeta >li.d-inline-flex{
+    margin: 0 !important;
+        width: 50%;
+        position: relative;
+
+    }
+
+
+    .mobile_teamdeta >li.d-inline-flex:after{
+        position: absolute;
+        width: 1px;
+        background-color: rgba(0,0,0,.05);
+        height: 100%;
+        content: "";
+        top: 0;
+        right: 0;
+        
+    }
+    .mobile_teamdeta >li.d-inline-flex:before{
+        position: absolute;
+        width: 100%;
+        background-color: rgba(0,0,0,.05);
+        height: 1px;
+        content: "";
+        bottom: 0;
+        right: 0;
+        
+    }
+    
+    
+    .mobile_teamdeta >li .game_week_info_icon img {
+   
+    display: none;
+}
+     
+    .liborderblock>li {
+   
+    border: none !important;
+}
+      
+    .liborderblock>li .game_week_info  .game_week_info_status  {
+        width: 100%;
+        text-align: center;
+        
+   
+}
+    
+    .fundraiser.mobile_teamdeta >li.d-inline-flex {padding: 0px !important; }
+
+    .gameweek_day { font-size: 1.3rem;}
+    .gameweek_status {
+        font-size: 1rem;}
+
+.game_week_info_status {
+    font-size: 1.6rem;
+}
+    
+    .games_tabs_sec .nav-tabs .nav-link{
+    font-size: 1rem;
+        
+    padding: .25rem 0.2rem;
+    }
+    
+    .mycomps_block{
+    box-shadow: none;
+    }
+    
+    .supercoash_point a{
+    font-size: 14px;
+    
+    padding: 8px 24px;
+    }
+    
+    .sponsors_img{
+    max-width: 5.71rem;
+        padding-right: 15px;
+    }
+   
+    .sponsors_img img{
+        max-width: 100%;
+    }
+	
+	.Salary_block >li.d-inline-flex{
+		width:33.333%;
+		
+	}
+
+
+    .top_players_slider .owl-nav, .fixtures_table_slide .owl-nav{
+
+  /*  width: 18px;*/
+    position: absolute;
+ /*   top: 2px;*/
+    right: 0%;
+    left: inherit;
+
+    }
+
+    .fixtures_table_slide .owl-nav .owl-next{
+right: 0.8rem;
+
+    }
+
+    li.last_childblock {
+position: relative;
+overflow: inherit;
+width: 100% !important;
+
+
+}
+
+
+li.last_childblock > div.game_week_info{ width: 100% !important;}
+li.last_childblock .game_week_info_status a.more_link{ position: inherit;}
+    
+    textarea.form-control{ height: 8rem;}
+    
+    .player_profile_list_block .game_week_info_list li{ -webkit-box-flex: 1; -ms-flex: auto; flex: auto;}
+    .player_profile_list_block .game_week_info_list li > div{ width: 100% !important;}
+    .about_info_block{ font-size: 1.07rem;}
+
+
+    .refer_frnd_banner h2 {font-size: 18px;}
+    .coupon_box h4 {font-size: 25px; }
+    .coupon_box {min-height: 70px; max-width: 200px; }
+    .coupon_code {
+    margin-top: 10px;
+}
+    .incoming_message {margin-bottom: 10px; }
+    .chat_footer {padding: 10px; }
+    .type_message textarea {height: 50px; padding: 17px 15px; }
+
+    .player_description {
+        width: calc(100% - 10%);
+    }
+    
+}
+
+@media (max-width: 479.98px){
+    .logo_white img { width: 13.5rem;}
+    .day_name {padding: 20px 0}
+    .chat_header {padding: 12px 15px; margin-bottom: 15px;}
+    .actual_mes {width: 285px; }
+    .invite_platform .box {font-size: 13px; }
+    .invite_platform .box span {margin-right: 5px;}
+.navbar-expand-md > .container { -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;}
+.logo + .home_toggle_block { width: 100%; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-left: 0rem !important;}
+
+.gameweek_list li > div, 
+.game_week_info_list li > div { width: 200px !important; display: block;}
+
+.footer_link_mview [class^="col"] { max-width: 50%;}
+
+.top_cricketclub_block, 
+.brought_by_sec { -ms-flex-wrap: wrap; flex-wrap: wrap; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;}
+
+.top_social_list { margin-left: 0rem !important; margin-top: 1.07rem;}
+
+.team_banner_btn { position: static;}
+.team_banner_btn > div { text-align: center;}
+.team_banner_btn .team_banner_label_name { text-align: left;}
+.team_banner_btn a { min-width: calc(100% - 1rem); margin: 0.2rem 0rem;} 
+
+.register_list_sec { width: 100%;}
+.info_links li { width: calc(100% - 1.6rem);}
+.table_bottom_btn .btn { min-width: 23rem;}
+
+.fantasy_game_sec .say_about_client_slider.owl-carousel .owl-nav button.owl-prev {float: left;margin-left: 0rem;}
+.fantasy_game_sec .say_about_client_slider.owl-carousel .owl-nav button.owl-next {float: right;margin-right: 0rem;}
+.game_user_info_block{  }
+.game_info{ padding-left: 1rem !important; margin-top: 0rem;}
+.howuse_btn{ max-width: 10.36rem;}
+
+.prizes_img { width: 8rem;}
+.prizes_info { font-size: 1.14rem;}
+    
+    .rank_player_pic { width: 3.5rem; height: 3.5rem;}
+    .rank_info{ overflow: auto; white-space: nowrap;}
+
+.club_logo img {    max-height: 70px;
+    border-radius: 6px;
+    margin-left: 10px;}
+    .player_star_name small {font-size: 14px; }
+    h5.text-white {font-size: 12px; }
+
+    .player_star_pic,  .player_star_pic img {
+        width: 80px;
+        height: 80px;
+    }
+     
+}

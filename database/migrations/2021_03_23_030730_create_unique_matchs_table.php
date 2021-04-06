@@ -30,6 +30,7 @@ class CreateUniqueMatchsTable extends Migration
             $table->string('tournament_name')->nullable();
 
             $table->string('API')->nullable();
+            $table->boolean('active')->nullable()->default(0);
 
             $table->timestamps();
         });
