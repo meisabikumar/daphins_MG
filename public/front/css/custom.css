@@ -1,0 +1,199 @@
+html { font-family: 'Open Sans', sans-serif; font-size: 14px;}
+body { font-family: 'Open Sans', sans-serif; font-size: 1.14rem; font-weight: 400; color: #414141; line-height: normal; position: relative;}
+
+::-webkit-scrollbar{ width: 8px; height: 8px; -webkit-box-shadow: inset 0px 0px 6px rgba(0,0,0,0);  -webkit-border-radius: 8px; border-radius: 8px;}
+/*add a shadow to the scrollbar here*/
+::-webkit-scrollbar-track{ -webkit-box-shadow: inset 0px 0px 0px rgba(0,0,0,0);  -webkit-border-radius: 8px; border-radius: 8px;}
+/*this is the little scrolly dealio in the bar*/ 
+::-webkit-scrollbar-thumb{ border-radius: 8px; background-color: rgba(0,0,0,0.2); height: 3px;}
+/*nobody needs this little scrollbar corner, I mean really, get rid of it haha*/  
+::-webkit-scrollbar-corner{ display: none; height: 0px; width: 0px;}
+
+img { max-width: 100%; display: inline-block;}
+button, input, textarea, select { font-family: 'Open Sans', sans-serif; opacity: 1; letter-spacing: 0.0143rem;}
+button:focus, input:focus, textarea:focus, select:focus{ outline: none;}
+ul, li { padding: 0px; margin: 0px; list-style: none;}
+a { display: inline-block; -webkit-transition: all 0.5s ease-out; transition: all 0.5s ease-out; color: #000000;}
+a:hover, a:focus { outline: inherit; text-decoration: none;}
+a:hover { color: #2e56bf;}
+h1, h2, h3, h4, h5, h6 { font-family: 'Open Sans', sans-serif; line-height: normal; padding: 0px 0px; margin: 0px 0px;}
+
+section::after{ display: block; clear: both; content: '';}
+
+.full_container{ /*max-width: 1920px;*/ width: 100%; overflow: hidden; position: relative; margin: 0rem auto;}
+
+input::-webkit-input-placeholder{ color:#000000; opacity:1;}
+input::-moz-placeholder{ color:#000000; opacity:1;}
+input:-ms-input-placeholder{ color:#000000; opacity:1;}
+input::-ms-input-placeholder{ color:#000000; opacity:1;}
+input::-webkit-input-placeholder{ color:#000000; opacity:1;}
+input:-ms-input-placeholder{ color:#000000; opacity:1;}
+input::placeholder{ color:#000000; opacity:1;}
+
+.logo{ display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center;}
+.logo img{ width: 11.79rem;}
+.navbar-expand-md{ -ms-flex-flow: wrap; flex-flow: wrap; border-bottom: 1px solid rgba(255,255,255,0.3); padding: 1.07rem 0rem;}
+.navbar-expand-md > .container{ -webkit-box-align: stretch; -ms-flex-align: stretch; align-items: stretch; -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start;}
+.logo img { display: inline-block; -webkit-transition: all 0.5s ease-out; transition: all 0.5s ease-out;}
+
+.navigation { width: 100%; background-color: #cd2b27; position: absolute; top: 0%; left: 0%; z-index: 9;}
+
+.navigation.fixed-top { width: 100%; position: fixed; top: 0%; background-color: #cd2b27; -webkit-animation:slide-down 0.7s; animation:slide-down 0.7s; -webkit-box-shadow: 0px 0.071rem 0.71rem 0px rgba(0, 0, 0, 0.1); box-shadow: 0px 0.071rem 0.71rem 0px rgba(0, 0, 0, 0.2); z-index: 999;}
+@keyframes slide-down{
+    0%{ opacity: 1; -webkit-transform: translateY(-100%); transform: translateY(-100%);}
+    100%{ opacity: 1; -webkit-transform: translateY(0); transform: translateY(0);} 
+}
+
+.navigation .navbar-toggler { width: 40px; height: 35px; line-height: 0; color: #faa61a; border-color: #cd2b27; background-color: #cd2b27; padding: 0px 0px; margin: 0rem 0rem 0rem auto;}
+.navigation .navbar-toggler-icon { width: 25px; height: 3px; display: block; background-color: #ffffff; margin: 4px auto;}
+.navigation .navbar-toggler:focus { outline: none; outline-offset: 0px;}
+.navigation .navbar-toggler:hover { background-color: #cd2b27;}
+.navigation .navbar-toggler:hover .navbar-toggler-icon { background-color: #ffffff;}
+
+.navigation .navbar-nav li { display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; position: relative; padding: 0rem 1.2rem;}
+.navigation .navbar-nav li a{ position: relative; overflow: hidden; font-size: 1.14rem; font-weight: 600; color: #ffffff; display: -moz-flex; display: -ms-flex; display: -o-flex; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; padding: .35rem 0rem;}
+.navigation .navbar-nav li a::before{ width: 100%; height: 2px; background-color: #000000; position: absolute; bottom: 0%; left: -150%; /*-webkit-transform: scale(0); transform: scale(0);*/ content: ''; -webkit-transition: all 0.5s ease-out; transition: all 0.5s ease-out;}
+.navigation .navbar-nav li.active a::before,
+.navigation .navbar-nav li:hover a::before{ /*-webkit-transform: scale(1); transform: scale(1);*/ left: 0%;}
+.navigation .navbar-nav > li.active > a,
+.navigation .navbar-nav li a:hover { color: #000000;}
+
+
+.banner_img{ position: relative;}
+.banner_img:after{ width: 100%; height: 100%; position: absolute; top: 0%; left: 0%; background-color: rgba(0,0,0,0.75); content: '';}
+.banner_img img{ width: 100%; height: 55rem; object-fit: cover;}
+.banner_data_sec{ width: 100%; position: absolute; top: 18rem; left: 0rem; z-index: 2;}
+
+.banner_title{ font-weight: 700; font-size: 3.5rem; color: #ffffff;}
+.banner_title small{ display: block; font-size: 70%;}
+.banner_title span{ color: #cd2b27;}
+.banner_subtitle{ font-weight: 600; font-size: 1.43rem; color: #ffffff;}
+
+
+
+.new_era_sec{ min-height: 42.5rem; background-repeat: no-repeat; background-position: top left;; background-size: cover;}
+.new_era_sec_img img{ width: 100%; height: 100%; object-fit: cover;}
+.new_era_content_sec{ width: 100%; padding-top: 6.5rem; /*position: absolute; top: 6rem; left: 0rem; z-index: 2;*/}
+.new_era_content_title{ font-size: 2.5rem; font-weight: 600; color: #414141;}
+.new_era_content{ font-size: 1.43rem; line-height: 2.5rem;}
+.fantasy_sports_list,
+.fantasy_sports_slider{ width: 100%; height: 100%; border-radius: .35rem; background-color: #ffffff; border: 1px solid #b9c4cb; padding: 1.07rem;}
+.fantasy_sports_list_title{ font-size: 1.28rem; font-weight: 600; color: #414141;}
+.fantasy_sports_list_title small{ display: block; font-size: 70%; color: #cd2b27; padding-top: .3rem;}
+.fantasy_sports_list_img img{ max-width: 5rem;}
+
+.fantasy_sports_slider_block{ width: 100%; /*position: absolute; top: 0rem; left: 0rem; z-index: 2;*/}
+.fantasy_sports_slider{ margin-top: -6rem;}
+.fantasy_sports_slider_list .fantasy_sports_list_img img{ width: auto; max-width: 5rem; display: inline-block;}
+.fantasy_sports_slider .owl-nav{ width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; position: absolute; top: 50%; left: 0%; -webkit-transform: translate(0%, -50%); transform: translate(0%, -50%);}
+
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-prev,
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-next{ width: 2.86rem; height: 2.86rem; border-radius: .35rem; background-color: #3573b1; background-image: url(../img/arrow_pre.svg); background-repeat: no-repeat; background-position: center center; background-size: 2rem; margin-left: 1.5rem;}
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-next{ background-image: url(../img/arrow_next.svg); margin-left: auto; margin-right: 1.5rem;}
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-prev span,
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-next span{ display: none;}
+
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-prev.disabled,
+.fantasy_sports_slider.owl-carousel .owl-nav button.owl-next.disabled{ opacity: .5;}
+
+.join_our_sec_title{ font-size: 2.86rem; font-weight: 700; color: #414141; text-transform: uppercase;}
+.join_our_sec_title small{ display: block; text-transform: initial; font-size: 65%;}
+
+.join_our_sec_list li{ display: -webkit-box; display: -ms-flexbox; display: flex; font-size: 1.28rem; color: #9b9b9b; font-weight: 400; padding: .8rem 0rem;}
+.join_our_sec_list li i{ font-size: 1.14rem;}
+
+.join_our_img img{ margin: -16rem 0rem;}
+
+.esports_faq_our_fans_sec{ background-repeat: no-repeat; background-position: top center; background-size: 100%;}
+.section_title{ font-size: 2.5rem; font-weight: 700; color: #414141;}
+
+/* faq */
+.faq_collapse .card-header{ width: 100%; border: 0px; background-color: transparent; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 0rem 0rem;}
+.faq_collapse .card-header a{ width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; font-size: 1.71rem; font-weight: 600; color: #414141; padding: 2rem 1.5rem; padding-right: 3.2rem;}
+
+.collapse_point{ background-repeat: no-repeat; background-position: center right 1.3rem; background-size: 1.28rem; background-image: url(../img/collapse_minus.svg);}
+.collapse_point[aria-expanded="false"]{ background-image: url(../img/collapse_plus.svg);}
+
+.faq_collapse .card{ background-color: #ffffff; box-shadow: 0rem 0rem 1.43rem rgba(65,65,65,.1); border: 0px; border-radius: .35rem; margin-top: 1.5rem;}
+.faq_collapse .card-body{ width: 100%; float: left; font-size: 1.28rem; color: #9b9b9b; line-height: 1.8; border-top: 1px solid #f5f6f8; padding: 1.5rem 1.5rem;}
+/*.faq_collapse .collapse.show{ background-color: rgba(8,184,160,.1);}*/
+
+.our_fans_slider_block{ background-repeat: no-repeat; background-position: left top; background-size: 12.85rem;}
+.our_fans_list{ height: 100%; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: .35rem; margin: 2.5rem .8rem 0rem;}
+
+.our_fans_user{ width: calc(100% - 3rem); margin: -2.5rem 1.5rem 0rem;}
+.our_fans_user_img{ width: 5.4rem; box-shadow: 0rem 0rem 1.43rem rgba(0,0,0,.2);}
+.our_fans_user_name{ width: calc(100% - 5.4rem); background-color: #3573b1; font-size: 1.28rem; font-weight: 600; color: #ffffff; padding: .6rem 1.07rem;}
+.team_name{ font-size: 1.14rem; font-weight: 600; color: #414141;}
+.team_name span{ display: block; color: #9b9b9b;}
+
+.team_winner_price{ font-size: 1.57rem; font-weight: 700; color: #cd2b27;}
+.team_overview_text{ color: #9b9b9b; line-height: 1.6;}
+
+footer{ width: 100%; position: absolute; left: 0%; bottom: 0%; background-color: #000; padding: 2.5rem 0rem;}
+.footer_logo{ min-width: 8.21rem;}
+.footer_menu_lists{ padding: 0rem 2rem;}
+.footer_menu_lists li { width: calc(50% - 1rem); color: #ffffff; margin: 0.5rem .5rem;}
+.footer_menu_lists li a{ font-size: 1rem; color: #ffffff;}
+.footer_menu_lists li a:hover{ color: #cd2b27;}
+.footer_social_links li a{ width: 2.15rem; height: 2.15rem; background-color: #ffffff; border-radius: 50%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;}
+.footer_social_links li a i{ color: #373737; font-size: 1.5rem;}
+
+.inner_title_block{ position: relative; background-repeat: no-repeat; background-position: center bottom; background-size: cover;}
+.inner_title_block::before{ width: 100%; height: 100%; position: absolute; top: 0%; left: 0%; background-color: rgba(0,0,0,0.6); content: '';}
+.inner_title_block h1{ color: #ffffff;}
+
+.breadcrumb_sec{ background-color: #f2f2f2;}
+.breadcrumb_sec .breadcrumb{ background-color: transparent; border-radius: 0px; padding: 1rem 0rem; margin-bottom: 0rem}
+.breadcrumb_sec .breadcrumb li{ font-size: .92rem; line-height: 1; color: #999999;}
+.breadcrumb_sec .breadcrumb li a{ display: inline-block; color: #666666;}
+.breadcrumb_sec .breadcrumb li a img{ width: 1.15rem;}
+
+.content_block{ font-size: 1.14rem; line-height: 2rem;}
+
+.carousel_captions_sec,
+.carousel_captions_dot_Sec{ position: static; overflow: auto; white-space: nowrap; -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; padding: 0rem 0rem; margin: 0rem 0rem;}
+.carousel_captions_sec li{ width: auto; height: auto; text-indent: 0; border: 0px; opacity: 1; display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; margin: 0rem 0rem;}
+.carousel_captions_sec li a{ width: 100%; text-indent: 0; text-align: center; font-size: 1.28rem; color: #414141; font-weight: 600; border-bottom: 2px solid transparent; padding: .8rem 1.07rem;}
+.carousel_captions_sec li.active a{ border-color: #cd2b27; color: #cd2b27;}
+
+.win_big_title{ font-size: 3.5rem; font-weight: 700; color: #cd2b27;}
+.win_big_title small{ display: block; font-size: 40%; font-weight: 400; color: #414141;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+font-family: 'Open Sans', sans-serif;
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

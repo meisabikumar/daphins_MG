@@ -1,0 +1,152 @@
+.help-inline{
+	color:red !important;
+}
+.row.pad {
+    padding: 6px;
+}
+.box.box-info {
+	background:white;
+}
+.mws-panel-body.no-padding .mws-form-message {
+	border-radius: 0;
+	border-width: 0 0 1px;
+	margin-bottom: 0;
+}
+.mws-form-message.info {
+	background-color: #bce5f7;
+	background-image: url("close.png");
+	background-position: right top;
+	background-size: 19px auto;
+	border-color: #a6d3e8;
+	color: #11689e;
+	background-position: 99% 17%; 
+}
+.mws-form-message {
+	background-position: 12px 12px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	font-size: 12px;
+	padding: 15px 8px 15px 45px;
+	position: relative;
+	vertical-align: middle;
+}
+textarea{
+	resize: vertical !important;
+}
+.alignCenterClass{
+	font-weight:bold;
+	text-align:center;
+}
+.ti-check {
+	font-weight:bold;
+}
+.fa.fa-eye.blueicon {
+    font-weight: bold;
+}
+.hrLine{
+	height: 2px !important;background: black; width:484px;
+}
+.sorting {
+    color: steelblue !important;
+}
+.btn.btn-danger {
+    margin-top: 3px;
+}
+.btn.btn-primary {
+    margin-top: 3px;
+}
+.btn.btn-success{
+    margin-top: 3px;
+}
+.btn.btn-info{
+    margin-top: 3px;
+}
+.btn.btn-warning{
+    margin-top: 3px;
+}
+.btn.btn-default{
+    margin-top: 3px;
+}
+.label.label-warning {
+    margin-bottom: 3px;
+}
+.label.label-danger {
+    margin-bottom: 3px;
+}
+.label.label-success {
+    margin-bottom: 3px;
+}
+
+a.remove {
+    position: absolute;
+    right: 0;
+    top: -3px;
+}
+.relative_position{
+	position:relative;
+}
+.position_add{
+	 position: absolute;
+    right: 0;
+}
+
+span.multiselect-native-select { 
+    width: 100%;
+    display: block;
+}
+
+input.form-control.multiselect-search {
+    height: 37px;
+}
+
+span.input-group-addon , button.btn.btn-default.multiselect-clear-filter {
+    margin: 0 !important;
+    height: 37px;
+}
+
+span.multiselect-native-select .btn-group {
+    width: 100%;
+}
+
+span.multiselect-native-select .btn-group .multiselect {
+    width: 100%;
+	text-align:left;
+}
+
+span.multiselect-native-select .btn-group .multiselect b{ 
+	float:right;
+	margin-top: 7px;
+}
+
+.multiselect-container { 
+    max-height: 150px;
+    overflow-y: auto;
+}
+.multiselect-selected-text {
+    float: left;
+}
+.txtFotnSize{
+	font-size:14px !important;
+}
+.bgcss{
+	background-color:#3c3f44; 
+	color:white;
+}
+
+.chosen-container-single .chosen-single{
+	height:34px !important;
+	padding:3px 6px;
+}
+/*Chosen CSS*/
+.chosen-container .chosen-results {
+    max-height:100px !important;
+}
+
+.lobby_link {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.skin-black .left-side {    padding-bottom: 75px;}

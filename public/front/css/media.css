@@ -1,0 +1,124 @@
+@media (max-width: 1919.98px){
+    .full_container{ max-width: 100%;}
+
+}
+
+
+@media (max-width: 1439.98px){
+    .banner_img img{ height: 53rem;}
+    .new_era_sec_img img{ height: 45rem;}
+    .fantasy_sports_slider_sec>img{ width: 100%; height: 20rem; object-fit: cover;}
+}
+
+
+@media (max-width: 1365.98px){}
+
+@media (max-width: 1199.98px){
+    html { font-size: 12px;}
+
+   
+   
+    
+}
+
+@media (max-width: 991.98px){
+    .navbar-expand-md > .container{ -webkit-box-align: center; -ms-flex-align: center; align-items: center; -ms-flex-wrap: wrap; flex-wrap: wrap;}
+    .logo{ padding: .2rem 0rem; position: relative;}
+    .logo img {width: 8rem;}
+    .collapse:not(.show){ display: none !important;}
+    .navbar-expand-md .navbar-toggler{ display: block !important;}
+    .navbar-expand-md .navbar-collapse{ width: 100%; -ms-flex-wrap: wrap; flex-wrap: wrap;}
+    .navbar-expand-md .navbar-nav{ -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row;}
+    .navigation .navbar-nav li{ padding: .5rem 1rem;}
+    .navigation .navbar-nav li a{ padding: .5rem 0rem;}
+    
+    
+    .banner_img img{ height: 40rem;}
+    .banner_data_sec{ top: 11rem;}
+    .banner_title{ font-size: 3rem;}
+    .banner_mobile{ padding-left: 2rem;}
+    
+    .fantasy_sports_list{ display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; padding: 1.07rem;}
+    .fantasy_sports_slider{ padding: 1.07rem;}
+    .fantasy_sports_list_title{ font-size: 1.43rem; padding-left: 1.07rem;}
+    .fantasy_sports_slider_list .fantasy_sports_list_title{ padding-left: 0rem;}
+    .fantasy_sports_list_img img,
+    .fantasy_sports_slider_list .fantasy_sports_list_img img{ max-width: 5rem;}
+    
+    .join_our_img img{ margin: 0rem 0rem;}
+    
+    .fantasy_sports_slider_sec>img{ height: 8rem;}
+    
+    .win_big_title{ font-size: 2.5rem;}
+
+    
+}
+
+@media (max-width: 767.98px){
+    .banner_data_sec{ top: 8rem;}
+    .banner_img img { height: 58rem;}
+    .banner_data_sec{ text-align: center;}
+    .banner_mobile{ padding-left: 0;}
+    .banner_mobile img{ max-width: 80%;}
+    .fantasy_sports_list_title{ font-size: 1.14rem;}
+    .banner_download_app,
+    .join_our_download_app,
+    .footer_social_links{/* -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;*/}
+    .new_era_content_sec{ padding-top: 2.5rem;}
+    .new_era_sec{ min-height: auto; padding-top: 18rem; padding-bottom: 2.5rem;}
+    .new_era_sec_img img{ height: 57.5rem;}
+    .fantasy_sports_slider{ margin-top: 3rem;}
+    .join_our_sec_title,
+    .join_our_img{ text-align: center;}
+    .join_our_img{ padding-top: 3.5rem;}
+    
+    .footer_menu_lists{ padding: 2rem 0rem;}
+    
+    
+    
+
+    
+    
+}
+
+@media (max-width: 575.98px){
+    .navigation .navbar{ padding-left: 15px; padding-right: 15px;}
+    
+    .banner_img img { height: 54rem;}
+    .banner_mobile img{ max-width: 28rem;}
+    .new_era_sec{ padding-top: 13.5rem;}
+    
+    .fantasy_sports_slider_list{ display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center;}
+    .fantasy_sports_slider_list{ text-align: left !important; padding: 1rem 0rem;}
+    .fantasy_sports_slider_list .fantasy_sports_list_title{ padding-left: 1.5rem;}
+    .fantasy_sports_list_img{ margin-bottom: 0 !important;}
+    .new_era_content_sec{ padding-top: 2.5rem;}
+    .section_title,
+    .join_our_sec_title,
+    .new_era_content_title{ font-size: 2rem;}
+    .faq_collapse .card-header a{ font-size: 1.43rem;}
+    .faq_collapse .card-body{ font-size: 1.14rem;}
+    .new_era_content{ font-size: 1.28rem; line-height: 2rem;}
+    .join_our_img img { max-width: 80%;}
+    .fantasy_sports_slider { margin-top: 2rem;}
+    .fantasy_sports_slider { padding: 0 1.07rem;}
+    .border_bottom1{ border-bottom: 1px solid #b9c4cb;}
+    
+    
+
+   
+}
+
+@media (max-width: 479.98px){
+    .banner_img img { height: 45rem;}
+    .banner_mobile img{ max-width: 20rem;}
+    .new_era_sec { padding-top: 10.5rem;}
+    .banner_title { font-size: 2.2rem;}
+    .new_era_sec_img{ display: none;}
+    .new_era_content_sec{ position: static; text-align: center; padding: 2rem 0rem 0rem;}
+    
+    /*.footer_menu_lists li{ margin: 0rem .5rem;}*/
+
+
+    
+}

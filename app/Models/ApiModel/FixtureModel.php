@@ -9,6 +9,8 @@ class FixtureModel extends Model
 {
     use HasFactory;
 
+    protected $table = 'fixture';
+
     public function getFixtureModel($data,$time)
     {
         // Object of array
@@ -41,10 +43,10 @@ class FixtureModel extends Model
             'starting_date'=>$starting_date,
             'starting_time'=>$time['starting_time'],
 
-        )); 
+        ));
         return $ret;
-                
-        
+
+
     }
-    
+
 }

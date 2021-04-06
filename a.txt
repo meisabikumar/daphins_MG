@@ -1,6 +1,18 @@
 php artisan passport:install
 
 
+git add .
+git commit -m "filter done"
+git push heroku master
+
+composer dump-autoload
+
+heroku run php artisan migrate:refresh
+heroku run artisan passport:install
+heroku run php artisan db: seed
+heroku pg:psql
+
+
   curl -X POST \
     -d "access_key=72f44464a24650ee6c0da5ee93ce5ecd" \
     -d "secret_key=ae8dee4499e678bef75682d709279550" \
