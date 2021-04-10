@@ -1,0 +1,286 @@
+<%- include('../utils/header') %>
+
+<!-- wrapper  -->
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content">
+      <!-- pageheader  -->
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <h2 class="pageheader-title">Orders</h2>
+
+            <div class="page-breadcrumb">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="/admin/success" class="breadcrumb-link"
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    All Orders
+                  </li>
+                </ol>
+              </nav>
+            </div>
+            <!-- <div class="nav-item">
+              <a class="nav-link px-0" href="#">
+                <button class="btn btn-block btn-success">Add Client</button>
+              </a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">Order Details Table</h5>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr class="border-0">
+                      <th class="border-0">Order Name</th>
+                      <th class="border-0">Item</th>
+                      <th class="border-0">Merchant</th>
+                      <th class="border-0">Client</th>
+                      <th class="border-0">Rider</th>
+                      <th class="border-0">Priority</th>
+                      <th class="border-0">Updated At</th>
+                      <th class="border-0">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% orders.forEach( (b,i)=>{ %>
+                    <tr>
+                      <td>
+                        <a href="/order/<%= b._id %>/details"
+                          ><%=b.name%></a
+                        >
+                      </td>
+                      <td><%=b.item%></td>
+                      <td><%=b.merchant%></td>
+                      <td><%=b.client%></td>
+                      <td><%=b.rider%></td>
+                      <td><%=b.priority_delivery%></td>
+                      <td><%=b.updatedAt.toLocaleString()%></td>
+                      <td>
+                        <a
+                          href="/order/<%= b._id %>/delete"
+                          class="btn btn-danger btn-sm"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                    <%})%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">Orders Delivered</h5>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr class="border-0">
+                      <th class="border-0">Order Name</th>
+                      <th class="border-0">Item</th>
+                      <th class="border-0">Merchant</th>
+                      <th class="border-0">Client</th>
+                      <th class="border-0">Rider</th>
+                      <th class="border-0">Priority</th>
+                      <th class="border-0">Updated At</th>
+                      <th class="border-0">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% orders.forEach( (b,i)=>{ if(b.delivered){%>
+                    <tr>
+                      <td>
+                        <a href="/order/<%= b._id %>/details"
+                          ><%=b.name%></a
+                        >
+                      </td>
+                      <td><%=b.item%></td>
+                      <td><%=b.merchant%></td>
+                      <td><%=b.client%></td>
+                      <td><%=b.rider%></td>
+                      <td><%=b.priority_delivery%></td>
+                      <td><%=b.updatedAt.toLocaleString()%></td>
+                      <td>
+                        <a
+                          href="/order/<%= b._id %>/delete"
+                          class="btn btn-danger btn-sm"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                    <%}})%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">Orders in Warehouse</h5>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr class="border-0">
+                      <th class="border-0">Order Name</th>
+                      <th class="border-0">Item</th>
+                      <th class="border-0">Merchant</th>
+                      <th class="border-0">Client</th>
+                      <th class="border-0">Rider</th>
+                      <th class="border-0">Priority</th>
+                      <th class="border-0">Updated At</th>
+                      <th class="border-0">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% orders.forEach( (b,i)=>{ if(b.currentStatus == "warehouse"){%>
+                    <tr>
+                      <td>
+                        <a href="/order/<%= b._id %>/details"
+                          ><%=b.name%></a
+                        >
+                      </td>
+                      <td><%=b.item%></td>
+                      <td><%=b.merchant%></td>
+                      <td><%=b.client%></td>
+                      <td><%=b.rider%></td>
+                      <td><%=b.priority_delivery%></td>
+                      <td><%=b.updatedAt.toLocaleString()%></td>
+                      <td>
+                        <a
+                          href="/order/<%= b._id %>/delete"
+                          class="btn btn-danger btn-sm"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                    <%}})%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">Orders Dispatched</h5>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr class="border-0">
+                      <th class="border-0">Order Name</th>
+                      <th class="border-0">Item</th>
+                      <th class="border-0">Merchant</th>
+                      <th class="border-0">Client</th>
+                      <th class="border-0">Rider</th>
+                      <th class="border-0">Priority</th>
+                      <th class="border-0">Updated At</th>
+                      <th class="border-0">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% orders.forEach( (b,i)=>{ if(b.status == "rider"){%>
+                    <tr>
+                      <td>
+                        <a href="/order/<%= b._id %>/details"
+                          ><%=b.name%></a
+                        >
+                      </td>
+                      <td><%=b.item%></td>
+                      <td><%=b.merchant%></td>
+                      <td><%=b.client%></td>
+                      <td><%=b.rider%></td>
+                      <td><%=b.priority_delivery%></td>
+                      <td><%=b.updatedAt.toLocaleString()%></td>
+                      <td>
+                        <a
+                          href="/order/<%= b._id %>/delete"
+                          class="btn btn-danger btn-sm"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                    <%}})%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">Orders to Pickup from Merchant</h5>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr class="border-0">
+                      <th class="border-0">Order Name</th>
+                      <th class="border-0">Item</th>
+                      <th class="border-0">Merchant</th>
+                      <th class="border-0">Client</th>
+                      <th class="border-0">Rider</th>
+                      <th class="border-0">Priority</th>
+                      <th class="border-0">Updated At</th>
+                      <th class="border-0">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% orders.forEach( (b,i)=>{ if(b.currentStatus == "merchant" && b.delivered == false){%>
+                    <tr>
+                      <td>
+                        <a href="/order/<%= b._id %>/details"
+                          ><%=b.name%></a
+                        >
+                      </td>
+                      <td><%=b.item%></td>
+                      <td><%=b.merchant%></td>
+                      <td><%=b.client%></td>
+                      <td><%=b.rider%></td>
+                      <td><%=b.priority_delivery%></td>
+                      <td><%=b.updatedAt.toLocaleString()%></td>
+                      <td>
+                        <a
+                          href="/order/<%= b._id %>/delete"
+                          class="btn btn-danger btn-sm"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                    <%}})%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<%- include('../utils/header') %>
+
+    <form class="splash-container" action="/item/add"  method="POST" enctype="multipart/form-data">
+        <div class="card ">
+            <div class="card-header">
+                <h3 class="mb-1">Add Item</h3>
+            </div>
+            <% if(error){ %>
+                <div class="error">
+                    <p style="color: red;"><%= error %></p>
+                </div>
+            <% } %> 
+            <div class="card-body">
+                <div class="form-group" id="pick-image" style="display: block;" >
+                    <h6>Choose an Image</h6>
+                    <input class="form-control form-control-lg col-3 col-12" name="image" type="file" accept="image/*" id="image" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="name" placeholder="Name" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="price" placeholder="Price" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="expirationDate" placeholder="Min Expiration Date" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="about" placeholder="About" autocomplete="off" required>
+                </div>
+            
+                
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary" id="submit" type="submit" >Add </button>
+                </div>
+        </div>
+        
+    </form>
+    <script>
+        let email = document.querySelector("#email")
+        let password = document.querySelector("#password")
+        let re_password = document.querySelector("#re_password")
+        let submit = document.querySelector('#submit')
+        function passwordCheck(){
+            if(password.value == re_password.value && password.value!= ""){
+                submit.disabled = false
+            } else{
+                submit.disabled = true
+            }
+        }
+        
+    </script>

@@ -1,0 +1,52 @@
+<%- include('../utils/header') %>
+
+    <form class="splash-container" action="/item/<%=response._id%>/edit"  method="POST" enctype="multipart/form-data">
+        <div class="card ">
+            <div class="card-header">
+                <h3 class="mb-1">Edit Item</h3>
+            </div>
+            <% if(error){ %>
+                <div class="error">
+                    <p style="color: red;"><%= error %></p>
+                </div>
+            <% } %> 
+            <div class="card-body">
+                <div class="form-group" id="pick-image" style="display: block;" >
+                    <h6>Choose an Image</h6>
+                    <input class="form-control form-control-lg col-3 col-12" name="image" value="<%= response.images[0]%>" type="file" accept="image/*" id="image" required>
+                    <p>currently selected: <a href="/<%= response.images[0] %>"></a></p>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="name" placeholder="Name" value = "<%= response.name%>" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="price" placeholder="Price" value = "<%= response.price %>" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="expirationDate" placeholder="Min Expiration Date" value = "<%= response.expirationDate %>" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg"  type="text" name="about" placeholder="About" autocomplete="off" required value = "<%= response.about%>">
+                </div>
+            
+                
+                <div class="form-group pt-2">
+                    <button class="btn btn-block btn-primary" id="submit" type="submit">Edit </button>
+                </div>
+        </div>
+        
+    </form>
+    <script>
+        let email = document.querySelector("#email")
+        let password = document.querySelector("#password")
+        let re_password = document.querySelector("#re_password")
+        let submit = document.querySelector('#submit')
+        function passwordCheck(){
+            if(password.value == re_password.value && password.value!= ""){
+                submit.disabled = false
+            } else{
+                submit.disabled = true
+            }
+        }
+        
+    </script>

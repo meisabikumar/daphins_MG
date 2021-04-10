@@ -1,0 +1,95 @@
+<%- include('../utils/header') %>
+
+<!-- wrapper  -->
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content">
+      <!-- pageheader  -->
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <h2 class="pageheader-title">Merchants</h2>
+
+            <div class="page-breadcrumb">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="/admin/success" class="breadcrumb-link"
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    All Merchants
+                  </li>
+                </ol>
+              </nav>
+            </div>
+            <div class="nav-item">
+              <a class="nav-link px-0" href="/merchant/add">
+                <button class="btn btn-block btn-success">Add Merchant</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="card">
+            <h5 class="card-header">Merchant Details Table</h5>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="bg-light">
+                    <tr class="border-0">
+                      <th class="border-0">Username</th>
+                      <th class="border-0">First Name</th>
+                      <th class="border-0">Last Name</th>
+                      <th class="border-0">Store Name</th>
+                      <th class="border-0">Email</th>
+                      <th class="border-0">Updated At</th>
+                      <th class="border-0">Edit</th>
+                      <th class="border-0">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%users.forEach( (b,i)=>{%>
+                    <tr>
+                      <td>
+                        <a href="/merchant/<%= b._id %>/details"
+                          ><%=b.username%></a
+                        >
+                      </td>
+                      <td><%=b.first_name%></td>
+                      <td><%=b.last_name%></td>
+                      <td><%=b.store_name%></td>
+                      <td><%=b.email%></td>
+                      <td><%=b.updatedAt.toLocaleString()%></td>
+                      <td>
+                        <a
+                          href="/merchant/<%= b._id %>/edit"
+                          class="btn btn-dark btn-sm"
+                          >Edit</a
+                        >
+                      </td>
+                      <td>
+                        <a
+                          href="/merchant/<%= b._id %>/delete"
+                          class="btn btn-danger btn-sm"
+                          >Delete</a
+                        >
+                      </td>
+                    </tr>
+                    <%})%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

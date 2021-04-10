@@ -1,0 +1,292 @@
+<%- include('../utils/header') %>
+
+<!-- wrapper  -->
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
+    <div class="container-fluid dashboard-content">
+      <!-- pageheader  -->
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="page-header">
+            <h2 class="pageheader-title"></h2>
+
+            <div class="page-breadcrumb">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="/api/rider/:id/details" class="breadcrumb-link"
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Riders
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end pageheader  -->
+
+      <!-- <p></p> -->
+
+      <div class="row">
+        <!-- profile -->
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+          <!-- card profile -->
+
+          <div class="card %> text-center">
+                  <div class="text-center">
+                        <img class="card-img-top" 
+                        style="height: 100px; width:100px;border-radius:50%; object-fit: cover;"
+                        src="http://localhost:5000/<%= user.profile_picture %>" alt="Card image cap">
+               
+                  </div>
+             <div class="card-body">
+              <div class="text-center">
+                <h2 class="font-24 mb-0"><%=user.username%></h2>
+                <h4 class="mb-0"><%=user.first_name+" "+user.last_name%></h4>
+              </div>
+            </div>
+          
+            <div class="card-body border-top">
+                <div class="row">
+                        <div class="col-6">
+              <h3 class="font-16">Email</h3>
+              <div class="card-text"><%= user.email %></div>
+              </div>
+              <div class="col-6">
+                <h3 class="font-16">Contact Number</h3>
+                <div class="card-text"><%= user.contact_number %></div>
+              
+              </div>
+              </div>
+            </div>
+            <div class="card-body border-top">
+                <div class="row">
+                        <div class="col-6">
+              <h3 class="font-16">License Number</h3>
+              <div class="card-text"><%= user.license_number %></div>
+              </div>
+              <div class="col-6">
+                <h3 class="font-16">Number Plate</h3>
+                <div class="card-text"><%= user.number_plate %></div>
+              
+              </div>
+              </div>
+            </div>
+            <div class="card-body border-top">
+                    <div class="row">
+                            <div class="col-6">
+                                <h3 class="font-16">Bank Account Number</h3>
+                                <div class="card-text"><%= user.bank_account %></div>
+                           
+                            </div>
+                            <div class="col-6">
+                                <h3 class="font-16">IFSC</h3>
+                                <div class="card-text"><%= user.ifsc %></div>
+                           
+                            </div>
+                    </div>
+                 </div>
+                
+            <div class="row text-center border-top">
+                <div class="col-6 p-2 border-right border-top border-bottom">
+                    <h3 class="font-16">Social Security Number</h3>
+                    <div class="card-text"><%= user.social_security_number %></div>
+                  </div>
+              <div class="col-6 p-2 border-right border-top border-bottom">
+                <h6 class="">Emergency Contact</h6>
+                <h3 class="mb-2"><%= user.emergency_contact %></h3>
+              </div>
+              
+             </div>
+             <div class="card-body border-top">
+                <div class="row">
+                        <div class="col-6">
+                            <h3 class="font-16">Amount Given</h3>
+                            <div class="card-text">$1240</div>
+                       
+                        </div>
+                        <div class="col-6">
+                            <h3 class="font-16" style="color:red">Pending Amount</h3>
+                            <div class="card-text">$124</div>
+                       
+                        </div>
+                </div>
+             </div>
+              <div class="card-body border-top">
+                <div class="row text-center justify-content-end">
+                  <div class="col-12">
+                    <td>
+                      <a
+                        href="/rider/<%= user._id %>/delete"
+                        class="btn btn-danger w-50"
+                        >Delete</a
+                      >
+                    </td>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+          </div>
+
+          <!-- end profile -->
+
+          <!-- campaign data -->
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            
+            <!-- campaign tab one -->
+            
+            <div class="influence-profile-content pills-regular">
+                <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                                                                <a class="nav-link active"
+                                                                  id="pills-tickets-tab"
+                                                                    data-toggle="pill" 
+                                                                    href="#pills-tickets" 
+                                                                    role="tab" 
+                                                                    aria-controls="pills-tickets" 
+                                                                    aria-selected="true">Rides</a>
+                    </li>
+                 </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-tickets" role="tabpanel" aria-labelledby="pills-tickets-tab">
+                        <!-- ==================================================== -->
+                                                                            <!-- Friends -->
+                                                                <!-- ==================================================== -->
+                        <div class="row">
+                                                                   
+                          
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                        <div class="card">
+                                                                                <h5 class="card-header">Done</h5>
+                                                                                <div class="card-body p-0">
+                                                                                        <div class="table-responsive">
+                                                                                                <table class="table">
+                                                                                                        <thead class="bg-light">
+                                                                                                                <tr class="border-0">
+                                                                                                                        <th class="border-0">#</th>
+                                                                                                                        <th class="border-0">Date</th>
+                                                                                                                        <th class="border-0">Cost</th>
+                                                                                                                        <th class="border-0">Duration</th>
+                                                                                                                        <th class="border-0">Orders</th>
+                                                                                                                        <th class="border-0">Time Slot</th>
+                                                                                                                        
+                                                                                                                </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            <% if(user.requests_sent){
+                                                                                                                user.requests_sent.forEach((item, i) => { %> 
+                                                                                                                <tr>
+                                                                                                                        <td><%= i %> </td>
+                                                                                                                        <td><a href="/api/admin/user/<%= item._id %>  "><%= item.username %> </a></td>
+                                                                                                                        <td><%= item.gender %> </td>
+                                                                                                                        <td><%= item.email %> </td>
+                                                                                                                        <td><%= item.preference %> </td>
+                                                                                                                </tr>
+                                                                                                            <% })}%>
+                                                                                                                <!-- <tr>
+                                                                                                                        <td colspan="8"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
+                                                                                                                </tr> -->
+                                                                                                        </tbody>
+                                                                                                </table>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                          
+                          
+                                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                                        <div class="card">
+                                                                                <h5 class="card-header">Current Ride</h5>
+                                                                                <div class="card-body p-0">
+                                                                                        <div class="table-responsive">
+                                                                                                <table class="table">
+                                                                                                        <thead class="bg-light">
+                                                                                                                <tr class="border-0">
+                                                                                                                        <th class="border-0">#</th>
+                                                                                                                        <th class="border-0">Started At</th>
+                                                                                                                        <th class="border-0">Orders</th>
+                                                                                                                        <th class="border-0">Cost</th>
+                                                                                                                        <th class="border-0">Others</th>
+                                                                                                                        
+                                                                                                                </tr>
+                                                                                                        </thead>
+                                                                                                        <tbody>
+                                                                                                            <% if(user.requests_sent){
+                                                                                                                user.requests_sent.forEach((item, i) => { %> 
+                                                                                                                <tr>
+                                                                                                                        <td><%= i %> </td>
+                                                                                                                        <td><a href="/api/admin/user/<%= item._id %>  "><%= item.username %> </a></td>
+                                                                                                                        <td><%= item.gender %> </td>
+                                                                                                                        <td><%= item.email %> </td>
+                                                                                                                        <td><%= item.preference %> </td>
+                                                                                                                </tr>
+                                                                                                            <% })}%>
+                                                                                                                <!-- <tr>
+                                                                                                                        <td colspan="8"><a href="#" class="btn btn-outline-light float-right">View Details</a></td>
+                                                                                                                </tr> -->
+                                                                                                        </tbody>
+                                                                                                </table>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                    </div>                                         
+                                                                    
+                                                                    
+
+                        </div>
+                    </div>
+                 
+                   
+                </div>
+            </div>
+            
+            <!-- end campaign tab one -->
+            
+        </div>
+          <!-- end campaign tab one -->
+
+          <!-- end campaign data -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery-migrate-3.0.0.js"></script>
+  <script src="/js/jquery-ui.min.js"></script>
+   Popper JS 
+  <script src="/js/popper.min.js"></script>
+  Bootstrap JS 
+  <script src="/js/bootstrap.min.js"></script>
+  Slicknav JS 
+  <script src="/js/slicknav.min.js"></script>
+   Owl Carousel JS 
+  <script src="/js/owl-carousel.js"></script>
+   Magnific Popup JS 
+  <script src="/js/magnific-popup.js"></script>
+   Waypoints JS 
+  <script src="/js/waypoints.min.js"></script>
+   Countdown JS 
+  <script src="/js/finalcountdown.min.js"></script>
+   Nice Select JS 
+  <script src="/js/nicesellect.js"></script>
+   Flex Slider JS 
+  <script src="/js/flex-slider.js"></script>
+   ScrollUp JS 
+  <script src="/js/scrollup.js"></script>
+   Onepage Nav JS 
+  <script src="/js/onepage-nav.min.js"></script>
+   Easing JS 
+  <script src="/js/easing.js"></script>
+   Active JS 
+  <script src="/js/active.js"></script>
+   custome scripts 
+  <script src="/js/script.js"></script> -->
+</div>
