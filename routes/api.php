@@ -128,6 +128,7 @@ Route::get('/Testingstr',[MatchesController::class,'TestAlgo']);
 Route::get('/FixtureData',[AppResController::class,'FixtureRes']);
 // Route::get('/TeamData',[AppResController::class,'TeamRes']);
 Route::get('/PlayerData',[AppResController::class,'PlayerRes']);
+Route::post('/Rmlauth',[LoginController::class,'rmlauth']);
 // Ends
 // ENds
 

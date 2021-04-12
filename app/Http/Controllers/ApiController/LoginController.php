@@ -223,4 +223,16 @@ class LoginController extends Controller
         }
 
     }
+    public function rmlauth(Request $request)
+    {
+        $mobile_num=$request->post('msisdn');
+        $product=$request->post('product');
+        $validity_from="2021-04-07";
+        $validity_to="2022-04-07";
+        
+        $data=array("msisdn"=>$mobile_num,"product"=>$product,"validity_from"=>$validity_from,"validity_to"=>$validity_to);
+        return response()->json($data);
+
+        
+    }
 }
