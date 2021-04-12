@@ -13,7 +13,7 @@
 
     <link rel="shortcut icon"
           type="image/x-icon"
-          href="{{ asset('front/img/profeud_favicon.ico') }}">
+          href="{{asset('images/logo_main.png')}}">
 
     <!-- Script -->
 
@@ -73,7 +73,7 @@
 
         <a href="{{ URL::to('admin/dashboard') }}"
            class="logo">
-            <img src="{{ asset('img/logo.png') }}">
+            <img  src="{{asset('images/logo_main.png')}}">
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -97,7 +97,7 @@
 
                         <a href="javascript:void(0);"
                            class="dropdown-toggle"
-                           data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>user name <i class="caret"></i></span> </a>
+                           data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>{{session('sess_admin_name')}} <i class="caret"></i></span> </a>
 
                         <ul class="dropdown-menu">
 
@@ -113,7 +113,7 @@
                                 </div>
 
                                 <div class="pull-right"> <a class="btn btn-default btn-flat"
-                                       href="{{ URL::to('admin/logout') }}">
+                                       href="{{ URL::to('/admin/logout_admin') }}">
 
                                         {{ trans('Logout') }} </a>
 
@@ -162,7 +162,7 @@
                         <ul class="treeview-menu closed"
                             style="treeview-menu display:none;">
                             <li>
-                                <a href="https://www.profeud.com/admin/users/3"><i class='fa fa-angle-double-right'></i>App Users </a>
+                                <a href="{{url('/admin/App_Users')}}"><i class='fa fa-angle-double-right'></i>App Users </a>
                             </li>
 
                             <li>

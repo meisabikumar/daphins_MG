@@ -43,6 +43,9 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'adminprotectedPage'=> [
+            \App\Http\Middleware\authcheck::class,
+        ],
     ];
 
     /**

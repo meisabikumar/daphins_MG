@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //
+    //Dashboard view
     public function dashboard()
     {
 
@@ -15,4 +15,10 @@ class HomeController extends Controller
       return view('AdminView.dashboard');
 
     }
+    // App User view
+    public function app_users()
+    {
+      return view('AdminView.appuserview');
+    }
+    
 }

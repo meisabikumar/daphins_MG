@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
-                    <a href="{{ URL::to('admin/contest/create') }}"
+                    <a href="{{ URL::to('/admin/Cric-Create') }}"
                        class="btn btn-success btn-small  pull-right"
                        style="margin:0;">{{ trans('Add New Contest') }} </a>
                 </div>

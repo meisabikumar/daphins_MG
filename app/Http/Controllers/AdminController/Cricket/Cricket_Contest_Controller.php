@@ -5,8 +5,9 @@ namespace App\Http\Controllers\AdminController\Cricket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\AdminModel\Cricket\cricket_contest;
 
+use App\Models\AdminModel\Cricket\cricket_contest;
+use App\Models\CricModel\CricModel;
 class Cricket_Contest_Controller extends Controller
 {
     //
@@ -44,6 +45,16 @@ class Cricket_Contest_Controller extends Controller
         $data->save();
 
         return "done";
+    }
+    
+    // Create Cricket Contest view
+    public function cric_create()
+    {
+        $CricModel=new CricModel();
+        $res=$CricModel->ContestgetCategory();
+        $res2=$CricModel->Contestgetseries();
+        // return $res;
+        return view('AdminView.cricket.createcontest',['res'=>$res,'res2'=>$res2]);
     }
 
 
