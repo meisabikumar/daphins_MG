@@ -92,6 +92,13 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/cricket/MatchData',[Cricket_AppResController::class,'MatchDataRes']);
     Route::post('/cricket/get-teams-data',[Cricket_AppResController::class,'cricket_get_team_by_match_id']);
     Route::post('/cricket/get-contest',[Cricket_AppResController::class,'get_cricket_contest_response']);
+    Route::get('/cricket_match',[Cricket_AppResController::class,'cricket_match']);
+    Route::get('/cricket_players',[Cricket_AppResController::class,'cricket_players']);
+    Route::post('/userJoin_contest',[Cricket_AppResController::class,'userJoin_contest']);
+
+    
+    
+    
 // -------------------------
 
 
