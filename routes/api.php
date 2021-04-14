@@ -38,10 +38,10 @@ use App\Http\Controllers\User\Wallet_Transaction_Controller;
 
 
 // ---------- Routes by Abhishek ---------------
-
+Route::post('/signup', [LoginController::class, 'signup']);
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', [LoginController::class, 'login']);
-    Route::post('/signup', [LoginController::class, 'signup']);
+    
     Route::post('/sendOtp', [LoginController::class, 'sendOtp']);
 
     Route::group(['middleware' => 'auth:api'], function() {
@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/MatchData',[AppResController::class,'MatchDataRes']);
     Route::post('/football/get-teams-data',[AppResController::class,'football_get_team_by_match_id']);
     Route::post('/football/get-contest',[AppResController::class,'get_football_contest_response']);
+    Route::post('/Football_User_Teams',[AppResController::class,'Football_User_Teams']);
+    Route::post('/Football_Teams_get',[AppResController::class,'Football_Teams_get']);
+    
     // -----------------------------------------------------------------------
 
 // -----------------
@@ -86,6 +89,9 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 
 // -------Cricket API------------
+    // Player Data Feeding
+    
+    Route::get('/player_list',[Cricket_Data_Controller::class,'player_list']);
     Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
     Route::get('/cricket/cricket_fixture_teams',[Cricket_Data_Controller::class,'cricket_fixture_teams']);
     // ---Criket App Response ---
@@ -95,6 +101,16 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/cricket_match',[Cricket_AppResController::class,'cricket_match']);
     Route::get('/cricket_players',[Cricket_AppResController::class,'cricket_players']);
     Route::post('/userJoin_contest',[Cricket_AppResController::class,'userJoin_contest']);
+    Route::post('/Cricket_User_Teams',[Cricket_AppResController::class,'Cricket_User_Teams']);
+    Route::post('/Cricket_User_Teams_get',[Cricket_AppResController::class,'Cricket_User_Teams_get']);
+    
+    Route::get('/CricLiveScores',[Cricket_AppResController::class,'CricLiveScores']);
+    Route::post('/getUserData',[LoginController::class,'getUserData']);
+    // Testing ScoreUpdate
+    Route::get('/Testing_Score',[Cricket_AppResController::class,'Testing_Score']);
+    
+    
+
 
     
     
@@ -121,6 +137,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 Route::post('/join-contest',[User_Contest_Controller::class,'join_contest']);
 Route::post('/wallet-Transaction',[Wallet_Transaction_Controller::class,'store']);
 Route::post('/user-profile',[User_Profile_Controller::class,'update']);
+
 // -------------------------------------------------------------------------------------
 
 // -----------------------------------------

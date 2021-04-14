@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 use App\Models\ApiModel\Cricket\cricket_fixture;
 use App\Models\ApiModel\Cricket\cricket_fixture_teams;
-
+use App\Models\ApiModel\Cricket\CricMatch;
+use Carbon\Carbon; 
 class Cricket_Data_Controller extends Controller
 {
     //
@@ -42,7 +43,7 @@ class Cricket_Data_Controller extends Controller
             $data->localteam_data = $value['localteam'];
             $data->visitorteam_id = $value['visitorteam_id'];
             $data->visitorteam_data = $value['visitorteam'];
-            $data->starting_at = $value['starting_at'];
+            $data->starting_at = Carbon::parse($value['starting_at'])->addMinutes(330);
             $data->type = $value['type'];
             $data->live = $value['live'];
             $data->status = $value['status'];
@@ -65,9 +66,8 @@ class Cricket_Data_Controller extends Controller
             // $data->weather_report = $value['weather_report'];
             $data->save();
 
-
         }
-        return "done";
+        // return "done";
 
 
 
@@ -86,7 +86,7 @@ class Cricket_Data_Controller extends Controller
         foreach ($fixtures as $fixture) {
 
 
-            $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token."&include=squad";
+            $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token;
 
             $localteam_res = Http::get($localteam);
             $localteam_data = $localteam_res["data"];
@@ -123,4 +123,42 @@ class Cricket_Data_Controller extends Controller
         return "done";
 
     }
-}
+    public function player_list()
+    {
+        // $api_token = "Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
+        // $curl = curl_init();
+
+        // curl_setopt_array($curl, array(
+        // CURLOPT_URL => 'https://cricket.sportmonks.com/api/v2.0/players?api_token='.$api_token,
+        // CURLOPT_RETURNTRANSFER => true,
+        // CURLOPT_ENCODING => '',
+        // CURLOPT_MAXREDIRS => 10,
+        // CURLOPT_TIMEOUT => 0,
+        // CURLOPT_FOLLOWLOCATION => true,
+        // CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        // CURLOPT_CUSTOMREQUEST => 'GET',
+        // ));
+
+        // $response = curl_exec($curl);
+
+        // curl_close($curl);
+        
+        // return gettype($response);
+        $CricMatch=new CricMatch();
+        $res=$CricMatch->getData();
+        // print_r($res['players']);
+        // // return gettype($res);
+        
+        // foreach ($res as $value) {
+            // $players=$value->players;
+        // return $players;
+        //     // return gettype($players);
+            // $result[]=$players;
+        // }             
+        // return $result;
+    }
+
+        
+    }
+    
+

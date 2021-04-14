@@ -22,6 +22,18 @@ Route::get('migrate', function () {
     \Artisan::call('migrate:refresh');
     dd("Done");
 });
+Route::get('/downlaodapk', function () {
+    $file= public_path()."/mg_v1.8_nrml.apk";
+    $headers = array(
+          'Content-Type:application/apk',
+        );
+    // return Response::download($file, 'mg_v1.8_nrml.apk');
+    return response()->download($file, 'mg_v1.8_nrml.apk', $headers);
+    
+});
+
+Route::get('/Downloadapk',[HomeController::class,'downloadapp']);
+
 
 // Route::get('passport', function () {
 //     \Artisan::call('passport:install');
@@ -63,7 +75,12 @@ Route::post('/admin/cricket/update_active_match',[Admin_Cricket_web_Controller::
 Route::post('/admin/cricket/update_disable_match',[Admin_Cricket_web_Controller::class,'update_inactive']);
 Route::get('/admin/cricket/get_player/{match_id}',[Admin_Cricket_web_Controller::class,'get_player']);
 Route::post('/admin/cricket/get_player/{match_id}',[Admin_Cricket_web_Controller::class,'assign_player_credit']);
+// Code By Amita
+Route::post('/admin/contests/cric_create/add',[Cricket_Contest_Controller::class,'store']);
+
 // middleware ends
+
+
 });
 Route::get('clear', function () {
 

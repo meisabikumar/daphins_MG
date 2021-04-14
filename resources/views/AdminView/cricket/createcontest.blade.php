@@ -1,4 +1,4 @@
-@extends('AdminView.layouts.default')
+@extends('AdminView.default')
 @section('content')
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
@@ -51,17 +51,20 @@
 
                     <label for="contest_category">Contest Category</label>
 
-                    <select class="form-control" name="contest_category" id="contest_category">
+                    <select class="form-control" name="category" id="contest_category">
 
                         <option value="">--Select Contest Category--</option>
 
                         @foreach($res as $id => $category)
 
-                            {{-- <option value="{{ $id }}" @if(isset($contest['contest_category']) && $contest['contest_category'] == $id){{ 'selected' }}@endif>{{ $category }}</option> --}}
+                     
+              <option value="{{ $category->id }}">{{ $category->category }}</option>
+              @endforeach
+</select>
 
-                        @endforeach
 
-                    </select>
+
+                    <!-- </select> -->
 
                 </div>
 
@@ -73,7 +76,7 @@
 
                     <label for="contest_category">Cricket Match(Teams)(Tournament)</label>
 
-                    <select class="form-control" name="series_id" id="series_id"  >
+                    <select class="form-control" name="game_type" id="series_id"  >
 
                         <option value="">--Select Match--</option>
 
@@ -81,8 +84,8 @@
 
 {{-- <option value="{{ $i->fixture_id }}">{{$i->localteam_data['name'] }} vs {{$i->visitorteam_data['name']}} ({{$i->type}}) ({{ $i->fixture_id }}) </option> --}}
 
-                        
-
+                      
+          
                         @endforeach
 
                     </select>
@@ -99,7 +102,7 @@
 
                                 <label for="name">Name</label>
 
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Contest Name" value="">
+                                <input type="text" name="contest_name" id="name" class="form-control" placeholder="Contest Name" value="">
 
                             </div>
 
@@ -394,7 +397,7 @@
 
                                 <label for="winning_amt">Breakdown Total</label>
 
-                                <input type="text" readonly class="form-control" name="breakdown_amt" id="breakdown_amt" value="">
+                                <input type="text" readonly class="form-control" name="breakdown" id="breakdown_amt" value="">
 
                             </div>
 
@@ -408,6 +411,7 @@
 
                         <div class="col-md-2">From Rank</div>
 
+
                         <div class="col-md-2">To Rank</div>
 
                         <div class="col-md-2 percent_header" style="">Prize Percent</div>
@@ -417,6 +421,7 @@
                         <div class="col-md-2">Amount Per Person</div>
 
                     </div>
+                 
 
                     <div id="pool_breakdown">
 
@@ -433,7 +438,7 @@
 
 
 
-                                <input type="text"  class="form-control from" name="from[]" id="from1" value="">
+                                    <input type="text"  class="form-control from" name="breakdown[]" id="from1" value="">
 
 
 
@@ -448,7 +453,7 @@
                                     <div class="form-group">
 
 
-                                <input type="text"  class="form-control to" name="to[]" id="to2" value="">
+                                <input type="text"  class="form-control to" name="breakdown[]" id="to2" value="">
 
 
 
@@ -659,7 +664,7 @@
                         </div>
 
         	  		</div>
-    	  		<input type="submit"  value="Submit" id="crik_submt_btn_sftlo" class="btn btn-primary" onclick="submit();">
+    	  		<input type="" value="Submit"    id="crik_submt_btn_sftlo" class="btn btn-primary" onclick="submit();">
     	  		
     	  	</form>
 

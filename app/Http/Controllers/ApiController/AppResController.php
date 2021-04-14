@@ -48,43 +48,63 @@ class AppResController extends Controller
         foreach ($data as $val) {
 
             if ($val->API == 'roanuz') {
-
-                $visitorteam = roanuz_match_teams::where('team_key', $val->match_away_team)->first();
-                $localteam = roanuz_match_teams::where('team_key', $val->match_home_team)->first();
-
+                // echo $val->match_away_team.'<br>';
+                $roanuz_match_teams=new roanuz_match_teams();
+                $visitorteam=$roanuz_match_teams->getVisitor($val->match_away_team);
+                $localteam = $roanuz_match_teams->getLocal($val->match_home_team);
+                foreach ($localteam as $teamone) {
+                    // echo $teamtwo->name."<br>";
+                }
+                
+                
+                foreach ($visitorteam as $teamtwo) {
+                    // echo $teamtwo->name."<br>";
+                    // echo $teamtwo->id;
+                }
                 $teams = array(
-                    array(
-                        "id" => $visitorteam->id,
-                        "team_id" => $visitorteam->team_key,
-                        "name" => $visitorteam->team_name,
-                        "short_name" => $visitorteam->team_short_name,
+                        array(
+                        "id" => $teamtwo->id,
+                        "team_id" => $teamtwo->team_key,
+                        "name" => $teamtwo->team_name,
+                        "short_name" => $teamtwo->team_short_name,
                         "flag" => null),
-                    array(
-                        "id" => $localteam->id,
-                        "team_id" => $localteam->team_key,
-                        "name" => $localteam->team_name,
-                        "short_name" => $localteam->team_short_name,
-                        "flag" => null));
-            }
+                        array(
+                        "id" => $teamone->id,
+                        "team_id" => $teamone->team_key,
+                        "name" => $teamone->team_name,
+                        "short_name" => $teamone->team_short_name,
+                        "flag" => null)
+                    );
+                     
+                } 
+            
 
             if ($val->API == 'sportsmonk') {
                 // return  $val->match_away_team;
-                $visitorteam = sportsmonk_match_teams::where('team_id', $val->match_away_team)->first();
-                $localteam = sportsmonk_match_teams::where('team_id', $val->match_home_team)->first();
-
+                $sportsmonk_match_teams=new sportsmonk_match_teams();
+                $visitorteam=$sportsmonk_match_teams->newgetvisitor($val->match_away_team);
+                $localteam=$sportsmonk_match_teams->newgetLocal($val->match_home_team);
+                // $visitorteam = sportsmonk_match_teams::where('team_id', $val->match_away_team)->first();
+                // $localteam = sportsmonk_match_teams::where('team_id', $val->match_home_team)->first();
+                foreach ($visitorteam as $teamtwo) {
+                    
+                }
+                foreach ($localteam as $teamone) {
+                    # code...
+                }
                 $teams = array(
                     array(
-                        "id" => $visitorteam->id,
-                        "team_id" => $visitorteam->teamId,
-                        "name" => $visitorteam->name,
-                        "short_name" => $visitorteam->short_code,
-                        "flag" => $visitorteam->logo_path),
+                        "id" => $teamtwo->id,
+                        "team_id" => $teamtwo->team_id,
+                        "name" => $teamtwo->name,
+                        "short_name" => $teamtwo->short_code,
+                        "flag" => $teamtwo->logo_path),
                     array(
-                        "id" => $localteam->id,
-                        "team_id" => $localteam->teamId,
-                        "name" => $localteam->name,
-                        "short_name" => $localteam->short_code,
-                        "flag" => $localteam->logo_path));
+                        "id" => $teamone->id,
+                        "team_id" => $teamone->team_id,
+                        "name" => $teamone->name,
+                        "short_name" => $teamone->short_code,
+                        "flag" => $teamone->logo_path));
             }
 
             $arr = array(
@@ -107,11 +127,16 @@ class AppResController extends Controller
         ]);
 
     }
+    // Football Team
+    // public function getFootballTeam(Request $request)
+    // {
 
+    // }
     public function football_get_team_by_match_id(Request $request)
     {
         $teams = unique_teams::where('match_key', $request->match_id)->get();
 
+        
         $data = array();
 
         foreach ($teams as $team) {
@@ -195,7 +220,7 @@ class AppResController extends Controller
         return response()->json([
             "status" => 1,
             "message" => "Success",
-            "result" => $data,
+            "result" => $teams,
         ]);
 
     }
@@ -267,6 +292,59 @@ class AppResController extends Controller
             "result" => [$data],
             "series_data" => $series_data,
         ]);
+    }
+    // Football User Team Create and Get
+    public function Football_User_Teams(Request $request)
+    {
+        $user_id=$request->post('user_id');
+        
+        $team[]=$request->post('team');
+        $match_id=$request->post('match_id');
+        // $data=array(
+        //     'user_id'=>$request->post('user_id'),
+        //     'teams'=>$team[],
+        //     // return $team;
+        // );
+        $team_json=json_encode($team);
+        // return $team;
+        // return gettype($team);
+        // return gettype($team_json);
+        // return $team;
+        $CricMatch=new CricMatch();
+        $res_user_team=$CricMatch->Football_User_Teams_Model($user_id,$team_json,$match_id);
+        // return $data;
+        
+        
+        // return response()->json(["status" => 1,"message" => "Success"]);
+        
+
+
+    }
+    public function Football_Teams_get(Request $request)
+    {
+        // $user_id=1;
+        // $match_id=24915;
+        $user_id=$request->post('user_id');
+        $match_id=$request->post('match_id');
+        $CricMatch=new CricMatch();
+        // return $match_id;
+        $res=$CricMatch->Football_Teams_Model_get($user_id,$match_id);
+        // return $res;
+        foreach ($res as $value) {
+            // $user_id=$value->user_id;
+            $id=$value->id;
+            $match_id=$value->match_id;
+            $team=stripslashes($value->teams);
+            $team_id=json_decode($team);
+            
+            $data=array("team_id"=>$id,"user_id"=>$user_id,"match_id"=>$match_id,"team"=>$team_id);
+            
+            
+            $result[]=$data;
+
+        }
+        return response()->json(["status" => 1,"message" => "Success","data"=>$result]);
+        
     }
 
 }

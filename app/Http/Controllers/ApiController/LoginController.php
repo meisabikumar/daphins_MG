@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\temp_user;
-
+use App\Models\ApiModel\Cricket\CricMatch;
 use Twilio\Rest\Client;
 use Twilio\Jwt\ClientToken;
 
@@ -223,16 +223,52 @@ class LoginController extends Controller
         }
 
     }
-    public function rmlauth(Request $request)
+    
+    // Signup
+    public function signup(Request $request)
     {
-        $mobile_num=$request->post('msisdn');
-        $product=$request->post('product');
-        $validity_from="2021-04-07";
-        $validity_to="2022-04-07";
-        
-        $data=array("msisdn"=>$mobile_num,"product"=>$product,"validity_from"=>$validity_from,"validity_to"=>$validity_to);
-        return response()->json($data);
+        $data=array(
+            'name'=>$request->post('name'),
+            'email'=>$request->post('email'),
+            'mobile'=>$request->post('mobile'),
+            'city'=>$request->post('city'),
+            'state'=>$request->post('state'),
+            'country'=>$request->post('country'),
+            'address'=>$request->post('address'),
+            'gender'=>$request->post('gender'),
+            'DOB'=>$request->post('DOB'),
+            'team_name'=>$request->post('team_name'),
+            'post_code'=>$request->post('post_code'),
+         						
+        );
+        $CricMatch=new CricMatch();
+        $result_user=$CricMatch->signup_model($data);
 
+        if($result_user>0)
+        {
+            return response()->json([
+                "status" => 1,
+                "message" => "Success",
+            ]);
+        }else
+        {
+            return response()->json([
+                "status" => 2,
+                "message" => "Error",
+            ]);
+        }
+    }
+    public function getUserData(Request $request)
+    {
+        $email=$request->post('email');
+        $CricMatch=new CricMatch();
+        $result_user=$CricMatch->getUserDataModel($email);
+        
+            return response()->json([
+                "status" => 1,
+                "message" => "Success",
+                "data"=>$result_user
+            ]);
         
     }
     
