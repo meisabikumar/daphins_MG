@@ -95,5 +95,12 @@ class CricMatch extends Model
         // $ret=DB::table('cric_user_team')->get();
         return $ret;
     }
+    // Get User JOined Contest
+    public function getUserJoined($data)
+    {
+        $data=(object)$data;
+        $ret=DB::table('')->where(array("user_id"=>$data->user_id,"match_id"=>$data->match_id,"game_type"=>$game_type))->get();
+        return $ret;
+    }
 
 }

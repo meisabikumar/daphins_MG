@@ -1481,6 +1481,19 @@ class Cricket_AppResController extends Controller
         
         
     }
+    // User Joined Contest Details
+    public function userJoin_get_contest(Request $request)
+    {
+        $data=array(
+        'user_id'=>$request->post('user_id'),
+        'match_id'=>$request->post('match_id'),
+        'game_type'=>$request->post('game_type'),
+        );
+        $CricMatch=new CricMatch();
+
+        $res=$CricMatch->getUserJoined($data);
+        return response()->json(["status" => 1,"message" => "Success","data"=>$res]);   
+    }
 
 
 

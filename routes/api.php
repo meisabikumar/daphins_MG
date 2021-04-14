@@ -101,6 +101,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/cricket_match',[Cricket_AppResController::class,'cricket_match']);
     Route::get('/cricket_players',[Cricket_AppResController::class,'cricket_players']);
     Route::post('/userJoin_contest',[Cricket_AppResController::class,'userJoin_contest']);
+    Route::post('/userJoin_get_contest',[Cricket_AppResController::class,'userJoin_get_contest']);
     Route::post('/Cricket_User_Teams',[Cricket_AppResController::class,'Cricket_User_Teams']);
     Route::post('/Cricket_User_Teams_get',[Cricket_AppResController::class,'Cricket_User_Teams_get']);
     
