@@ -14,6 +14,7 @@ use App\Models\temp_user;
 use App\Models\ApiModel\Cricket\CricMatch;
 use Twilio\Rest\Client;
 use Twilio\Jwt\ClientToken;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -239,10 +240,78 @@ class LoginController extends Controller
             'DOB'=>$request->post('DOB'),
             'team_name'=>$request->post('team_name'),
             'post_code'=>$request->post('post_code'),
+            'wallet'=>$request->post('wallet'),
          						
         );
         $CricMatch=new CricMatch();
+        if(DB::table('users')->where(array('mobile'=>$data['mobile']))->exists())
+        {
+            return response()->json([
+                "status" => 3,
+                "message" => "User Alreday Exist",
+            ]);
+        }
+        else{
+
+        
         $result_user=$CricMatch->signup_model($data);
+        
+        if($result_user>0)
+        {
+            return response()->json([
+                "status" => 1,
+                "message" => "Success",
+            ]);
+        }else
+        {
+            return response()->json([
+                "status" => 2,
+                "message" => "Error",
+            ]);
+        }
+        }
+    }
+    public function getUserData(Request $request)
+    {
+        $mobile=$request->post('mobile');
+        $CricMatch=new CricMatch();
+        $result_user=$CricMatch->getUserDataModel($mobile);
+        if($result_user)
+        {
+            return response()->json([
+                "status" => 1,
+                "message" => "Success",
+                "data"=>$result_user
+            ]);
+        }else{
+            return response()->json([
+                "status" => 2,
+                "message" => "No Data or Some Error",
+                
+            ]);
+        }
+        
+    }
+    public function  profileupdate(Request $request)
+    {
+        $data=array(
+            'user_id'=>$request->post('user_id'),
+            'name'=>$request->post('name'),
+            'email'=>$request->post('email'),
+            'mobile'=>$request->post('mobile'),
+            'city'=>$request->post('city'),
+            'state'=>$request->post('state'),
+            'country'=>$request->post('country'),
+            'address'=>$request->post('address'),
+            'gender'=>$request->post('gender'),
+            'DOB'=>$request->post('DOB'),
+            'team_name'=>$request->post('team_name'),
+            'post_code'=>$request->post('post_code'),
+            'wallet'=>$request->post('wallet'),
+         						
+        );
+        $CricMatch=new CricMatch();
+        $result_user=$CricMatch->profileupdate_Model($data);
 
         if($result_user>0)
         {
@@ -258,18 +327,24 @@ class LoginController extends Controller
             ]);
         }
     }
-    public function getUserData(Request $request)
+    public function unsubscribe_user(Request $request)
     {
-        $email=$request->post('email');
+
+        $user_id=$request->post('user_id');
         $CricMatch=new CricMatch();
-        $result_user=$CricMatch->getUserDataModel($email);
-        
+        $result_user=$CricMatch->unsubscribe_user_Model($user_id);
+        if($result_user)
+        {
             return response()->json([
                 "status" => 1,
                 "message" => "Success",
-                "data"=>$result_user
             ]);
-        
+        }else{
+            return response()->json([
+                "status" => 2,
+                "message" => "No Data or Some Error",
+                
+            ]);
+        }
     }
-    
 }

@@ -3,6 +3,29 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\ApiModel\Cricket\CricMatch;
+use Illuminate\Support\Facades\DB;
+use App\Models\CricUserTeams;
+use App\Models\CricPlayerPrice;
+use App\Models\CricUserTeamPlayers;
+use App\Models\CricPlayers;
+use App\Models\CricCountry;
+use App\Models\CricUserContest;
+use App\Models\CricPlayerStats;
+use App\Models\CricTeam;
+use App\Models\CricContests;
+use App\Models\CricUserContestRank;
+use App\Models\CricTournament;
+// use App\Models\CricMatches;
+use App\Models\CricketMatches;
+use App\Models\CricPlayerPoints;
+use App\Models\CricMatchStatus;
+use \Carbon\Carbon;
+use App\Models\User;
+use App\Models\UserWalets;
+
+use App\Models\CronRecord;
+use DateTime;
 
 class ScoreUpdate extends Command
 {
@@ -11,14 +34,14 @@ class ScoreUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'update:score';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Update Live Cricket Scores every 2 minutes';
 
     /**
      * Create a new command instance.
@@ -341,7 +364,7 @@ class ScoreUpdate extends Command
                     $points_detail["i1"][] = $temp;
                     $points_detail["i2"][] = $temp;
                 }
-                $mid = CricMatches::where("roaster_id", $lm["id"])->first()->id;
+                $mid = CricketMatches::where("fixture_id", $lm["id"])->first()->id;
                 $players = CricPlayerPrice::where("match_id", $mid)->where("price", ">", 0)->pluck("player_id")->toArray();
                 foreach ($players as $plid) {
                     $player_id = $plid;
@@ -835,24 +858,28 @@ class ScoreUpdate extends Command
         $matches_to_rank = CricMatchStatus::where("status", 1)->orWhere(["status" => 0, "bonus_evaluation_done" => 1])->pluck("match_id")->toArray();
         // $matches_to_rank = CricMatches::all();
         $userTeams = array();
+        // Changes
+        // $CricMatch=new CricMatch();
         foreach ($matches_to_rank as $mId) {
-            $uTs = CricUserTeams::where("match_id", $mId)->get();
+            // $uTs =    CricUserTeams::where("match_id", $mId)->get(); //do changes here in cricUser Teams
+            $uTs=DB::table('cric_user_team')->where(array("match_id"=>$mId))->get();
             foreach ($uTs as $uT) {
                 if ($uT) {
                     $userTeams[] = $uT;
                 }
             }
         }
-
+        // Changes ends
         $uids = array();
 
         foreach ($userTeams as $ut) {
-
-            $teamPlayers = CricUserTeamPlayers::where("team_id", $ut->id)->get();
-
+            // Chnages Here
+            // $teamPlayers = CricUserTeamPlayers::where("team_id", $ut->id)->get();
+            $teamPlayers=DB::table('cric_user_team')->where(array("id"=>$ut->id))->get();
             $team_user_id = $ut->user_id;
             $userTeamPoints = 0;
             $matchId = $ut->match_id;
+            // Changes
             foreach ($teamPlayers as $tp) {
                 if (CricPlayerPoints::where(['player_id' => $tp->player_id, 'match_id' => $ut->match_id])->exists()) {
                     $player_points = CricPlayerPoints::where(['player_id' => $tp->player_id, 'match_id' => $ut->match_id])->first()->points;
@@ -879,7 +906,7 @@ class ScoreUpdate extends Command
                     $newContestRank = new CricUserContestRank;
                     $newContestRank->user_id = $team_user_id;
                     $newContestRank->team_id = $ut->id;
-                    $newContestRank->participant_name = User::find($ut->user_id)->full_name;
+                    $newContestRank->partic3ipant_name = User::find($ut->user_id)->full_name;
                     $newContestRank->points = $userTeamPoints;
                     $newContestRank->contest_id = $userContest["contest_id"];
                     $newContestRank->series_id = $matchId;
@@ -898,7 +925,7 @@ class ScoreUpdate extends Command
         }
 
         // Rank Allocation
-        $all_contest_ids = CricContests::where("status", 1)->pluck("id")->toArray();
+        $all_contest_ids = CricContests::where("game_status", 1)->pluck("id")->toArray();
         foreach ($all_contest_ids as $c_id) {
             if (CricUserContestRank::where("contest_id", $c_id)->exists()) {
                 $userRanks = CricUserContestRank::where("contest_id", $c_id)->orderBy("points", "DESC")->get();
@@ -938,6 +965,7 @@ class ScoreUpdate extends Command
                     // echo json_encode($breakdownMap);
                     // Allot amount
                     // return;
+
                     foreach ($breakdownMap as $rank => $amount) {
                         if (CricUserContestRank::where(["contest_id" => $contest["id"], "rank" => $rank, "won_amount" => 0])->exists()) {
                             $rankCount = CricUserContestRank::where("contest_id", $contest->id)->where("rank", $rank)->count();
@@ -997,17 +1025,18 @@ class ScoreUpdate extends Command
         $pastMatches = CricMatchStatus::where(["status" => 1, "bonus_evaluation_done" => 0])->pluck("match_id")->toArray();
 
         foreach ($pastMatches as $pm) {
-            $p_m = CricMatches::where("roaster_id", $pm)->exists();
+            // $p_m = CricMatches::where("fixture_id", $pm)->exists();
+            $p_m =DB::table('cricket_fixtures')->where(array("fixture_id"=>$pm))->exists();
             if ($p_m) {
                 $is_innings = 0;
-                $p_m = CricMatches::where("roaster_id", $pm)->first();
+                $p_m = CricketMatches::where("fixture_id", $pm)->first();
                 if ($p_m->type == "Test/5day" || $p_m->type == "4day") {
                     $is_innings = 1;
                 }
 
-                $api_key = "YorIxro1sMWLmRjlmUMqMGuKvTaMcQICUtdPdOCDDBQn756ZiX4GrVB292jw";
+                $api_key = "Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
                 $api_url  = "https://cricket.sportmonks.com/api/v2.0";
-                $api_fetch_fixture = "$api_url/fixtures/$p_m->roaster_id/?api_token=$api_key&include=scoreboards";
+                $api_fetch_fixture = "$api_url/fixtures/$p_m->fixture_id/?api_token=$api_key&include=scoreboards";
                 $data = json_decode(file_get_contents($api_fetch_fixture), true)["data"];
                 $scores = $data["scoreboards"];
                 if ($is_innings) {

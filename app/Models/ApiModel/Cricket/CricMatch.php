@@ -32,7 +32,7 @@ class CricMatch extends Model
     public function usercontestModel($data)
     {
         $data=(object)$data;
-        $ret=DB::table('user_contests')->insert(array("user_id"=>$data->user_id,"contest_id"=>$data->contest_id,"match_id"=>$data->match_id,"game_type"=>$data->game_type,"entry_fee"=>$data->entry_fee))->get();
+        $ret=DB::table('user_contests')->insert(array("user_id"=>$data->user_id,"contest_id"=>$data->contest_id,"match_id"=>$data->match_id,"game_type"=>$data->game_type,"entry_fee"=>$data->entry_fee,"team_id"=>$data->team_id,"team_name"=>$data->team_name));
         return $ret;
     }
     // get team id
@@ -63,12 +63,14 @@ class CricMatch extends Model
             'DOB'=>$data->DOB,
             'team_name'=>$data->team_name,
             'post_code'=>$data->post_code,
+            'wallet'=>$data->wallet,
+            
     ));
     return $ret;
     }
-    public function getUserDataModel($email)
+    public function getUserDataModel($mobile)
     {
-        $ret=DB::table('users')->where(array("email"=>$email))->get();
+        $ret=DB::table('users')->where(array("mobile"=>$mobile))->get();
         return $ret;
     }
     public function Cricket_User_Teams_Model($user_id,$team,$match_id)
@@ -89,7 +91,7 @@ class CricMatch extends Model
         $ret=DB::table('football_user_team')->insert(array('user_id'=>$user_id,'teams'=>$team,'match_id'=>$match_id));
         return $ret;
     }
-    public function Football_Teams_get($id,$match_id)
+    public function Football_Teams_get_Model($id,$match_id)
     {
         $ret=DB::table('football_user_team')->where(array("user_id"=>$id,"match_id"=>$match_id))->get();
         // $ret=DB::table('cric_user_team')->get();
@@ -99,7 +101,29 @@ class CricMatch extends Model
     public function getUserJoined($data)
     {
         $data=(object)$data;
-        $ret=DB::table('')->where(array("user_id"=>$data->user_id,"match_id"=>$data->match_id,"game_type"=>$game_type))->get();
+        $ret=DB::table('user_contests')->where(array("user_id"=>$data->user_id,"match_id"=>$data->match_id,"game_type"=>$data->game_type))->get();
+        return $ret;
+    }
+    public function profileupdate_Model($data)
+    {
+        $data=(object)$data;
+        $ret=DB::table('users')->where(array("id"=>$data->user_id))->update(array('name'=>$data->name,
+            'email'=>$data->email,
+            'mobile'=>$data->mobile,
+            'city'=>$data->city,
+            'state'=>$data->state,
+            'country'=>$data->country,
+            'address'=>$data->address,
+            'gender'=>$data->gender,
+            'DOB'=>$data->DOB,
+            'team_name'=>$data->team_name,
+            'post_code'=>$data->post_code,
+            'wallet'=>$data->wallet
+    ));
+    }
+    public function unsubscribe_user_Model($user_id)
+    {
+        $ret=DB::table('users')->where(array("id"=>$user_id))->delete();
         return $ret;
     }
 

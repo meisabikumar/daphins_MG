@@ -10,8 +10,8 @@ use App\Models\ApiModel\football\roanuz\roanuz_recent_tournament;
 use App\Models\ApiModel\football\roanuz\roanuz_tournament_rounds;
 use App\Models\ApiModel\football\roanuz\roanuz_matchs;
 use App\Models\ApiModel\football\roanuz\roanuz_match_teams;
-
-
+use App\Models\ApiModel\football\FootBallModel;
+use Illuminate\Support\Facades\DB;
 use DateTime;
 use DateTimeZone;
 
@@ -275,5 +275,93 @@ class Roanuz_Api_Controller extends Controller
 
 
     }
+    public function Player_points()
+    {
+        
+        $api_token=$this->roanuz_Auth();
+        $FootBallModel= new FootBallModel();
+        $res_matches=$FootBallModel->match_data();
+        foreach ($res_matches as $value) {
+           $url="https://api.footballapi.com/v1/match/".$value->match_key."?access_token=".$api_token;
+           $live_score = Http::get($url)->json();
+           $live_score_player=$live_score['data']['players'];
+        //    return $live_score_player
+           $player_id=json_encode($live_score_player);
+           $obj = json_decode($player_id, TRUE);
+
+             foreach($obj as $key => $val) 
+            {
+                $ret=DB::table('football_match_player_point')->insert(array("match_id"=>$value->match_key,"player_id"=>$key));
+                
+            }
+        
+        }
+        return response()->json(["status"=>1,"msg"=>"success"]);
+         
+            
+    }
+    public function player_update()
+    {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', '3600');
+        ini_set('max_input_time', '3600');
+        $api_token=$this->roanuz_Auth();
+        $ret=DB::table('football_match_player_point')->where(array("match_id"=>"1381498440328024066"))->get();
+        foreach ($ret as $value) {
+            $url="https://api.footballapi.com/v1/match/1381498440328024066?access_token=".$api_token."&card_type=summary_card";
+            $data=Http::get($url);
+            $live_score_player=$data['data']['players'];
+            // return $live_score_player;
+            // return $live_score_player;
+            $player_id=$live_score_player[$value->player_id];
+            // echo $player_id;
+            $pd[]=$player_id;
+            // $pdata[]=$obj;
+
+            
+            
+        }
+        // return $pd;
+         foreach ($pd as  $p) {
+            // echo json_encode($p['stats']['goal']['saved']);
+            // return $p['stats']['clean_sheet'];
+            foreach($p['stats']['goal'] as $pi)
+            {
+                return $pi['saved'];
+            }
+            //  echo json_encode($p);
+             $req=array(
+                 'in_bench_squad'=>$p['in_bench_squad'],
+                 'in_playing_squad'=>$p['in_playing_squad'],
+                 'name'=>$p['name'],
+                 'RC'=>$p['stats']['card']['RC'],
+                 'YC'=>$p['stats']['card']['YC'],
+                 'Y2C'=>$p['stats']['card']['Y2C'],
+                //  'clean_sheet'=>$p['stats']['clean_sheet'],
+                 'goal_assist'=>$p['stats']['goal']['assist'],
+                 'own_goal_conceded'=>$p['stats']['goal']['own_goal_conceded'],
+                //  'goal_saved'=>$p['stats']['goal']['saved'],
+                 'goal_scored'=>$p['stats']['goal']['scored'],
+                 'minutes_played '=>$p['stats']['minutes_played'],
+                //  'passes'=>$p['stats']['passes'],
+                 'penalty_missed'=>$p['stats']['penalty']['missed'],
+                 'penalty_saved'=>$p['stats']['penalty']['saved'],
+
+             );
+
+            //  DB::table('football_match_player_point')->where(array("player_id"=>$p['key']))->update(array("role"=>$p['role'],"point_details"=>$req));
+            //  print_r($p['role']);
+            // return $req;
+            
+         }
+         
+        //  return "success";
+        
+
+    }
+        
+
+
+    
 
 }

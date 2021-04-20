@@ -67,7 +67,7 @@ class Cricket_Data_Controller extends Controller
             $data->save();
 
         }
-        // return "done";
+        return "done";
 
 
 
@@ -86,21 +86,23 @@ class Cricket_Data_Controller extends Controller
         foreach ($fixtures as $fixture) {
 
 
-            $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token;
+            $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token. "&include=squad";
 
             $localteam_res = Http::get($localteam);
             $localteam_data = $localteam_res["data"];
-
-            $data = new cricket_fixture_teams;
-            $data->team_id = $localteam_data["id"];
-            $data->fixture_id = $fixture->fixture_id;
-            $data->name = $localteam_data["name"];
-            $data->code = $localteam_data["code"];
-            $data->image_path = $localteam_data["image_path"];
-            $data->country_id = $localteam_data["country_id"];
-            $data->national_team = $localteam_data["national_team"];
-            $data->players = $localteam_data["squad"];
-            $data->save();
+            // return $localteam_data;
+            echo json_encode($localteam_data);
+            // $data = new cricket_fixture_teams;
+            
+            // $data->team_id = $localteam_data["id"];
+            // $data->fixture_id = $fixture->fixture_id;
+            // $data->name = $localteam_data["name"];
+            // $data->code = $localteam_data["code"];
+            // $data->image_path = $localteam_data["image_path"];
+            // $data->country_id = $localteam_data["country_id"];
+            // $data->national_team = $localteam_data["national_team"];
+            // $data->players = $localteam_data["squad"];
+            // $data->save();
 
             // ---------------------------------
             $visitorteam = "https://cricket.sportmonks.com/api/v2.0/teams/" . $fixture['visitorteam_id'] . "?api_token=" . $api_token . "&include=squad";

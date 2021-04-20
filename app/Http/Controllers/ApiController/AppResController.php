@@ -9,6 +9,8 @@ use App\Models\ApiModel\football\sportsmonk\sportsmonk_match_teams;
 use App\Models\ApiModel\football\unique_data\unique_matchs;
 use App\Models\ApiModel\football\unique_data\unique_teams;
 use App\Models\ApiModel\MatchesModel;
+use App\Models\ApiModel\football\FootBallModel;
+use App\Models\ApiModel\Cricket\CricMatch;
 use App\Models\ApiModel\PlayerModel;
 use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
@@ -59,8 +61,9 @@ class AppResController extends Controller
                 
                 foreach ($visitorteam as $teamtwo) {
                     // echo $teamtwo->name."<br>";
-                    // echo $teamtwo->id;
+                    
                 }
+                
                 $teams = array(
                         array(
                         "id" => $teamtwo->id,
@@ -75,7 +78,7 @@ class AppResController extends Controller
                         "short_name" => $teamone->team_short_name,
                         "flag" => null)
                     );
-                     
+                    // return $teams;     
                 } 
             
 
@@ -92,19 +95,19 @@ class AppResController extends Controller
                 foreach ($localteam as $teamone) {
                     # code...
                 }
-                $teams = array(
-                    array(
-                        "id" => $teamtwo->id,
-                        "team_id" => $teamtwo->team_id,
-                        "name" => $teamtwo->name,
-                        "short_name" => $teamtwo->short_code,
-                        "flag" => $teamtwo->logo_path),
-                    array(
-                        "id" => $teamone->id,
-                        "team_id" => $teamone->team_id,
-                        "name" => $teamone->name,
-                        "short_name" => $teamone->short_code,
-                        "flag" => $teamone->logo_path));
+                // $teams = array(
+                //     array(
+                //         "id" => $teamtwo->id,
+                //         "team_id" => $teamtwo->team_id,
+                //         "name" => $teamtwo->name,
+                //         "short_name" => $teamtwo->short_code,
+                //         "flag" => $teamtwo->logo_path),
+                //     array(
+                //         "id" => $teamone->id,
+                //         "team_id" => $teamone->team_id,
+                //         "name" => $teamone->name,
+                //         "short_name" => $teamone->short_code,
+                //         "flag" => $teamone->logo_path));
             }
 
             $arr = array(
@@ -114,7 +117,7 @@ class AppResController extends Controller
                 "short_title" => $val->match_short_name,
                 "start_date" => $val->match_start_date . " " . $val->match_start_time,
                 "type" => $val->tournament_name,
-                "teams" => $teams,
+                "teams" => $teams,  
                 "API" => $val->API);
 
             $result[] = $arr;
@@ -155,16 +158,31 @@ class AppResController extends Controller
                 $players = array();
 
                 foreach ($team->players as $player) {
-
+                    if($player['position_id']==1)
+                    {
+                        $type="goalkeeper";
+                    }
+                    if($player['position_id']==2)
+                    {
+                        $type="defender";
+                    }
+                    if($player['position_id']==3)
+                    {
+                        $type="midfielder";
+                    }
+                    if($player['position_id']==4)
+                    {
+                        $type="striker";
+                    }
                     $player = array(
                         "player_id" => $player["player_id"],
                         "team_id" => $player["team_id"],
                         "team_code" => $team->team_short_name,
                         "short_name" => $player["common_name"],
                         "name" => $player["fullname"],
-                        "type" => null,
-                        "player_points" => "22",
-                        "player_credits" => "8.5",
+                        "type" => $type,
+                        // "player_points" => "22",
+                        "player_credits" => "9",
                         "sel_by" => "21.16",
                     );
 
@@ -220,7 +238,7 @@ class AppResController extends Controller
         return response()->json([
             "status" => 1,
             "message" => "Success",
-            "result" => $teams,
+            "result" => $data,
         ]);
 
     }
@@ -313,9 +331,14 @@ class AppResController extends Controller
         $CricMatch=new CricMatch();
         $res_user_team=$CricMatch->Football_User_Teams_Model($user_id,$team_json,$match_id);
         // return $data;
+        if($res_user_team)
+        {
+            return response()->json(["status" => 1,"message" => "Success"]);
+        }else{
+            return response()->json(["status" => 2,"message" => "No Data Found or Some error occured"]);
+        }
         
         
-        // return response()->json(["status" => 1,"message" => "Success"]);
         
 
 
@@ -328,7 +351,7 @@ class AppResController extends Controller
         $match_id=$request->post('match_id');
         $CricMatch=new CricMatch();
         // return $match_id;
-        $res=$CricMatch->Football_Teams_Model_get($user_id,$match_id);
+        $res=$CricMatch->Football_Teams_get_Model($user_id,$match_id);
         // return $res;
         foreach ($res as $value) {
             // $user_id=$value->user_id;
@@ -346,5 +369,21 @@ class AppResController extends Controller
         return response()->json(["status" => 1,"message" => "Success","data"=>$result]);
         
     }
+    public function football_leaderboard(Request $request)
+    {
+        $contest_id=$request->post('contest_id');
+        $FootBallModel= new FootBallModel();
+        $res=$FootBallModel->getleaderboardModel($contest_id);
+
+        if($res)
+        {
+            return response()->json(["status" => 1,"message" => "Success","data"=>$res]);
+        }
+        else{
+            return response()->json(["status" => 2,"message" => "Success","data"=>$res]);
+        }
+
+    }
+   
 
 }

@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
           
             Commands\fixins::class,
             Commands\fixdel::class,
+            Commands\ScoreUpdate::class,
         // Commands\FixtureDataUpdate::class,
 
     ];
@@ -32,6 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('fixture:delete')->dailyAt('1:00');
         // $schedule->command('fixture:update')->dailyAt('1:10');
         $schedule->command('fixture:update')->everyMinute()->runInBackground();
+        $schedule->command('update:score')->everyMinute();
         // $schedule->command('fixture:delete')->everyTwoMinutes()->runInBackground();
         
         

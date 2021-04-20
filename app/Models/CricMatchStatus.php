@@ -1,5 +1,5 @@
 <?php
-namespace App\Model; 
+namespace App\Models; 
 use Eloquent;
 class CricMatchStatus extends Eloquent
 {

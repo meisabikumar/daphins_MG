@@ -4,7 +4,7 @@ use Eloquent;
 /**
  * EmailAction Model
  */
-class CricPlayerPrice extends Eloquent {
+class CronRecord extends Eloquent {
 
 	
 /**
@@ -12,17 +12,16 @@ class CricPlayerPrice extends Eloquent {
  *
  * @var string
  */
-	protected $table = 'cric_player_price';
+	protected $table = 'cron_records';
 
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
-        'match_id', 'player_id', 'price','type', 'team', 'created_at', 'updated_at'
+         'status', 'date_time', 'error_log'
     ];	
 
 
-					
 
 
 	

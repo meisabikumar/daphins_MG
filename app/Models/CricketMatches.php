@@ -1,10 +1,10 @@
 <?php 
-namespace App\Model; 
+namespace App\Models; 
 use Eloquent;
 /**
  * EmailAction Model
  */
-class CricMatches extends Eloquent {
+class CricketMatches extends Eloquent {
 
 	
 /**
