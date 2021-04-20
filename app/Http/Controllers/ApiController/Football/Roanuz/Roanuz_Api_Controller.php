@@ -291,6 +291,7 @@ class Roanuz_Api_Controller extends Controller
 
              foreach($obj as $key => $val) 
             {
+                // return $val->match_id;
                 $ret=DB::table('football_match_player_point')->insert(array("match_id"=>$value->match_key,"player_id"=>$key));
                 
             }
@@ -306,9 +307,9 @@ class Roanuz_Api_Controller extends Controller
         ini_set('max_execution_time', '3600');
         ini_set('max_input_time', '3600');
         $api_token=$this->roanuz_Auth();
-        $ret=DB::table('football_match_player_point')->where(array("match_id"=>"1381498440328024066"))->get();
+        $ret=DB::table('football_match_player_point')->where(array("match_id"=>"1382976873692270593"))->get();
         foreach ($ret as $value) {
-            $url="https://api.footballapi.com/v1/match/1381498440328024066?access_token=".$api_token."&card_type=summary_card";
+            $url="https://api.footballapi.com/v1/match/1382976873692270593?access_token=".$api_token."&card_type=summary_card";
             $data=Http::get($url);
             $live_score_player=$data['data']['players'];
             // return $live_score_player;
@@ -327,7 +328,7 @@ class Roanuz_Api_Controller extends Controller
             // return $p['stats']['clean_sheet'];
             foreach($p['stats']['goal'] as $pi)
             {
-                return $pi['saved'];
+                // return $pi['saved'];
             }
             //  echo json_encode($p);
              $req=array(
@@ -349,17 +350,54 @@ class Roanuz_Api_Controller extends Controller
 
              );
 
-            //  DB::table('football_match_player_point')->where(array("player_id"=>$p['key']))->update(array("role"=>$p['role'],"point_details"=>$req));
+             DB::table('football_match_player_point')->where(array("player_id"=>$p['key']))->update(array("role"=>$p['role'],"point_details"=>$req));
             //  print_r($p['role']);
             // return $req;
             
          }
          
-        //  return "success";
+         return "success";
         
 
     }
-        
+    public function point_logic()
+    {
+        $ret=DB::table('football_match_player_point')->get();
+        foreach ($ret as $value) {
+
+            $r=array(json_decode(stripslashes($value->point_details)));
+
+            foreach ($r as $rvalue) {
+                
+                // return $rvalue->minutes_played;
+            }
+            $data=array(
+                'id'=>$value->id,
+                'match_id'=>$value->match_id,
+                'player_id'=>$value->player_id,
+                'role'=>$value->role,
+                'is_c'=>$value->is_c,
+                'is_vc'=>$value->is_vc,
+                'points'=>$value->points,
+                // 'point_details'=>array(json_decode(stripslashes($value->point_details))),
+                'in_bench_squad'=>$rvalue->in_bench_squad,
+                'in_playing_squad'=>$rvalue->in_playing_squad,
+                'name'=>$rvalue->name,
+                'RC'=>$rvalue->RC,
+                'YC'=>$rvalue->YC,
+                'Y2C'=>$rvalue->Y2C,
+                'goal_assist'=>$rvalue->goal_assist,
+                'own_goal_conceded'=>$rvalue->own_goal_conceded,
+                'goal_scored'=>$rvalue->goal_scored,
+                // minutes_played'=>$rvalue->minutes_played,
+                'penalty_missed'=>$rvalue->penalty_missed,
+                'penalty_saved'=>$rvalue->penalty_saved,
+                'created_at'=>$value->created_at
+            );
+            $result[]=$data;
+        }
+        // return $result;
+    }  
 
 
     

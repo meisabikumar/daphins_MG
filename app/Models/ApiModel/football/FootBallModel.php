@@ -23,8 +23,12 @@ class FootBallModel extends Model
     // }
     public function match_data()
     {
-        $ret=DB::table('unique_matchs')->where(array("Api"=>"roanuz","match_start_date"=>date("Y-m-d")))->get();
+        // $ret=DB::table('unique_matchs')->where(array("Api"=>"roanuz","match_start_date"=>date("Y-m-d")))->get();
+        $ret=DB::table('unique_matchs')->where(array("Api"=>"roanuz","match_start_date"=>"2021-04-21"))->get();
         return $ret;
+        
+
+        
     }
     
 }

@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/Football_LeaderBoard',[AppResController::class,'football_leaderboard']);
     Route::get('/Player_points',[Roanuz_Api_Controller::class,'Player_points']);
     Route::get('/player_data_update',[Roanuz_Api_Controller::class,'player_update']);
+    Route::get('/point_logic',[Roanuz_Api_Controller::class,'point_logic']);
     
     
     // -----------------------------------------------------------------------
