@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
 use App\Http\Controllers\AdminController\Cricket\Admin_Cricket_web_Controller;
 use App\Http\Controllers\AdminController\Football\Admin_Football_web_Controller;
 
+use App\Http\Controllers\FootballController;
 
 Route::get('migrate-refresh', function () {
     \Artisan::call('migrate:refresh');
@@ -29,7 +30,7 @@ Route::get('/downlaodapk', function () {
         );
     // return Response::download($file, 'mg_v1.8_nrml.apk');
     return response()->download($file, 'mg_v1.8_nrml.apk', $headers);
-    
+
 });
 
 Route::get('/Downloadapk',[HomeController::class,'downloadapp']);
@@ -63,7 +64,8 @@ Route::post('/admin/football/update_active_match',[Admin_Football_web_Controller
 Route::post('/admin/football/update_disable_match',[Admin_Football_web_Controller::class,'update_inactive']);
 Route::get('/admin/football/get_player/{match_id}',[Admin_Football_web_Controller::class,'get_player']);
 Route::post('/admin/football/get_player/{match_id}',[Admin_Football_web_Controller::class,'assign_player_credit']);
-
+//Routes by Vansh
+Route::get('/admin/football/contest/create',[FootballController::class, 'create']);
 
 // Cricket part
 // Routes by Amir

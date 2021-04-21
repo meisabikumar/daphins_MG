@@ -30,17 +30,17 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
-                    <a href="{{ URL::to('/admin/Cric-Create') }}"
+                    <a href="{{ URL::to('/admin/football/contest/create') }}"
                        class="btn btn-success btn-small  pull-right"
                        style="margin:0;">{{ trans('Add New Contest') }} </a>
                 </div>
             </div>
         </div>
-        {{-- <div class="row">
+        <div class="row">
             {{ Form::open(['role' => 'form', 'url' => 'admin/contests/', 'class' => 'mws-form', 'method' => 'get']) }}
             {{ Form::hidden('display') }}
 
-            {{ Form::select('is_active', ['' => trans('Select Status'), 0 => 'Inactive', 1 => 'Active'], isset($searchVariable['is_active']) ? $searchVariable['is_active'] : '', ['class' => 'form-control choosen_selct']) }}
+            {{-- {{ Form::select('is_active', ['' => trans('Select Status'), 0 => 'Inactive', 1 => 'Active'], isset($searchVariable['is_active']) ? $searchVariable['is_active'] : '', ['class' => 'form-control choosen_selct']) }} --}}
 
             <div class="col-md-2 col-sm-2">
                 <div class="form-group ">
@@ -57,7 +57,7 @@
             </div>
             {{ Form::close() }}
 
-        </div> --}}
+        </div>
 
         <div class="box">
             <div class="box-body ">
@@ -119,7 +119,7 @@
 
                                 <td>
                                     {{-- {{ date(config::get('Reading.date_format'), strtotime($record->created_at)) }} --}}
-                                    {{$record->created_at}}
+                                    {{ $record->created_at }}
                                 </td>
                                 <td>
                                     @if ($record->status == 1)
@@ -128,57 +128,23 @@
                                         <span class="label label-danger">Cancelled</span>
                                     @endif
                                 </td>
+
                                 <td>
+                                {{-- Action buttons but linking and conditions has been removed (only UI is present) --}}
+                                    <a class="btn btn-primary" href="#" title="View"><i class="fa fa-lg fa-eye"></i></a>
+
+                {{-- @if($record->status == 1) --}}
+
+                                    <a class="btn btn-primary" href="#" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
+                                    {{-- @if($record->game_status != 'live') --}}
+                                        <a class="btn btn-primary delete" href="#" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                                    {{-- @endif --}}
 
 
+            <a href="#" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
 
-
-
-                                    {{-- <a class="btn btn-primary"
-                                       href="{{ route('contest.show', $record->id) }}"
-                                       title="View"><i class="fa fa-lg fa-eye"></i></a> --}}
-
-                                    @if ($record->status == 1)
-
-                                        <a class="btn btn-primary"
-                                           href="{{ route('contest.edit', $record->id) }}"
-                                           title="Edit"><i class="fa fa-lg fa-edit"></i></a>
-                                        @if ($record->game_status != 'live')
-                                            <a class="btn btn-primary delete"
-                                               href="{{ route('contest.delete', $record->id) }}"
-                                               title="Delete"><i class="fa fa-lg fa-trash"></i></a>
-                                        @endif
-
-
-
-
-
-                                        @if (empty($record->bot_status))
-                                            <a href="{{ URL::to('admin/contests/active/' . $record->id) }}"
-                                               title="Bot Deactive"
-                                               class="btn btn-success"><i class="fa fa-user-plus"
-                                                   aria-hidden="true"></i></a>
-                                        @else
-                                            <a href="{{ URL::to('admin/contests/active/' . $record->id) }}"
-                                               title="Bot Active"
-                                               class="btn btn-warning"><i class="fa fa-user-times"
-                                                   aria-hidden="true"></i></a>
-                                        @endif
-
-
-                                        <a href="{{ URL::to('admin/contest/cancel/' . $record->id) }}"
-                                           title="Cancel"
-                                           class="btn btn-danger"
-                                           onclick="return confirm('Are you sure?');"><i class="fa fa-times"
-                                               aria-hidden="true"></i></a>
-
-                                    @endif
-
-
-
-
-                                </td>
-
+                                    {{-- @endif --}}
+                                        </td>
                             </tr>
                         @endforeach
                     @else
