@@ -146,7 +146,8 @@ class ScoreUpdate extends Command
             // ----------------------------------------------------------
             // DECIDES WHETHER MATCH ALREADY EXISTS IN LIVE MATCHES OR NOT  
             // ----------------------------------------------------------
-            if (!CricMatchStatus::where('match_id', $lm['id'])->exists()) {
+            if (!CricMatchStatus::where('match_id', $lm['id'])->exists()) 
+            {
                 $newMatch = new CricMatchStatus;
                 $newMatch->match_id = $lm["id"];
                 $newMatch->status = 1;
@@ -368,7 +369,8 @@ class ScoreUpdate extends Command
                 $players = CricPlayerPrice::where("match_id", $mid)->where("price", ">", 0)->pluck("player_id")->toArray();
                 foreach ($players as $plid) {
                     $player_id = $plid;
-                    if (!(CricPlayerPoints::where(["match_id" => $lm['id'], "player_id" => $player_id])->exists())) {
+                    if (!(CricPlayerPoints::where(["match_id" => $lm['id'], "player_id" => $player_id])->exists())) 
+                    {
                         $ncp = new CricPlayerPoints;
                         $ncp->match_id = $lm["id"];
                         $ncp->player_id =  $player_id;
@@ -1005,7 +1007,8 @@ class ScoreUpdate extends Command
                     continue;
                 }
             }
-            if ($ucr->won_amount > 0) {
+            if ($ucr->won_amount > 0) 
+            {
                 $tmp_uw = UserWalets::firstOrNew(['user_id' => $ucr->user_id, 'contest_id' => $ucr->contest_id, 'team_id' => $ucr->team_id]);
                 $tmp_uw->user_id = $ucr->user_id;
                 $tmp_uw->contest_id = $ucr->contest_id;

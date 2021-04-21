@@ -366,7 +366,7 @@ class Roanuz_Api_Controller extends Controller
         foreach ($ret as $value) {
 
             $r=array(json_decode(stripslashes($value->point_details)));
-
+            // return $r['name'];
             foreach ($r as $rvalue) {
                 
                 // return $rvalue->minutes_played;
@@ -389,14 +389,14 @@ class Roanuz_Api_Controller extends Controller
                 'goal_assist'=>$rvalue->goal_assist,
                 'own_goal_conceded'=>$rvalue->own_goal_conceded,
                 'goal_scored'=>$rvalue->goal_scored,
-                // minutes_played'=>$rvalue->minutes_played,
+                // 'minutes_played'=>$rvalue->minutes_played,
                 'penalty_missed'=>$rvalue->penalty_missed,
                 'penalty_saved'=>$rvalue->penalty_saved,
                 'created_at'=>$value->created_at
             );
             $result[]=$data;
         }
-        // return $result;
+        return $result;
     }  
 
 
