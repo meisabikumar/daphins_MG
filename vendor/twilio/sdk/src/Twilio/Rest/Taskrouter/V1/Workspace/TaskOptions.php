@@ -21,10 +21,11 @@ abstract class TaskOptions {
      * @param int $priority The Task's new priority value
      * @param string $taskChannel When MultiTasking is enabled, specify the
      *                            TaskChannel with the task to update
+     * @param string $ifMatch The If-Match HTTP request header
      * @return UpdateTaskOptions Options builder
      */
-    public static function update(string $attributes = Values::NONE, string $assignmentStatus = Values::NONE, string $reason = Values::NONE, int $priority = Values::NONE, string $taskChannel = Values::NONE): UpdateTaskOptions {
-        return new UpdateTaskOptions($attributes, $assignmentStatus, $reason, $priority, $taskChannel);
+    public static function update(string $attributes = Values::NONE, string $assignmentStatus = Values::NONE, string $reason = Values::NONE, int $priority = Values::NONE, string $taskChannel = Values::NONE, string $ifMatch = Values::NONE): UpdateTaskOptions {
+        return new UpdateTaskOptions($attributes, $assignmentStatus, $reason, $priority, $taskChannel, $ifMatch);
     }
 
     /**
@@ -76,13 +77,15 @@ class UpdateTaskOptions extends Options {
      * @param int $priority The Task's new priority value
      * @param string $taskChannel When MultiTasking is enabled, specify the
      *                            TaskChannel with the task to update
+     * @param string $ifMatch The If-Match HTTP request header
      */
-    public function __construct(string $attributes = Values::NONE, string $assignmentStatus = Values::NONE, string $reason = Values::NONE, int $priority = Values::NONE, string $taskChannel = Values::NONE) {
+    public function __construct(string $attributes = Values::NONE, string $assignmentStatus = Values::NONE, string $reason = Values::NONE, int $priority = Values::NONE, string $taskChannel = Values::NONE, string $ifMatch = Values::NONE) {
         $this->options['attributes'] = $attributes;
         $this->options['assignmentStatus'] = $assignmentStatus;
         $this->options['reason'] = $reason;
         $this->options['priority'] = $priority;
         $this->options['taskChannel'] = $taskChannel;
+        $this->options['ifMatch'] = $ifMatch;
     }
 
     /**
@@ -139,6 +142,17 @@ class UpdateTaskOptions extends Options {
      */
     public function setTaskChannel(string $taskChannel): self {
         $this->options['taskChannel'] = $taskChannel;
+        return $this;
+    }
+
+    /**
+     * If provided, applies this mutation if (and only if) the [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) header of the Task matches the provided value. This matches the semantics of (and is implemented with) the HTTP [If-Match header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match).
+     *
+     * @param string $ifMatch The If-Match HTTP request header
+     * @return $this Fluent Builder
+     */
+    public function setIfMatch(string $ifMatch): self {
+        $this->options['ifMatch'] = $ifMatch;
         return $this;
     }
 
