@@ -23,7 +23,7 @@
 
 </section>
 
-<section class="content"> 
+<section class="content">
 
 
 
@@ -33,7 +33,7 @@
 
         <div class="box-body ">
 
-            
+
 
 
 
@@ -57,7 +57,7 @@
 
                         @foreach($res as $id => $category)
 
-                     
+
               <option value="{{ $category->id }}">{{ $category->category }}</option>
               @endforeach
 </select>
@@ -84,8 +84,8 @@
 
 {{-- <option value="{{ $i->fixture_id }}">{{$i->localteam_data['name'] }} vs {{$i->visitorteam_data['name']}} ({{$i->type}}) ({{ $i->fixture_id }}) </option> --}}
 
-                      
-          
+
+
                         @endforeach
 
                     </select>
@@ -96,7 +96,7 @@
 
     	  			<div class="row">
 
-                	  	<div class="col-md-4">	
+                	  	<div class="col-md-4">
 
                             <div class="form-group">
 
@@ -184,7 +184,7 @@
 
                                 </div>
 
-                                
+
 
                             </div>
 
@@ -210,7 +210,7 @@
 
                                   </div> -->
 
-                                  <span class="input-group-addon">%</span> 
+                                  <span class="input-group-addon">%</span>
 
                                 </div>
 
@@ -238,7 +238,7 @@
 
                                   </div> -->
 
-                                  <span class="input-group-addon">%</span> 
+                                  <span class="input-group-addon">%</span>
 
                                 </div>
 
@@ -260,7 +260,7 @@
 
                         <div class="col-md-4">
 
-                            
+
 
                             <div class="animated-checkbox">
 
@@ -313,7 +313,7 @@
 
 
 
-                        
+
 
 
 
@@ -363,7 +363,7 @@
 
                                 </div>
 
-                                
+
 
                             </div>
 
@@ -405,7 +405,7 @@
 
                     </div>
 
-  
+
 
                     <div class="row">
 
@@ -421,13 +421,13 @@
                         <div class="col-md-2">Amount Per Person</div>
 
                     </div>
-                 
+
 
                     <div id="pool_breakdown">
 
-                        
 
-                        
+
+
 
                         <div class="row breakdown-row">
 
@@ -444,7 +444,7 @@
 
 
 
-                                    </div>                
+                                    </div>
 
                                 </div>
 
@@ -457,7 +457,7 @@
 
 
 
-                                    </div>                
+                                    </div>
 
                                 </div>
 
@@ -479,7 +479,7 @@
 
                                         </div>
 
-                                    </div>                
+                                    </div>
 
                                 </div>
 
@@ -518,20 +518,20 @@
 
                                 <div class="col-md-2">
 
-                                    
+
 
                                     <div class="btn-group">
 
                                         <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
 
-                                    </div>                
+                                    </div>
 
-                                    
+
                                 </div>
 
                             </div>
 
-                            
+
 
                             <div class="row breakdown-row">
 
@@ -557,7 +557,7 @@
 
 
 
-                                    </div>                
+                                    </div>
 
                                 </div>
 
@@ -583,7 +583,7 @@
 
 
 
-                                    </div>                
+                                    </div>
 
                                 </div>
 
@@ -605,7 +605,7 @@
 
                                         </div>
 
-                                    </div>                
+                                    </div>
 
                                 </div>
 
@@ -659,13 +659,13 @@
 
                             </div>
 
-                            
+
 
                         </div>
 
         	  		</div>
     	  		<input type="" value="Submit"    id="crik_submt_btn_sftlo" class="btn btn-primary" onclick="submit();">
-    	  		
+
     	  	</form>
 
         </div>
@@ -722,7 +722,7 @@
 
 
 
-        </div>                
+        </div>
 
     </div>
 
@@ -750,7 +750,7 @@
 
             */ ?>
 
-            
+
 
              <input type="text"  class="form-control to" name="to[]" id="to1">
 
@@ -758,7 +758,7 @@
 
 
 
-        </div>                
+        </div>
 
     </div>
 
@@ -780,7 +780,7 @@
 
             </div>
 
-        </div>                
+        </div>
 
     </div>
 
@@ -834,7 +834,7 @@
 
             <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
 
-        </div>                
+        </div>
 
     </div>
 
