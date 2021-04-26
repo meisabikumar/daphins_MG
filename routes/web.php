@@ -66,7 +66,11 @@ Route::get('/admin/football/get_player/{match_id}',[Admin_Football_web_Controlle
 Route::post('/admin/football/get_player/{match_id}',[Admin_Football_web_Controller::class,'assign_player_credit']);
 //Routes by Vansh
 Route::get('/admin/football/contest/create',[FootballController::class, 'create']);
-
+Route::post('/admin/football/contest/create',[FootballController::class, 'add']);
+Route::get('/admin/football/contest/edit/{id}',[FootballController::class, 'editContestCategory']);
+Route::post('/admin/football/contest/edit/{id}',[FootballController::class, 'postUpdate']);
+Route::get('/admin/football/contest/delete/{id}',[FootballController::class, 'delete']);
+Route::get('/admin/football/contest/cancel/{id}',[FootballController::class, 'cancel']);
 // Cricket part
 // Routes by Amir
 

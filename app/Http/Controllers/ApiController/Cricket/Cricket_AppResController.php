@@ -48,7 +48,7 @@ class Cricket_AppResController extends Controller
 
         $data = cricket_fixture::all();
 
-        
+
         $result = array();
 
         foreach ($data as $val) {
@@ -57,10 +57,10 @@ class Cricket_AppResController extends Controller
 
             $visitorteam = cricket_fixture_teams::where('team_id', $val->visitorteam_id)->first();
             $localteam = cricket_fixture_teams::where('team_id', $val->localteam_id)->first();
-            
+
             $arr = array(
                 "id" => $val->id,
-                "fixture_id" => $val->fixture_id,               
+                "fixture_id" => $val->fixture_id,
                 "title" => $visitorteam->name . " Vs " . $localteam->name,
                 "short_title" => $visitorteam->code . " Vs " . $localteam->code,
                 "type" => $val->type,
@@ -80,8 +80,8 @@ class Cricket_AppResController extends Controller
 
             );
 
-            
-        //     // // print_r($arr); 
+
+        //     // // print_r($arr);
                        $result[] = $arr;
         }
         // // // var_dump($result);
@@ -103,12 +103,12 @@ class Cricket_AppResController extends Controller
             $localteam=$CricMatch->getlocalteam($value->localteam_id);
             $visitorteam=$CricMatch->getvisitorteam($value->visitorteam_id);
             // echo $localteam;
-            
+
             foreach ($localteam as $teamone) {
                 // echo $teamtwo->name."<br>";
             }
-            
-            
+
+
             foreach ($visitorteam as $teamtwo) {
                 // echo $teamtwo->name."<br>";
             }
@@ -130,13 +130,13 @@ class Cricket_AppResController extends Controller
                         "short_name" => $teamtwo->code,
                         "flag" => $teamtwo->image_path)),
             );
-            
+
             $result[]=$data;
             // echo $value->localteam_id."<br>";
             // visitor team data
             // echo $value->visitorteam_id."<br>";
         }
-        
+
         // $result_json = json_encode($result);
         if($result)
         {
@@ -145,8 +145,8 @@ class Cricket_AppResController extends Controller
         else{
             return response()->json(["status" => 500,"message" => "Error in data","result" => $result]);
         }
-        
-        
+
+
     }
 
     public function cricket_get_team_by_match_id(Request $request)
@@ -207,7 +207,7 @@ class Cricket_AppResController extends Controller
 
     //    $data = cricket_contest::where('match_id', $request->match_id)->first();
     $data=DB::table('cricket_contests')->where(array("match_id"=>$request->match_id))->get();
-    
+
 
         if (!$data) {
             return response()->json([
@@ -257,14 +257,14 @@ class Cricket_AppResController extends Controller
 
         cricket_fixture_teams::truncate();
 
-        foreach ($fixtures as $fixture) 
+        foreach ($fixtures as $fixture)
         {
-            
+
 
             $teamone_id=$fixture->localteam_id;
             $seasson_id=$fixture->season_id;
             // echo $teamid."<br>";
-            
+
             $localteam ="https://cricket.sportmonks.com/api/v2.0/teams/".$teamone_id."/squad/".$seasson_id."?api_token=".$api_token;
             // $localteam = "https://cricket.sportmonks.com/api/v2.0/teams/".$fixture['localteam_id']."?api_token=".$api_token."&include=squad";
 
@@ -281,7 +281,7 @@ class Cricket_AppResController extends Controller
             $data->national_team = $localteam_data["national_team"];
             $data->players = $localteam_data["squad"];
             $data->save();
-        
+
 
             // ------------ ---------------------
             $teamtwo_id=$fixture->visitorteam_id;
@@ -301,7 +301,7 @@ class Cricket_AppResController extends Controller
             $data->national_team = $visitorteam_data["national_team"];
             $data->players = $visitorteam_data["squad"];
             $data->save();
-            
+
         }
 
         return response()->json([
@@ -309,9 +309,9 @@ class Cricket_AppResController extends Controller
             "message" => "Success",
         ]);
 
-    }   
+    }
 
-    
+
     public function userJoin_contest(Request $request)
     {
         $user_id=$request->input('user_id');
@@ -325,11 +325,11 @@ class Cricket_AppResController extends Controller
         foreach ($contest_detail as $value) {
             // $match_id=$value->match_id;
             // $game_type=$value->game_type;
-            
+
         }
         $football_contest=DB::table('football_contests')->where(array("id"=>$contest_id))->get();
         foreach ($football_contest as $val) {
-            
+
         }
         if($game_type=="cricket")
         {
@@ -337,7 +337,7 @@ class Cricket_AppResController extends Controller
         }
         if($game_type=="football")
         {
-            $entry_fee=$val->entry_fee; 
+            $entry_fee=$val->entry_fee;
         }
         $data=array(
             'user_id'=>$user_id,
@@ -348,30 +348,30 @@ class Cricket_AppResController extends Controller
             'game_type'=>$game_type,
             'entry_fee'=>$entry_fee
         );
-        
+
         if(DB::table('user_contests')->where(array("user_id"=>$user_id,"contest_id"=>$contest_id))->exists())
         {
-            
+
             return response()->json(["status" => 3,"message" => "User Already Exist"]);
         }else
         {
             $result_usercontest=$CricMatch->usercontestModel($data);
-            
+
             if($result_usercontest>0)
             {
                 if($game_type=="cricket")
                 {
-                    $max_remaining_entry=$value->max_remaining_entry;   
+                    $max_remaining_entry=$value->max_remaining_entry;
                     $new_max_remaining_entry=$max_remaining_entry-1;
                     DB::table('cricket_contests')->where(array("id"=>$contest_id))->update(array("max_remaining_entry"=>$new_max_remaining_entry));
                 }
                 if($game_type=="football")
                 {
-                    $max_remaining_entry=$val->max_remaining_entry;   
+                    $max_remaining_entry=$val->max_remaining_entry;
                     $new_max_remaining_entry=$max_remaining_entry-1;
                     DB::table('football_contests')->where(array("id"=>$contest_id))->update(array("max_remaining_entry"=>$new_max_remaining_entry));
                 }
-                
+
                 return response()->json(["status" => 1,"message" => "Success"]);
             }else
             {
@@ -384,7 +384,7 @@ class Cricket_AppResController extends Controller
     public function Cricket_User_Teams(Request $request)
     {
         $user_id=$request->post('user_id');
-        
+
         $team[]=$request->post('team');
         $match_id=$request->post('match_id');
         // $data=array(
@@ -400,10 +400,10 @@ class Cricket_AppResController extends Controller
         $CricMatch=new CricMatch();
         $res_user_team=$CricMatch->Cricket_User_Teams_Model($user_id,$team_json,$match_id);
         // return $data;
-        
-        
+
+
         // return response()->json(["status" => 1,"message" => "Success"]);
-        
+
 
 
     }
@@ -423,15 +423,15 @@ class Cricket_AppResController extends Controller
             $match_id=$value->match_id;
             $team=stripslashes($value->teams);
             $team_id=json_decode($team);
-            
+
             $data=array("team_id"=>$id,"user_id"=>$user_id,"match_id"=>$match_id,"team"=>$team_id);
-            
-            
+
+
             $result[]=$data;
 
         }
         return response()->json(["status" => 1,"message" => "Success","data"=>$result]);
-        
+
     }
     // Live Scores
     public function CricLiveScores()
@@ -468,7 +468,7 @@ class Cricket_AppResController extends Controller
     }
     public function Testing_Score()
     {
-      
+
         // Starts Here
         // echo "Updating Score";
         $api_key = "Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
@@ -526,7 +526,7 @@ class Cricket_AppResController extends Controller
             "80-89.99" => 0,
             "90-99.99" => 0
         ];
-        // Bowler Point Details 
+        // Bowler Point Details
         $point_details_bowler = [
             "wickets" => 0,
             "rate" => 0,
@@ -548,23 +548,24 @@ class Cricket_AppResController extends Controller
         // Live Match Point Evaluation
         // echo json_encode($fixtures);
         // return;
-        // foreach for fixture starts here 
-        foreach ($fixtures as $lm) 
+        // foreach for fixture starts here
+        foreach ($fixtures as $lm)
         {
             $rid = $lm["id"];
             // $userTeams[] = CricUserTeams::where("match_id", $lm["id"])->get();
 
             // ----------------------------------------------------------
-            // DECIDES WHETHER MATCH ALREADY EXISTS IN LIVE MATCHES OR NOT  
+            // DECIDES WHETHER MATCH ALREADY EXISTS IN LIVE MATCHES OR NOT
             // ----------------------------------------------------------
-            // IF CricMatchStatus starts 
-            // if (!CricMatchStatus::where('match_id', $lm['id'])->exists()) 
+            // IF CricMatchStatus starts
+            // if (!CricMatchStatus::where('match_id', $lm['id'])->exists())
 
             // {
                 $newMatch = new CricMatchStatus;
                 $newMatch->match_id = $lm["id"];
                 $newMatch->status = 1;
                 $newMatch->bonus_evaluation_done = 0;
+                // echo $newMatch;
                 $newMatch->save();
                 // Initializing the points detail array for all the players.
                 $points_detail = array();
@@ -779,18 +780,24 @@ class Cricket_AppResController extends Controller
                     $points_detail["i2"][] = $temp;
                 }
                 $mid = CricketMatches::where("fixture_id", $lm["id"])->first()->id;
-                
+
                 $players = CricPlayerPrice::where("match_id", $mid)->where("price", ">", 0)->pluck("player_id")->toArray();
                 // return $players;
                 foreach ($players as $plid) {
                     $player_id = $plid;
-                    if (!(CricPlayerPoints::where(["match_id" => $lm['id'], "player_id" => $player_id])->exists())) {
+                    if (!(CricPlayerPoints::where(['match_id', 'player_id'])->exists())) {
                         $ncp = new CricPlayerPoints;
-                        $ncp->match_id = $lm["id"];
+                        $ncp->match_id = $lm['id'];
                         $ncp->player_id =  $player_id;
                         $ncp->points_detail = json_encode($points_detail);
                         $ncp->points = 0;
                         $ncp->is_announced = 0;
+                        // echo $ncp;
+                        // print_r($ncp);
+                        // echo $lm["id"];
+                        // echo $player_id;
+                        // echo json_encode($points_detail);
+                        // echo $ncp;
                         $ncp->save();
                     }
                 }
@@ -802,7 +809,7 @@ class Cricket_AppResController extends Controller
             // If there are players not announced, it would make an api call otherwise it won't.
             // --------------------------------------------------------------------------------
             // $not_announced = CricPlayerPoints::where(["match_id" => $lm["id"], "is_announced" => 0])->get();
-            // if (!empty($not_announced)) 
+            // if (!empty($not_announced))
             // {
             //     $api_fetch_lineup = "$api_url/livescores/$rid/?api_token=$api_key&include=lineup";
             //     $jsons = file_get_contents($api_fetch_lineup);
@@ -1122,7 +1129,7 @@ class Cricket_AppResController extends Controller
                 $player_scores[] = $batsman;
                 $positions["batsman"][] = $batsman["player_id"];
             }
-            foreach ($player_scores as $p_r) 
+            foreach ($player_scores as $p_r)
             {
                 // Continue
 
@@ -1433,7 +1440,7 @@ class Cricket_AppResController extends Controller
                 $tmp_uw->amount = $ucr->won_amount;
                 $tmp_uw->save();
 
-                $win_uw = UserWalets::where('user_id', $ucr->user_id)->where('transaction_type', 3)->sum('amount'); // won amount 
+                $win_uw = UserWalets::where('user_id', $ucr->user_id)->where('transaction_type', 3)->sum('amount'); // won amount
                 $wd_uw = UserWalets::where('user_id', $ucr->user_id)->where('transaction_type', 4)->where('status', 2)->sum('amount');
 
                 User::where('id', $ucr->user_id)->update(["won_amount" => ($win_uw - $wd_uw)]); // final won amount is total won - withdrawn amount into bank
@@ -1559,9 +1566,9 @@ class Cricket_AppResController extends Controller
         $cron_rec->error_log = null;
         $cron_rec->save();
 
-        // Ends Here  
-        
-        
+        // Ends Here
+
+
     }
     // User Joined Contest Details
     public function userJoin_get_contest(Request $request)
@@ -1577,7 +1584,7 @@ class Cricket_AppResController extends Controller
         $game_type=$data['game_type'];
         foreach ($res as  $value) {
             if($game_type=="cricket"){
-            //  $res3=DB::table('cricket_fixtures')->where(array("fixture_id"=>$data['match_id']))->get();   
+            //  $res3=DB::table('cricket_fixtures')->where(array("fixture_id"=>$data['match_id']))->get();
             $res2=DB::table('cricket_contests')->where(array("id"=>$value->contest_id))->get();
             foreach ($res2 as  $val) {
                 $breakdown=stripslashes($val->breakdown);
@@ -1591,7 +1598,7 @@ class Cricket_AppResController extends Controller
             foreach ($res2 as  $val) {
                 $breakdown=stripslashes($val->breakdown);
                 $prize_breakdown=json_decode($breakdown);
-            } 
+            }
         }
             $detail=array(
                 'user_id'=>$value->user_id,
@@ -1601,15 +1608,15 @@ class Cricket_AppResController extends Controller
                 'entry_fee'=>$value->entry_fee,
                 'players'=>$value->players,
                 'team_id'=>$value->team_id,
-                
+
 
             );
             // echo $detail;
             // echo "working";
             $result_data[]=$detail;
         }
-        
-        return response()->json(["status" => 1,"message" => "Success","data"=>$result_data]);   
+
+        return response()->json(["status" => 1,"message" => "Success","data"=>$result_data]);
     }
     public function CricLeaderBoard(Request $request)
     {
@@ -1626,29 +1633,29 @@ class Cricket_AppResController extends Controller
     public function UserMatchData(Request $request)
     {
         $user_id=$request->post('user_id');
-        $result_cric = array(); 
+        $result_cric = array();
         $result = array();
         $ret=DB::table('user_contests')->where(array("user_id"=>$user_id))->get();
-        foreach ($ret as $value) 
+        foreach ($ret as $value)
         {
-              
+
             // Cricket Starts Here
-            if ($value->game_type=="cricket") 
+            if ($value->game_type=="cricket")
             {
                     $data_cric=DB::table('cricket_fixtures')->where(array("fixture_id"=>$value->match_id))->get();
 
-        
-                            
 
-                            foreach ($data_cric as $val_cric) 
+
+
+                            foreach ($data_cric as $val_cric)
                             {
 
                                 $visitorteam_cric= cricket_fixture_teams::where('team_id', $val_cric->visitorteam_id)->first();
                                 $localteam_cric= cricket_fixture_teams::where('team_id', $val_cric->localteam_id)->first();
-                                
+
                                 $arr_cric = array(
                                     "id" => $val_cric->id,
-                                    "fixture_id" => $val_cric->fixture_id,               
+                                    "fixture_id" => $val_cric->fixture_id,
                                     "title" => $visitorteam_cric->name . " Vs " . $localteam_cric->name,
                                     "short_title" => $visitorteam_cric->code . " Vs " . $localteam_cric->code,
                                     "type" => $val_cric->type,
@@ -1669,8 +1676,8 @@ class Cricket_AppResController extends Controller
 
                                 );
 
-                                
-                            
+
+
                                         $result_cric[] = $arr_cric;
                             }
             //                 // echo json_encode($result_cric);
@@ -1681,26 +1688,26 @@ class Cricket_AppResController extends Controller
 
             // Cricket Ends here
             // Football Starts here
-            
+
             if($value->game_type=="football")
             {
         //     // $data = unique_matchs::all();
             $data=DB::table('unique_matchs')->where(array("match_key"=>$value->match_id))->get();
-            
+
                 // echo json_encode($data);
         //     // echo json_encode($data);
         //     // echo json_encode($value->match_id);
-            foreach ($data as $val) 
+            foreach ($data as $val)
             {
-                
+
                     $roanuz_match_teams=new roanuz_match_teams();
                     $visitorteam=$roanuz_match_teams->getVisitor($val->match_away_team);
                     $localteam = $roanuz_match_teams->getLocal($val->match_home_team);
                     foreach ($localteam as $teamone) {
                     }
-                    
+
                     foreach ($visitorteam as $teamtwo) {
-            
+
                     }
                     $teams = array(
                             array(
@@ -1716,8 +1723,8 @@ class Cricket_AppResController extends Controller
                             "short_name" => $teamtwo->team_short_name,
                             "flag" => null)
                         );
-                         
-    
+
+
                 $arr = array(
                     "id" => $val->id,
                     "match_key" => $val->match_key,
@@ -1729,14 +1736,14 @@ class Cricket_AppResController extends Controller
                     "match_status"=>$val->match_status,
                     "API" => $val->API);
 
-                    
+
                     $result[] = $arr;
-                
-                
-                
+
+
+
             }
-               
-             
+
+
         //     // Football Ends Here
         } //else{$result = array();}
 
@@ -1744,12 +1751,12 @@ class Cricket_AppResController extends Controller
         $match_data=array(
                 'cricket_match'=>$result_cric,
                 'football_match'=>$result
-                
-                
+
+
         );
 
         return response()->json(["status" => 1,"message" => "Success","data"=>$match_data]);
-        
+
     }
     public function UserLeaderBoard(Request $request)
     {
@@ -1766,15 +1773,15 @@ class Cricket_AppResController extends Controller
         if($game_type=="cricket")
         {
             $ret=DB::table('cric_user_team')->where(array("id"=>$team_id))->get();
-            
+
         }
         if($game_type=="football")
         {
             $ret=DB::table('football_user_team')->where(array("id"=>$team_id))->get();
-            
+
         }
         foreach ($ret as $value) {
-            
+
         }
         $data=array(
             'id'=>$value->id,
@@ -1783,11 +1790,11 @@ class Cricket_AppResController extends Controller
             'match_id'=>$value->match_id
         );
 
-        
+
         return response()->json(["status" => 1,"message" => "Success","data"=>$data]);
-        
+
     }
-    
+
 
 
 

@@ -51,7 +51,7 @@
             <div class="col-md-2 col-sm-2">
                 <button class="btn btn-primary"
                         style="margin:0;"><i class='fa fa-search '></i> {{ trans('Search') }}</button>
-                <a href="{{ URL::to('admin/contests/') }}"
+                <a href="{{ URL::to('admin/football/contest') }}"
                    class="btn btn-primary"
                    style="margin:0;"><i class='fa fa-refresh '></i> {{ trans('Reset') }}</a>
             </div>
@@ -71,7 +71,7 @@
                                 ID
                             </th>
                             <th>
-                                NameE
+                                Name
                             </th>
                             <th>
                                 Series
@@ -122,7 +122,7 @@
                                     {{ $record->created_at }}
                                 </td>
                                 <td>
-                                    @if ($record->status == 1)
+                                    @if ($record->game_status == 1)
                                         <span class="label label-primary">Active</span>
                                     @else
                                         <span class="label label-danger">Cancelled</span>
@@ -130,20 +130,20 @@
                                 </td>
 
                                 <td>
-                                {{-- Action buttons but linking and conditions has been removed (only UI is present) --}}
-                                    <a class="btn btn-primary" href="#" title="View"><i class="fa fa-lg fa-eye"></i></a>
 
-                {{-- @if($record->status == 1) --}}
+                                    {{-- <a class="btn btn-primary" href="" title="View"><i class="fa fa-lg fa-eye"></i></a> --}}
 
-                                    <a class="btn btn-primary" href="#" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
-                                    {{-- @if($record->game_status != 'live') --}}
-                                        <a class="btn btn-primary delete" href="#" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
-                                    {{-- @endif --}}
+                                    @if($record->game_status == 1)
+
+                                    <a class="btn btn-primary" href="/admin/football/contest/edit/{{ $record->id }}" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
+                                    @if($record->game_status != 'live')
+                                        <a class="btn btn-primary delete" href="/admin/football/contest/delete/{{ $record->id }}" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                                    @endif
 
 
-            <a href="#" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <a href="/admin/football/contest/cancel/{{ $record->id }}" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
 
-                                    {{-- @endif --}}
+                                    @endif
                                         </td>
                             </tr>
                         @endforeach

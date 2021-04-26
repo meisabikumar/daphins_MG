@@ -42,8 +42,8 @@
         <div class="alert alert-dismissible alert-success d-none" id="error_msg"></div>
 
         <div class="tile">
-
-    	  	<form class="add-form" method="post" action="/admin/contests/cric_create/add">
+            {{-- action="/admin/football/contest/edit/{{ app('request')->input('id') }}" --}}
+    	  	<form class="add-form" method="post" >
 
     	  		@csrf
 
@@ -52,13 +52,13 @@
                     <label for="contest_category">Contest Category</label>
 
                     <select class="form-control" name="category" id="contest_category">
+                        @foreach ($result as $r)
+                        <option value="{{ $r->category }}">{{ $r->category }}</option>
 
-                        <option value="">--Select Contest Category--</option>
-
-                        @foreach($res as $id => $category)
+                        @foreach($res as $category)
 
 
-              <option value="{{ $category->id }}">{{ $category->category }}</option>
+              <option value="{{ $category->category }}">{{ $category->category }}</option>
               @endforeach
 </select>
 
@@ -74,17 +74,22 @@
 
                 <div class="form-group">
 
-                    <label for="contest_category">Cricket Match(Teams)(Tournament)</label>
+                    <label for="contest_category">Football Match(Teams)(Tournament)</label>
 
-                    <select class="form-control" name="game_type" id="series_id"  >
-
-                        <option value="">--Select Match--</option>
-
+                    <select class="form-control" name="match" id="series_id"  >
                         @foreach($res2 as $i)
 
-{{-- <option value="{{ $i->fixture_id }}">{{$i->localteam_data['name'] }} vs {{$i->visitorteam_data['name']}} ({{$i->type}}) ({{ $i->fixture_id }}) </option> --}}
+                        @if (($i->match_key) == ($r->match_id))
+                            <option value="{{ $i->match_key }}">{{ $i->match_name }}</option>
+                        {{-- @else
+                            <option value="">--Select Match--</option> --}}
+                        @endif
+                        {{-- <option value="{{ $r->contest_name }}">{{ $r->contest_name }}</option> --}}
 
-<option value=""> {{ $i->fixture_id }}</option>
+
+{{-- <option value="{{ $i->fixture_id }}">{{$i->localteam_data['name'] }} vs {{$i->visitorteam_data['name']}} ({{$i->type}}) ({{ $i->fixture_id }}) </option> --}}
+                        <option  value="{{ $i->match_key }}">{{ $i -> match_name}}</option>
+
 
                         @endforeach
 
@@ -102,7 +107,9 @@
 
                                 <label for="name">Name</label>
 
-                                <input type="text" name="contest_name" id="name" class="form-control" placeholder="Contest Name" value="">
+                                <input type="text" name="contest_name" id="name" class="form-control" value="{{ $r->contest_name }}" value="">
+
+
 
                             </div>
 
@@ -114,7 +121,7 @@
 
                                 <label for="min_entry">Min. entry </label>
 
-                                <input type="text" name="min_entry" id="min_entry" class="form-control" placeholder="Min. entry" value="">
+                                <input type="text" name="min_entry" id="min_entry" class="form-control" placeholder="Min. entry" value="{{ $r->min_entry }}">
 
                             </div>
 
@@ -126,7 +133,7 @@
 
     	  						<label for="max_entry">Max. entry</label>
 
-    	  						<input type="text" name="max_entry" id="max_entry" class="form-control" placeholder="Max. entry" value="">
+    	  						<input type="text" name="max_entry" id="max_entry" class="form-control" placeholder="Max. entry" value="{{ $r->max_entry }}">
 
     	  					</div>
 
@@ -154,7 +161,7 @@
 
                                   <span class="input-group-addon">$</span>
 
-                                  <input type="text" name="entry_fee" id="entry_fee" class="form-control" placeholder="Entry Fee"   value="">
+                                  <input type="text" name="entry_fee" id="entry_fee" class="form-control" placeholder="Entry Fee"   value="{{ $r->entry_fee }}">
 
                                 </div>
 
@@ -202,7 +209,7 @@
 
                                 <div class="input-group">
 
-                                  <input type="text" name="admin_per" id="admin_per" class="form-control" placeholder="Admin Commission (in %)" value="">
+                                  <input type="text" name="admin_per" id="admin_per" class="form-control"  value="{{ $r->admin_per }}">
 
                                   <!-- <div class="input-group-append">
 
@@ -214,7 +221,7 @@
 
                                 </div>
 
-                                <input type="hidden" name="admin_amt" id="admin_amt" value="">
+                                <input type="hidden" name="admin_amt" id="admin_amt" >
 
                             </div>
 
@@ -230,7 +237,7 @@
 
                                 <div class="input-group">
 
-                                  <input type="text" name="admin_fix" id="admin_fix" class="form-control" placeholder="Admin Commission (Fixed Amount)" value="">
+                                  <input type="text" name="admin_fix" id="admin_fix" class="form-control" placeholder="Admin Commission (Fixed Amount)" value="{{ $r->admin_amt }}">
 
                                   <!-- <div class="input-group-append">
 
@@ -242,7 +249,7 @@
 
                                 </div>
 
-                          <input type="hidden" name="admin_fix_amt" id="admin_fix_amt" value="">
+                          <input type="hidden" name="admin_fix_amt" id="admin_fix_amt" value="{{ $r->admin_amt }}">
 
                             </div>
 
@@ -265,8 +272,12 @@
                             <div class="animated-checkbox">
 
                               <label>
+                                @if ($r->is_free == 1)
+                                    <input type="checkbox" name="is_free" id="is_free" value="1" checked><span class="label-text">Free Contest</span>
+                                @else
+                                    <input type="checkbox" name="is_free" id="is_free" value="1"><span class="label-text">Free Contest</span>
+                                @endif
 
-                                <input type="checkbox" name="is_free" id="is_free" value="1" ><span class="label-text">Free Contest</span>
 
                               </label>
 
@@ -275,8 +286,12 @@
                             <div class="animated-checkbox">
 
                               <label>
+                                @if ($r->is_featured == 1)
+                                    <input type="checkbox" name="is_featured" id="is_featured" value="1" checked><span class="label-text">Featured Contest</span>
+                                @else
+                                    <input type="checkbox" name="is_featured" id="is_featured" value="1" ><span class="label-text">Featured Contest</span>
+                                @endif
 
-                                <input type="checkbox" name="is_featured" id="is_featured" value="1" ><span class="label-text">Featured Contest</span>
 
                               </label>
 
@@ -287,8 +302,12 @@
                             <div class="animated-checkbox">
 
                               <label>
+                                @if ($r->is_confirmed == 1)
+                                    <input type="checkbox" name="is_confirmed" id="is_confirmed" value="1" checked><span class="label-text">Is Confirmed?</span>
+                                @else
+                                    <input type="checkbox" name="is_confirmed" id="is_confirmed" value="1" ><span class="label-text">Is Confirmed?</span>
+                                @endif
 
-                                <input type="checkbox" name="is_confirmed" id="is_confirmed" value="1" ><span class="label-text">Is Confirmed?</span>
 
                               </label>
 
@@ -329,19 +348,19 @@
 
                                 <label>Number of entries per User</label>
 
-                                <input type="text" name="entry_per_user" class="form-control" id="entry_per_user" placeholder="Entry per User" value="">
+                                <input type="text" name="entry_per_user" class="form-control" id="entry_per_user" placeholder="Entry per User" value="{{ $r->entry_per_user }}">
 
                             </div>
 
                         </div>
 
-                         <div class="col-md-4 " id="private_password">
+                         {{-- <div class="col-md-4 " id="private_password">
 
                             <label>Password</label>
 
                             <input type="text" name="private_password" class="form-control" id="private_password" placeholder="Password" value="">
 
-                        </div>
+                        </div> --}}
 
 
 
@@ -425,7 +444,11 @@
 
                     <div id="pool_breakdown">
 
+                        <?php
+                            $breakdown = json_decode($r->breakdown);
+                            ?>
 
+                        @foreach ($breakdown as $b)
 
 
 
@@ -438,7 +461,7 @@
 
 
 
-                                    <input type="text"  class="form-control from" name="breakdown[]" id="from1" value="">
+                                    <input type="text"  class="form-control from" name="breakdown[]" id="from1" value="{{$b->from}}">
 
 
 
@@ -453,7 +476,7 @@
                                     <div class="form-group">
 
 
-                                <input type="text"  class="form-control to" name="breakdown[]" id="to2" value="">
+                                <input type="text"  class="form-control to" name="breakdown[]" id="to2" value="{{$b->to}}">
 
 
 
@@ -467,7 +490,7 @@
 
                                         <div class="input-group">
 
-                                        <input type="text" name="percent[]" id="percent2" class="form-control percent" placeholder="%" value="">
+                                        <input type="text" name="percent[]" id="percent2" class="form-control percent" placeholder="%" value="{{$b->prize_per}}">
 
                                           <!-- <div class="input-group-append">
 
@@ -492,7 +515,7 @@
 
                                           <span class="input-group-addon">$</span>
 
-                                          <input type="text" name="amount[]" id="amount2" class="form-control amount" placeholder="Amount"   value="">
+                                          <input type="text" name="amount[]" id="amount2" class="form-control amount" placeholder="Amount"   value="{{$b->prize_amt}}">
 
                                         </div>
 
@@ -508,7 +531,7 @@
 
                                           <span class="input-group-addon">$</span>
 
-                                            <input type="text" name="person[]" id="person3" class="form-control person" placeholder="Amount Per Person" value="">
+                                            <input type="text" name="person[]" id="person3" class="form-control person" placeholder="Amount Per Person" value="{{$b->amt_per_person}}">
 
                                         </div>
 
@@ -520,152 +543,133 @@
 
 
 
-                                    <div class="btn-group">
+                                    {{-- <div class="btn-group">
 
                                         <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
 
-                                    </div>
+                                    </div> --}}
+
+
+                                </div>
+
+                            </div>
+                            @endforeach
+
+
+
+                        <div class="row breakdown-row d-none" id="breakdown-row">
+
+                            <div class="col-md-2 from-col">
+
+                                <div class="form-group">
+
+
+
+
+
+
+
+
+
+
+
+                                     <input type="text"  class="form-control from" name="from[]" id="from3" >
+
+
+
 
 
                                 </div>
 
                             </div>
 
+                            <div class="col-md-2 to-col">
 
+                                <div class="form-group">
 
-                            <div class="row breakdown-row">
 
-                                <div class="col-md-2 from-col">
 
-                                    <div class="form-group">
 
-                                        <?php /*
+                                     <input type="text"  class="form-control to" name="to[]" id="to1">
 
-                                        <select class="form-control from" name="from[]" id="from">
 
-                                            <option value="">-</option>
 
-                                        </select>
 
-                                        */ ?>
-
-
-
-                                <input type="text"  class="form-control from" name="from[]" id="from2" >
-
-
-
-
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2 to-col">
-
-                                    <div class="form-group">
-
-                                        <?php /*
-
-                                        <select class="form-control to" name="to[]" id="to">
-
-                                            <option value="">-</option>
-
-                                        </select>
-
-
-
-                                        */ ?>
-
-
-
-                                <input type="text"  class="form-control to" name="to[]" id="to3">
-
-
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2 percent-col">
-
-                                    <div class="form-group">
-
-                                        <div class="input-group">
-
-                                          <input type="text" name="percent[]" id="percent3" class="form-control percent" placeholder="%">
-
-                                          <!-- <div class="input-group-append">
-
-                                            <span class="input-group-text">%</span>
-
-                                          </div> -->
-
-                                           <span class="input-group-addon">%</span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2 amount-col">
-
-                                    <div class="form-group">
-
-                                        <div class="input-group">
-
-                                          <!-- <div class="input-group-prepend">
-
-                                            <span class="input-group-text" id="basic-addon1">$</span>
-
-                                          </div> -->
-
-                                          <span class="input-group-addon">$</span>
-
-                                          <input type="text" name="amount[]" id="amount1" class="form-control amount" placeholder="Amount" readonly>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2 person-col">
-
-                                    <div class="form-group">
-
-                                        <div class="input-group">
-
-                                          <!-- <div class="input-group-prepend">
-
-                                            <span class="input-group-text" id="basic-addon1">$</span>
-
-                                          </div> -->
-
-                                          <span class="input-group-addon">$</span>
-
-                                            <input type="text" name="person[]" id="person1" class="form-control person" placeholder="Amount Per Person">
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-2">
 
                                 </div>
 
                             </div>
 
+                            <div class="col-md-2 percent-col">
 
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                      <input type="text" name="percent[]" id="percent1" class="form-control percent" placeholder="%">
+
+
+
+                                       <span class="input-group-addon">%</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2 amount-col">
+
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+
+
+                                      <span class="input-group-addon">$</span>
+
+                                      <input type="text" name="amount[]" id="amount" class="form-control amount" placeholder="Amount" readonly>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2 person-col">
+
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+
+                                      <span class="input-group-addon">$</span>
+
+                                      <input type="text" name="person[]" id="person2" class="form-control person" placeholder="Amount Per Person">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <div class="btn-group">
+
+                                    <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
+
+                                </div>
+
+                            </div>
 
                         </div>
+                    </div>
+    </div>
+    @endforeach
 
-        	  		</div>
-    	  		<input type="" value="Submit"    id="crik_submt_btn_sftlo" class="btn btn-primary" onclick="submit();">
-
+    	  		<input type="submit" value="Submit"   class="btn btn-primary" />
+            {{-- </a> --}}
     	  	</form>
 
         </div>
@@ -680,167 +684,10 @@
 
 
 
-<div class="row breakdown-row d-none" id="breakdown-row">
 
-    <div class="col-md-2 from-col">
-
-        <div class="form-group">
-
-
-
-            <?php /*
-
-            <select class="form-control from" name="from[]" id="from">
-
-                <option value="">-</option>
-
-                @if(isset($breakdown))
-
-                    @for($i = 1;$i <= $contest['max_entry'];$i++)
-
-                        <option value="{{ $i }}">{{ $i }}</option>
-
-                    @endfor
-
-                @endif
-
-            </select>
-
-
-
-            */ ?>
-
-
-
-
-
-
-
-             <input type="text"  class="form-control from" name="from[]" id="from3" >
-
-
-
-
-
-        </div>
-
-    </div>
-
-    <div class="col-md-2 to-col">
-
-        <div class="form-group">
-
-            <?php /*
-
-            <select class="form-control to" name="to[]" id="to">
-
-                <option value="">-</option>
-
-                @if(isset($breakdown))
-
-                    @for($i = 1;$i <= $contest['max_entry'];$i++)
-
-                        <option value="{{ $i }}">{{ $i }}</option>
-
-                    @endfor
-
-                @endif
-
-            </select>
-
-            */ ?>
-
-
-
-             <input type="text"  class="form-control to" name="to[]" id="to1">
-
-
-
-
-
-        </div>
-
-    </div>
-
-    <div class="col-md-2 percent-col">
-
-        <div class="form-group">
-
-            <div class="input-group">
-
-              <input type="text" name="percent[]" id="percent1" class="form-control percent" placeholder="%">
-
-              <!-- <div class="input-group-append">
-
-                <span class="input-group-text">%</span>
-
-              </div> -->
-
-               <span class="input-group-addon">%</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-2 amount-col">
-
-        <div class="form-group">
-
-            <div class="input-group">
-
-              <!-- <div class="input-group-prepend">
-
-                <span class="input-group-text" id="basic-addon1">$</span>
-
-              </div> -->
-
-              <span class="input-group-addon">$</span>
-
-              <input type="text" name="amount[]" id="amount" class="form-control amount" placeholder="Amount" readonly>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-2 person-col">
-
-        <div class="form-group">
-
-            <div class="input-group">
-
-              <!-- <div class="input-group-prepend">
-
-                <span class="input-group-text" id="basic-addon1">$</span>
-
-              </div> -->
-
-              <span class="input-group-addon">$</span>
-
-              <input type="text" name="person[]" id="person2" class="form-control person" placeholder="Amount Per Person">
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-2">
-
-        <div class="btn-group">
-
-            <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
-
-        </div>
-
-    </div>
-
-</div>
 
 </section>
+
 
 @endsection
 <script>
