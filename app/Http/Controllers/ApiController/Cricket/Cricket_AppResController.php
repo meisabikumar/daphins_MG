@@ -548,14 +548,19 @@ class Cricket_AppResController extends Controller
         // Live Match Point Evaluation
         // echo json_encode($fixtures);
         // return;
-        foreach ($fixtures as $lm) {
+        // foreach for fixture starts here
+        foreach ($fixtures as $lm)
+        {
             $rid = $lm["id"];
             // $userTeams[] = CricUserTeams::where("match_id", $lm["id"])->get();
 
             // ----------------------------------------------------------
             // DECIDES WHETHER MATCH ALREADY EXISTS IN LIVE MATCHES OR NOT
             // ----------------------------------------------------------
-            if (!CricMatchStatus::where('match_id', $lm['id'])->exists()) {
+            // IF CricMatchStatus starts
+            // if (!CricMatchStatus::where('match_id', $lm['id'])->exists())
+
+            // {
                 $newMatch = new CricMatchStatus;
                 $newMatch->match_id = $lm["id"];
                 $newMatch->status = 1;
@@ -774,15 +779,10 @@ class Cricket_AppResController extends Controller
                     $points_detail["i1"][] = $temp;
                     $points_detail["i2"][] = $temp;
                 }
-                // $mid = CricketMatches::where("fixture_id", $lm["id"])->first()->id();
+                $mid = CricketMatches::where("fixture_id", $lm["id"])->first()->id;
 
-
-            }
-            $mid = CricketMatches::where("fixture_id", $lm["id"])->first()->id;
-                // $players = CricPlayerPrice::where("match_id", $mid)->where("price", ">", 0)->pluck("player_id")->toArray();
-                // return print_r($players);
-                $players = DB::table('cric_player_price')->where(array("match_id"=>$mid))->get();
-                return $players;
+                $players = CricPlayerPrice::where("match_id", $mid)->where("price", ">", 0)->pluck("player_id")->toArray();
+                // return $players;
                 foreach ($players as $plid) {
                     $player_id = $plid;
                     if (!(CricPlayerPoints::where(['match_id', 'player_id'])->exists())) {
@@ -802,243 +802,246 @@ class Cricket_AppResController extends Controller
                     }
                 }
             // }
+            // IF CricMatchStatus ends
+            // }
 
             // --------------------------------------------------------------------------------
             // If there are players not announced, it would make an api call otherwise it won't.
             // --------------------------------------------------------------------------------
-            $not_announced = CricPlayerPoints::where(["match_id" => $lm["id"], "is_announced" => 0])->get();
-            if (!empty($not_announced)) {
-                $api_fetch_lineup = "$api_url/livescores/$rid/?api_token=$api_key&include=lineup";
-                $jsons = file_get_contents($api_fetch_lineup);
-                $lineup = json_decode($jsons, true)["data"]["lineup"];
-                foreach ($lineup as $player) {
-                    $player_id = $player["id"];
-                    $points_detail = array();
+            // $not_announced = CricPlayerPoints::where(["match_id" => $lm["id"], "is_announced" => 0])->get();
+            // if (!empty($not_announced))
+            // {
+            //     $api_fetch_lineup = "$api_url/livescores/$rid/?api_token=$api_key&include=lineup";
+            //     $jsons = file_get_contents($api_fetch_lineup);
+            //     $lineup = json_decode($jsons, true)["data"]["lineup"];
+            //     foreach ($lineup as $player) {
+            //         $player_id = $player["id"];
+            //         $points_detail = array();
 
-                    // Initializing the points detail array again.
+            //         // Initializing the points detail array again.
 
-                    $temp["event_name"] = "Starting XI";
-                    $temp["count"] = "Yes";
-                    $temp["points"] = 4;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        // $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "Runs";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "Balls";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "Strike Rate";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "4s";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "6s";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "30+ Runs";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-                    $temp["event_name"] = "50+ Runs";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
+            //         $temp["event_name"] = "Starting XI";
+            //         $temp["count"] = "Yes";
+            //         $temp["points"] = 4;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             // $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "Runs";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "Balls";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "Strike Rate";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "4s";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "6s";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "30+ Runs";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+            //         $temp["event_name"] = "50+ Runs";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
 
-                    $temp["event_name"] = "Century";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
+            //         $temp["event_name"] = "Century";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
 
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
 
-                    $temp["event_name"] = "Duck";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
+            //         $temp["event_name"] = "Duck";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
 
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
 
-                    $temp["event_name"] = "Wickets";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
+            //         $temp["event_name"] = "Wickets";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
 
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-
-
-                    $temp["event_name"] = "Overs";
-                    $temp["count"] = "-";
-                    $temp["points"] = "-";
-
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
 
 
-                    $temp["event_name"] = "Economy Rate";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
+            //         $temp["event_name"] = "Overs";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = "-";
 
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-
-                    $temp["event_name"] = "Maiden";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
-
-                    $temp["event_name"] = "Catches/Stumping";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
-
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
 
 
-                    $temp["event_name"] = "Wicket Bonus";
-                    $temp["count"] = "-";
-                    $temp["points"] = 0;
+            //         $temp["event_name"] = "Economy Rate";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
 
-                    if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
-                        $points_detail[] = $temp;
-                    } else {
-                        // INNINGS
-                        // $temp1["i1"] = $temp;
-                        // $temp2["i2"] = $temp;
-                        $points_detail["i1"][] = $temp;
-                        $points_detail["i2"][] = $temp;
-                    }
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
 
-                    // Update status from is_Announced 0 to is_announced 1...
-                    if (CricPlayerPoints::where(["match_id" => $lm["id"], "player_id" => $player_id])->exists()) {
-                        $player_rec = CricPlayerPoints::where(["match_id" => $lm["id"], "player_id" => $player_id])->first();
-                        $player_rec->points_detail = json_encode($points_detail);
-                        $player_rec->points = 4;
-                        $player_rec->is_announced = 1;
-                        $player_rec->save();
-                    }
-                }
-            }
+            //         $temp["event_name"] = "Maiden";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+
+            //         $temp["event_name"] = "Catches/Stumping";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+
+
+            //         $temp["event_name"] = "Wicket Bonus";
+            //         $temp["count"] = "-";
+            //         $temp["points"] = 0;
+
+            //         if ($lm["type"] != "Test/5day" && $lm["type"] != "4day") {
+            //             $points_detail[] = $temp;
+            //         } else {
+            //             // INNINGS
+            //             // $temp1["i1"] = $temp;
+            //             // $temp2["i2"] = $temp;
+            //             $points_detail["i1"][] = $temp;
+            //             $points_detail["i2"][] = $temp;
+            //         }
+
+            //         // Update status from is_Announced 0 to is_announced 1...
+            //         if (CricPlayerPoints::where(["match_id" => $lm["id"], "player_id" => $player_id])->exists()) {
+            //             $player_rec = CricPlayerPoints::where(["match_id" => $lm["id"], "player_id" => $player_id])->first();
+            //             $player_rec->points_detail = json_encode($points_detail);
+            //             $player_rec->points = 4;
+            //             $player_rec->is_announced = 1;
+            //             $player_rec->save();
+            //         }
+            //     }
+            // }
 
             // Announced Points and return
             // return;
@@ -1126,8 +1129,8 @@ class Cricket_AppResController extends Controller
                 $player_scores[] = $batsman;
                 $positions["batsman"][] = $batsman["player_id"];
             }
-
-            foreach ($player_scores as $p_r) {
+            foreach ($player_scores as $p_r)
+            {
                 // Continue
 
                 $player_points  =  CricPlayerPoints::where(["match_id" => $lm["id"], "player_id" => $p_r['player_id'], "is_announced" => 1]);
@@ -1268,6 +1271,7 @@ class Cricket_AppResController extends Controller
                 }
             }
         }
+        // Foreach of fixture ends here
 
 
 
@@ -1761,6 +1765,34 @@ class Cricket_AppResController extends Controller
 
         $res=DB::table('user_contests')->where(array("contest_id"=>$contest_id,"game_type"=>$game_type))->get();
         return response()->json(["status" => 1,"message" => "Success","data"=>$res]);
+    }
+    public function all_team_data(Request $request)
+    {
+        $team_id=$request->post('team_id');
+        $game_type=$request->post('game_type');
+        if($game_type=="cricket")
+        {
+            $ret=DB::table('cric_user_team')->where(array("id"=>$team_id))->get();
+
+        }
+        if($game_type=="football")
+        {
+            $ret=DB::table('football_user_team')->where(array("id"=>$team_id))->get();
+
+        }
+        foreach ($ret as $value) {
+
+        }
+        $data=array(
+            'id'=>$value->id,
+            'user_id'=>$value->user_id,
+            'team'=>json_decode(stripslashes($value->teams)),
+            'match_id'=>$value->match_id
+        );
+
+
+        return response()->json(["status" => 1,"message" => "Success","data"=>$data]);
+
     }
 
 

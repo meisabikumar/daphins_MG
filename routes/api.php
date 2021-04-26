@@ -118,7 +118,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/CricLeaderBoard',[Cricket_AppResController::class,'CricLeaderBoard']);
     
     Route::get('/CricLiveScores',[Cricket_AppResController::class,'CricLiveScores']);
-    
+    Route::post('/all_team_data',[Cricket_AppResController::class,'all_team_data']);
     // Testing ScoreUpdate
     Route::get('/Testing_Score',[Cricket_AppResController::class,'Testing_Score']);
     
