@@ -117,7 +117,7 @@ class ScoreUpdate extends Command
             "80-89.99" => 0,
             "90-99.99" => 0
         ];
-        // Bowler Point Details 
+        // Bowler Point Details
         $point_details_bowler = [
             "wickets" => 0,
             "rate" => 0,
@@ -144,7 +144,7 @@ class ScoreUpdate extends Command
             // $userTeams[] = CricUserTeams::where("match_id", $lm["id"])->get();
 
             // ----------------------------------------------------------
-            // DECIDES WHETHER MATCH ALREADY EXISTS IN LIVE MATCHES OR NOT  
+            // DECIDES WHETHER MATCH ALREADY EXISTS IN LIVE MATCHES OR NOT
             // ----------------------------------------------------------
             if (!CricMatchStatus::where('match_id', $lm['id'])->exists()) {
                 $newMatch = new CricMatchStatus;
@@ -152,6 +152,7 @@ class ScoreUpdate extends Command
                 $newMatch->status = 1;
                 $newMatch->bonus_evaluation_done = 0;
                 $newMatch->save();
+                // Clear till this point
                 // Initializing the points detail array for all the players.
                 $points_detail = array();
                 $temp["event_name"] = "Starting XI";
@@ -365,6 +366,7 @@ class ScoreUpdate extends Command
                     $points_detail["i2"][] = $temp;
                 }
                 $mid = CricketMatches::where("fixture_id", $lm["id"])->first()->id;
+                // return $mid;
                 $players = CricPlayerPrice::where("match_id", $mid)->where("price", ">", 0)->pluck("player_id")->toArray();
                 foreach ($players as $plid) {
                     $player_id = $plid;
@@ -1014,7 +1016,7 @@ class ScoreUpdate extends Command
                 $tmp_uw->amount = $ucr->won_amount;
                 $tmp_uw->save();
 
-                $win_uw = UserWalets::where('user_id', $ucr->user_id)->where('transaction_type', 3)->sum('amount'); // won amount 
+                $win_uw = UserWalets::where('user_id', $ucr->user_id)->where('transaction_type', 3)->sum('amount'); // won amount
                 $wd_uw = UserWalets::where('user_id', $ucr->user_id)->where('transaction_type', 4)->where('status', 2)->sum('amount');
 
                 User::where('id', $ucr->user_id)->update(["won_amount" => ($win_uw - $wd_uw)]); // final won amount is total won - withdrawn amount into bank
