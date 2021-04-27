@@ -178,18 +178,34 @@
                             <div class="form-group">
 
                                 <label >Admin Commission</label>
+                                    @if (!empty($r->admin_per))
+                                    <div class="input-group">
 
-                                <div class="input-group">
+                                        <input type="radio" class="choose-comm-type" id="amt_type" name="amt_type"  value="per" checked> &nbsp;
 
-                                    <input type="radio" class="choose-comm-type" id="amt_type" name="amt_type"  value="per"> &nbsp;
+                                        <label>In Percent</label>&nbsp;&nbsp;
 
-                                    <label>In Percent</label>&nbsp;&nbsp;
+                                        <input type="radio" class="choose-comm-type"  name="amt_type"  value="fix">&nbsp;
 
-                                    <input type="radio" class="choose-comm-type"  name="amt_type"  value="fix">&nbsp;
+                                        <label>Fixed Value</label>
 
-                                    <label>Fixed Value</label>
+                                    </div>
 
-                                </div>
+                                    @else
+
+                                    <div class="input-group">
+
+                                        <input type="radio" class="choose-comm-type" id="amt_type" name="amt_type"  value="per"> &nbsp;
+
+                                        <label>In Percent</label>&nbsp;&nbsp;
+
+                                        <input type="radio" class="choose-comm-type"  name="amt_type"  value="fix" checked>&nbsp;
+
+                                        <label>Fixed Value</label>
+
+                                    </div>
+
+                                    @endif
 
 
 
@@ -369,10 +385,10 @@
                             <div class="form-group">
 
                                 <label >Prize distribution</label>
-
+                                @if (!empty($r->admin_per))
                                 <div class="input-group">
 
-                                    <input type="radio" class="choose-prize-distribution" id="prize_type" name="prize_type"  value="per"> &nbsp;
+                                    <input type="radio" class="choose-prize-distribution" id="prize_type" name="prize_type"  value="per" checked> &nbsp;
 
                                     <label>In Percent</label>&nbsp;&nbsp;
 
@@ -381,6 +397,21 @@
                                     <label>Fixed Value</label>
 
                                 </div>
+                                @else
+
+                                <div class="input-group">
+
+                                    <input type="radio" class="choose-prize-distribution" id="prize_type" name="prize_type"  value="per"> &nbsp;
+
+                                    <label>In Percent</label>&nbsp;&nbsp;
+
+                                    <input type="radio" class="choose-prize-distribution"  name="prize_type"  value="fix" checked>&nbsp;
+
+                                    <label>Fixed Value</label>
+
+                                </div>
+                                @endif
+
 
 
 
@@ -543,11 +574,11 @@
 
 
 
-                                    {{-- <div class="btn-group">
+                                    <div class="btn-group">
 
                                         <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
 
-                                    </div> --}}
+                                    </div>
 
 
                                 </div>
