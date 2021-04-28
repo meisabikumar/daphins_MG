@@ -87,6 +87,10 @@ class FootballController extends Controller
         }
         if($is_free == 1){
             $entry_fee = 0;
+            $admin_per = null;
+            $admin_amt = null;
+            $winning_amt = 0;
+            $prize_breakdown = [];
         }
         DB::table('football_contests')->insert([
             'match_id' => $match,

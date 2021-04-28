@@ -385,7 +385,7 @@ class Cricket_AppResController extends Controller
     {
         $user_id=$request->post('user_id');
 
-        $team[]=$request->post('team');
+        $team=$request->post('team');
         $match_id=$request->post('match_id');
         // $data=array(
         //     'user_id'=>$request->post('user_id'),
@@ -400,7 +400,37 @@ class Cricket_AppResController extends Controller
         $CricMatch=new CricMatch();
         $res_user_team=$CricMatch->Cricket_User_Teams_Model($user_id,$team_json,$match_id);
         // return $data;
+        $res=DB::table('cric_user_team')->where(array("user_id"=>$user_id,"match_id"=>$match_id))->get();
+        foreach ($res as $value_team) {
+         $team_id=$value_team->id;
+        }
+        $obj=json_decode($team_json);
+        foreach ($obj as $value) {
 
+        $data=array(
+            'user_id'=>$user_id,
+            'team_id'=>$team_id,
+            'match_id'=>$match_id,
+            'players_id'=>$value->id,
+            "type"=>$value->type,
+            "is_sec"=>$value->is_sec,
+            "is_cap"=>$value->is_cap,
+            "is_vcap"=>$value->is_vcap
+
+        );
+        $ret=DB::table('cricket_player_team')->insert(array(
+            'user_id'=>$data['user_id'],
+            'team_id'=>$data['team_id'],
+            'match_id'=>$data['match_id'],
+            'players_id'=>$data['players_id'],
+
+            'type'=>$data['type'],
+
+
+            'is_sec'=>$data['is_sec'],
+            'is_cap'=>$data['is_cap'],
+            'is_vcap'=>$data['is_vcap'],
+        ));
 
         // return response()->json(["status" => 1,"message" => "Success"]);
 

@@ -19,6 +19,7 @@ use App\Http\Controllers\ApiController\AppResController;
 // --Cricket Data ---
 use App\Http\Controllers\ApiController\Cricket\Cricket_Data_Controller;
 use App\Http\Controllers\ApiController\Cricket\Cricket_AppResController;
+use App\Http\Controllers\Cric_Score_Controller;
 // -----
 
 // -- Admin Contest ---
@@ -41,7 +42,7 @@ use App\Http\Controllers\User\Wallet_Transaction_Controller;
 Route::post('/signup', [LoginController::class, 'signup']);
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', [LoginController::class, 'login']);
-    
+
     Route::post('/sendOtp', [LoginController::class, 'sendOtp']);
 
     Route::group(['middleware' => 'auth:api'], function() {
@@ -89,8 +90,8 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/Player_points',[Roanuz_Api_Controller::class,'Player_points']);
     Route::get('/player_data_update',[Roanuz_Api_Controller::class,'player_update']);
     Route::get('/point_logic',[Roanuz_Api_Controller::class,'point_logic']);
-    
-    
+
+
     // -----------------------------------------------------------------------
 
 // -----------------
@@ -99,7 +100,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 // -------Cricket API------------
     // Player Data Feeding
-    
+
     Route::get('/player_list',[Cricket_Data_Controller::class,'player_list']);
     Route::get('/cricket/fixtures',[Cricket_Data_Controller::class,'fixtures']);
     // Route::get('/cricket/cricket_fixture_teams',[Cricket_Data_Controller::class,'cricket_fixture_teams']);
@@ -116,18 +117,20 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('/Cricket_User_Teams',[Cricket_AppResController::class,'Cricket_User_Teams']);
     Route::post('/Cricket_User_Teams_get',[Cricket_AppResController::class,'Cricket_User_Teams_get']);
     Route::post('/CricLeaderBoard',[Cricket_AppResController::class,'CricLeaderBoard']);
-    
+
     Route::get('/CricLiveScores',[Cricket_AppResController::class,'CricLiveScores']);
     Route::post('/all_team_data',[Cricket_AppResController::class,'all_team_data']);
     // Testing ScoreUpdate
-    Route::get('/Testing_Score',[Cricket_AppResController::class,'Testing_Score']);
-    
-    
+    // Route by vansh
+    Route::get('/Testing_Score',[Cric_Score_Controller::class,'Testing_Score']);
+    Route::get('/Update_Score',[Cric_Score_Controller::class,'score_update']);
 
 
-    
-    
-    
+
+
+
+
+
 // -------------------------
 
 
