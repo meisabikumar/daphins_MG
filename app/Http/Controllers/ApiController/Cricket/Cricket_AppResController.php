@@ -411,9 +411,8 @@ class Cricket_AppResController extends Controller
             'user_id'=>$user_id,
             'team_id'=>$team_id,
             'match_id'=>$match_id,
-            'players_id'=>$value->id,
+            'player_id'=>$value->id,
             "type"=>$value->type,
-            "is_sec"=>$value->is_sec,
             "is_cap"=>$value->is_cap,
             "is_vcap"=>$value->is_vcap
 
@@ -422,23 +421,16 @@ class Cricket_AppResController extends Controller
             'user_id'=>$data['user_id'],
             'team_id'=>$data['team_id'],
             'match_id'=>$data['match_id'],
-            'players_id'=>$data['players_id'],
-
+            'player_id'=>$data['player_id'],
             'type'=>$data['type'],
-
-
-            'is_sec'=>$data['is_sec'],
             'is_cap'=>$data['is_cap'],
             'is_vcap'=>$data['is_vcap'],
         ));
 
-        // return response()->json(["status" => 1,"message" => "Success"]);
-
-
-
     }
-    public function Cricket_User_Teams_get(Request $request)
-    {
+    return response()->json(["status" => 1,"message" => "Success"]);
+    }
+    public function Cricket_User_Teams_get(Request $request){
         // $user_id=1;
         // $match_id=24915;
         $user_id=$request->post('user_id');

@@ -124,6 +124,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     // Route by vansh
     Route::get('/Testing_Score',[Cric_Score_Controller::class,'Testing_Score']);
     Route::get('/Update_Score',[Cric_Score_Controller::class,'score_update']);
+    Route::get('/user_point_details',[Cric_Score_Controller::class,'user_point_update']);
 
 
 

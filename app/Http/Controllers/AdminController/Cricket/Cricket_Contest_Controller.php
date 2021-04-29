@@ -15,7 +15,7 @@ class Cricket_Contest_Controller extends Controller
     {
         //
         $result = cricket_contest::all();
-        return view('AdminView.show_contest')->with('result',$result);
+        return view('AdminView.show_cric_contest')->with('result',$result);
     }
 
     public function store(Request $request)
@@ -38,15 +38,15 @@ class Cricket_Contest_Controller extends Controller
         $data->winning_amt = $request->winning_amt;
         $data->is_free = $request->is_free;
         $data->is_featured = $request->is_featured;
-        $data->game_status = $request->game_status;
+        $data->game_status = 1;
         $data->is_confirmed = $request->is_confirmed;
         $data->is_cancelled = $request->is_cancelled;
         $data->breakdown = $request->breakdown;
         $data->save();
 
-        return "done";
+        return redirect('/admin/cricket/contest');
     }
-    
+
     // Create Cricket Contest view
     public function cric_create()
     {
@@ -57,8 +57,8 @@ class Cricket_Contest_Controller extends Controller
         return view('AdminView.cricket.createcontest',['res'=>$res,'res2'=>$res2]);
     }
 
+    public function
 
-    
 
 
 
