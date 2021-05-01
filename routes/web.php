@@ -72,8 +72,13 @@ Route::get('/admin/football/contest/edit/{id}',[FootballController::class, 'edit
 Route::post('/admin/football/contest/edit/{id}',[FootballController::class, 'postUpdate']);
 Route::get('/admin/football/contest/delete/{id}',[FootballController::class, 'delete']);
 Route::get('/admin/football/contest/cancel/{id}',[FootballController::class, 'cancel']);
+Route::get('/admin/football/contest/view/{id}',[FootballController::class, 'view']);
 //Cricket
-
+Route::get('/admin/cricket/contest/delete/{id}',[Cricket_Contest_Controller::class, 'delete']);
+Route::get('/admin/cricket/contest/cancel/{id}',[Cricket_Contest_Controller::class, 'cancel']);
+Route::get('/admin/cricket/contest/edit/{id}',[Cricket_Contest_Controller::class, 'editContestCategory']);
+Route::post('/admin/cricket/contest/edit/{id}',[Cricket_Contest_Controller::class, 'postUpdate']);
+Route::get('/admin/cricket/contest/view/{id}',[Cricket_Contest_Controller::class, 'view']);
 //Routes by Vansh ends
 // Cricket part
 // Routes by Amir
@@ -100,4 +105,5 @@ Route::get('clear', function () {
     // \Artisan::call('cache:clear');
     dd("Done");
 });
+
 

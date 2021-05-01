@@ -43,7 +43,7 @@
 
         <div class="tile">
 
-    	  	<form class="add-form" method="post" action="/admin/contests/cric_create/add">
+    	  	<form class="add-form" method="post" action="{{url('/admin/contests/cric_create/add')}}">
 
     	  		@csrf
 
@@ -58,7 +58,7 @@
                         @foreach($res as $id => $category)
 
 
-              <option value="{{ $category->id }}">{{ $category->category }}</option>
+              <option value="{{ $category->category }}">{{ $category->category }}</option>
               @endforeach
 </select>
 
@@ -76,7 +76,7 @@
 
                     <label for="contest_category">Cricket Match(Teams)(Tournament)</label>
 
-                    <select class="form-control" name="game_type" id="series_id"  >
+                    <select class="form-control" name="match" id="series_id"  >
 
                         <option value="">--Select Match--</option>
 
@@ -84,7 +84,12 @@
 
 {{-- <option value="{{ $i->fixture_id }}">{{$i->localteam_data['name'] }} vs {{$i->visitorteam_data['name']}} ({{$i->type}}) ({{ $i->fixture_id }}) </option> --}}
 
-<option value=""> {{ $i->fixture_id }}</option>
+{{-- <option value="{{ $i->fixture_id }}"> {{ $i->fixture_id }}</option> --}}
+<?php
+$ld = json_decode($i->localteam_data);
+$vd = json_decode($i->visitorteam_data);
+?>
+<option  value="{{ $i->fixture_id }}">{{ $ld->name}} vs {{$vd->name}} ({{$i->fixture_id}})</option>
 
                         @endforeach
 
@@ -174,11 +179,11 @@
 
                                 <div class="input-group">
 
-                                    <input type="radio" class="choose-comm-type" id="amt_type" name="amt_type"  value="per"> &nbsp;
+                                    <input type="radio" class="choose-comm-type" id="amt_type" name="amt_type" {{ !empty($contest['amt_type']) && $contest['amt_type'] == 1  ? 'checked' : '' }}  {{isset($contest['is_free']) && $contest['is_free'] == 1 ? 'disabled' : ''}} value="per"> &nbsp;
 
                                     <label>In Percent</label>&nbsp;&nbsp;
 
-                                    <input type="radio" class="choose-comm-type"  name="amt_type"  value="fix">&nbsp;
+                                    <input type="radio" class="choose-comm-type"  name="amt_type" {{  !empty($contest['amt_type']) && $contest['amt_type'] == 2 ? 'checked' : '' }}  {{isset($contest['is_free']) && $contest['is_free'] == 1 ? 'disabled' : ''}} value="fix">&nbsp;
 
                                     <label>Fixed Value</label>
 
@@ -194,7 +199,7 @@
 
 
 
-                        <div class="col-md-4 " style="">
+                        <div class="col-md-4 " style="{{  !empty($contest['amt_type']) && $contest['amt_type'] == 1   ? '' : 'display: none;' }}">
 
                             <div class="form-group">
 
@@ -202,7 +207,7 @@
 
                                 <div class="input-group">
 
-                                  <input type="text" name="admin_per" id="admin_per" class="form-control" placeholder="Admin Commission (in %)" value="">
+                                  <input type="text" name="admin_per" id="admin_per" class="form-control" placeholder="Admin Commission (in %)" value="@if(isset($contest['admin_per'])){{ $contest['admin_per'] }}@endif">
 
                                   <!-- <div class="input-group-append">
 
@@ -214,7 +219,7 @@
 
                                 </div>
 
-                                <input type="hidden" name="admin_amt" id="admin_amt" value="">
+                                <input type="hidden" name="admin_amt" id="admin_amt" value="@if(isset($contest['admin_amt'])){{ $contest['admin_amt'] }}@endif">
 
                             </div>
 
@@ -222,7 +227,7 @@
 
 
 
-                        <div class="col-md-4 " style="">
+                        <div class="col-md-4 " style="{{  !empty($contest['amt_type']) && $contest['amt_type'] == 2  ? '' : 'display: none;' }}">
 
                             <div class="form-group">
 
@@ -230,7 +235,7 @@
 
                                 <div class="input-group">
 
-                                  <input type="text" name="admin_fix" id="admin_fix" class="form-control" placeholder="Admin Commission (Fixed Amount)" value="">
+                                  <input type="text" name="admin_fix" id="admin_fix" class="form-control" placeholder="Admin Commission (Fixed Amount)" value="@if(isset($contest['admin_fix'])){{ $contest['admin_fix'] }}@endif">
 
                                   <!-- <div class="input-group-append">
 
@@ -242,7 +247,7 @@
 
                                 </div>
 
-                          <input type="hidden" name="admin_fix_amt" id="admin_fix_amt" value="">
+                    {{--       <input type="hidden" name="admin_fix_amt" id="admin_fix_amt" value="@if(isset($contest['admin_fix_amt'])){{ $contest['admin_fix_amt'] }}@endif"> --}}
 
                             </div>
 
@@ -250,7 +255,10 @@
 
 
 
-    	  			</div>
+                      </div>
+
+                    </div>
+
 
                     <div class="row">
 
@@ -335,13 +343,7 @@
 
                         </div>
 
-                         <div class="col-md-4 " id="private_password">
 
-                            <label>Password</label>
-
-                            <input type="text" name="private_password" class="form-control" id="private_password" placeholder="Password" value="">
-
-                        </div>
 
 
 
@@ -438,7 +440,7 @@
 
 
 
-                                    <input type="text"  class="form-control from" name="breakdown[]" id="from1" value="">
+                                    <input type="text"  class="form-control from" name="from[]" id="from1" value="">
 
 
 
@@ -453,7 +455,7 @@
                                     <div class="form-group">
 
 
-                                <input type="text"  class="form-control to" name="breakdown[]" id="to2" value="">
+                                <input type="text"  class="form-control to" name="to[]" id="to2" value="">
 
 
 
@@ -520,11 +522,11 @@
 
 
 
-                                    <div class="btn-group">
+                                    {{-- <div class="btn-group">
 
                                         <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
 
-                                    </div>
+                                    </div> --}}
 
 
                                 </div>
@@ -533,7 +535,7 @@
 
 
 
-                            <div class="row breakdown-row">
+                            {{-- <div class="row breakdown-row">
 
                                 <div class="col-md-2 from-col">
 
@@ -663,7 +665,169 @@
 
                         </div>
 
-        	  		</div>
+        	  		</div> --}}
+                      {{-- <a href="/admin/football/contest/create"> --}}
+                        <div class="row breakdown-row d-none" id="breakdown-row">
+
+                            <div class="col-md-2 from-col">
+
+                                <div class="form-group">
+
+
+
+                                    <?php /*
+
+                                    <select class="form-control from" name="from[]" id="from">
+
+                                        <option value="">-</option>
+
+                                        @if(isset($breakdown))
+
+                                            @for($i = 1;$i <= $contest['max_entry'];$i++)
+
+                                                <option value="{{ $i }}">{{ $i }}</option>
+
+                                            @endfor
+
+                                        @endif
+
+                                    </select>
+
+
+
+                                    */ ?>
+
+
+
+
+
+
+
+                                     <input type="text"  class="form-control from" name="from[]" id="from" >
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2 to-col">
+
+                                <div class="form-group">
+
+                                    <?php /*
+
+                                    <select class="form-control to" name="to[]" id="to">
+
+                                        <option value="">-</option>
+
+                                        @if(isset($breakdown))
+
+                                            @for($i = 1;$i <= $contest['max_entry'];$i++)
+
+                                                <option value="{{ $i }}">{{ $i }}</option>
+
+                                            @endfor
+
+                                        @endif
+
+                                    </select>
+
+                                    */ ?>
+
+
+
+                                     <input type="text"  class="form-control to" name="to[]" id="to1">
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2 percent-col">
+
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                      <input type="text" name="percent[]" id="percent1" class="form-control percent" placeholder="%">
+
+                                      <!-- <div class="input-group-append">
+
+                                        <span class="input-group-text">%</span>
+
+                                      </div> -->
+
+                                       <span class="input-group-addon">%</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2 amount-col">
+
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                      <!-- <div class="input-group-prepend">
+
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+
+                                      </div> -->
+
+                                      <span class="input-group-addon">$</span>
+
+                                      <input type="text" name="amount[]" id="amount" class="form-control amount" placeholder="Amount" readonly>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2 person-col">
+
+                                <div class="form-group">
+
+                                    <div class="input-group">
+
+                                      <!-- <div class="input-group-prepend">
+
+                                        <span class="input-group-text" id="basic-addon1">$</span>
+
+                                      </div> -->
+
+                                      <span class="input-group-addon">$</span>
+
+                                      <input type="text" name="person[]" id="person2" class="form-control person" placeholder="Amount Per Person">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2">
+
+                                <div class="btn-group">
+
+                                    <a class="btn btn-primary remove-breakdown" href="#"><i class="fa fa-lg fa-minus"></i></a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+    </div>
     	  		<input type="" value="Submit"    id="crik_submt_btn_sftlo" class="btn btn-primary" onclick="submit();">
 
     	  	</form>

@@ -7,20 +7,22 @@ use App\Models\AdminModel\Cricket\cricket_fixture_player_credits_by_admin;
 use App\Models\ApiModel\Cricket\cricket_fixture;
 use App\Models\ApiModel\Cricket\cricket_fixture_teams;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Admin_Cricket_web_Controller extends Controller
 {
     //
     public function all_matchs()
     {
-        $data = cricket_fixture::all();
+        $data = DB::table('cricket_fixtures')->get();
         return view('AdminView.cricket.all_match')->with('match', $data);
     }
 
     public function update_active(Request $request)
     {
-        cricket_fixture::where('fixture_id', $request->match_id)->update(['active' => 1]);
-        return redirect()->back();
+        // print_r($request);
+        DB::table('cricket_fixtures')->where(array('fixture_id'=> $request->match_id))->update(['active' => 1]);
+        return redirect(url('/admin/cricket/all_matchs'));
     }
 
     public function update_inactive(Request $request)
@@ -48,8 +50,8 @@ class Admin_Cricket_web_Controller extends Controller
                         'team_name' => $team['name'],
                         'player_id' => $player['id'],
                         'player_name' => $player['fullname'],
-                        'position' => $player['position']['name'],
-                        'credit' => null]
+                        'position' => $player['position']['name']
+                        ]
                     );
 
                 }
@@ -58,7 +60,7 @@ class Admin_Cricket_web_Controller extends Controller
 
         });
 
-        return $f = cricket_fixture_player_credits_by_admin::where('match_id',$match_id)->get();
+        $f = cricket_fixture_player_credits_by_admin::where('match_id',$match_id)->get();
 
         return view('AdminView.cricket.assign_players_credit')->with('teams', $teams);
     }
@@ -78,19 +80,20 @@ class Admin_Cricket_web_Controller extends Controller
                     // return $player_id;
 
                     $arr = array(
+                        "match_id" => $match_id,
                         "player_id" => $player_id,
-                        "credit" => $credit,
+
                     );
 
-                    $platers_data[] = $arr;
+                    DB::table('cricket_fixture_player_credits_by_admins')->where($arr)->update(array('credit' => $credit));
                 }
 
             }
 
-            $team1_data = array(
-                "team_id" => $team_id,
-                "platers_data" => $platers_data,
-            );
+            // $team1_data = array(
+            //     "team_id" => $team_id,
+            //     "platers_data" => $platers_data,
+            // );
 
         }
 
@@ -104,26 +107,27 @@ class Admin_Cricket_web_Controller extends Controller
                     // return $player_id;
 
                     $arr = array(
+                        "match_id" => $match_id,
                         "player_id" => $player_id,
-                        "credit" => $credit,
+
                     );
 
-                    $platers_data[] = $arr;
+                    DB::table('cricket_fixture_player_credits_by_admins')->where($arr)->update(array('credit' => $credit));
                 }
 
             }
 
-            $team2_data = array(
-                "team_id" => $team_id,
-                "platers_data" => $platers_data,
-            );
+            // $team2_data = array(
+            //     "team_id" => $team_id,
+            //     "platers_data" => $platers_data,
+            // );
 
         }
 
-        $data = cricket_fixture_player_credits_by_admin::updateOrCreate(
-            ['match_id' => $match_id],
-            ['match_id' => $match_id, 'team_1' => $team1_data, 'team_2' => $team2_data]
-        );
+        // $data = cricket_fixture_player_credits_by_admin::updateOrCreate(
+        //     ['match_id' => $match_id],
+        //     ['match_id' => $match_id, 'team_1' => $team1_data, 'team_2' => $team2_data]
+        // );
 
         return redirect()->back();
     }

@@ -44,13 +44,13 @@
 
             <div class="col-md-2 col-sm-2">
                 <div class="form-group ">
-                    {{ Form::text('name', isset($searchVariable['name']) ? $searchVariable['name'] : '', ['class' => 'form-control', 'placeholder' => 'Name']) }}
+                    <input class="form-control" id="myInput" type="text" placeholder="Search..">
                 </div>
             </div>
 
             <div class="col-md-2 col-sm-2">
-                <button class="btn btn-primary"
-                        style="margin:0;"><i class='fa fa-search '></i> {{ trans('Search') }}</button>
+                {{-- <button class="btn btn-primary"
+                        style="margin:0;"><i class='fa fa-search '></i> {{ trans('Search') }}</button> --}}
                 <a href="{{ URL::to('admin/football/contest') }}"
                    class="btn btn-primary"
                    style="margin:0;"><i class='fa fa-refresh '></i> {{ trans('Reset') }}</a>
@@ -99,6 +99,7 @@
                             </th>
                         </tr>
                     </thead>
+                    <tbody id="myTable">
                     @if (!$result->isEmpty())
                         @foreach ($result as $key => $record)
                             <tr>
@@ -131,17 +132,17 @@
 
                                 <td>
 
-                                    {{-- <a class="btn btn-primary" href="" title="View"><i class="fa fa-lg fa-eye"></i></a> --}}
+                                    <a class="btn btn-primary" href="{{url('/admin/cricket/contest/view/' . $record->id) }}" title="View"><i class="fa fa-lg fa-eye"></i></a>
 
                                     @if($record->game_status == 1)
 
-                                    <a class="btn btn-primary" href="/admin/football/contest/edit/{{ $record->id }}" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
+                                    <a class="btn btn-primary" href="{{url('/admin/cricket/contest/edit/' . $record->id) }}" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
                                     @if($record->game_status != 'live')
-                                        <a class="btn btn-primary delete" href="/admin/football/contest/delete/{{ $record->id }}" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                                        <a class="btn btn-primary delete" href="{{url('/admin/cricket/contest/delete/'. $record->id) }}" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                                     @endif
 
 
-                                    <a href="/admin/football/contest/cancel/{{ $record->id }}" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <a href="{{url('/admin/cricket/contest/cancel/'. $record->id) }}" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
 
                                     @endif
                                         </td>
@@ -153,6 +154,7 @@
                                 colspan="9">No record is yet available.</td>
                         </tr>
                     @endif
+                    </tbody>
                 </table>
 
 
@@ -166,5 +168,14 @@
             </div>
         </div>
     </section>
-
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
 @stop
