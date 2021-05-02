@@ -27,7 +27,7 @@
 
 			<h4>Cricket Match Data </h4>
 
-
+            <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width: 6cm">
 			<button class="btn btn-primary" style="float:right;margin:5px;" onclick="refreshData();"><i class="fa fa-refresh"></i> Refresh Matches</button>
 			<div class="loaderRefresh">
 				<h2 class="text-center" id="refresh-text">Refreshing Data..</h2>
@@ -47,7 +47,7 @@
 
 
 
-							<tbody>
+							<tbody id="myTable">
 
 								<tr>
 
@@ -73,10 +73,13 @@
 									<td>{{ ($val->fixture_id) }}</td>
 
                                     {{-- <td>{{ ($val->tournament_name) }}</td> --}}
+                                    <?php
+                                        $ld = json_decode($val->localteam_data);
+                                        $vd = json_decode($val->visitorteam_data);
+                                    ?>
+									<td>{{ $ld->name }} vs {{ $vd->name }}</td>
 
-									<td>{{ ($val->localteam_data['name']) }} vs {{ ($val->visitorteam_data['name']) }}</td>
-
-									<td>{{ ($val->localteam_data['code']) }} vs {{ ($val->visitorteam_data['code']) }}</td>
+									{{-- <td>{{ ($val->localteam_data['code']) }} vs {{ ($val->visitorteam_data['code']) }}</td> --}}
 
 									<td>{{ ( date_format(date_create($val->starting_at),"Y-m-d H:i:s")) }}</td>
 
@@ -84,7 +87,7 @@
 									@if( $val->active==1 )
 									<td>
 
-										<form method="post" action="/admin/cricket/update_disable_match">
+										<form method="post" action="{{url('/admin/cricket/update_disable_match')}}">
 											@csrf
 											<input type="hidden" name="match_id" value="{{ $val->fixture_id }}">
 											<input type="submit" name="active/inactive" value="Click to Inactive">
@@ -96,7 +99,7 @@
 								@else
 
 								<td>
-									<form method="post" action="/admin/cricket/update_active_match">
+									<form method="post" action="{{url('/admin/cricket/update_active_match')}}">
                                         @csrf
                                         <input type="hidden" name="match_id" value="{{ $val->fixture_id }}">
                                         <input type="submit" name="active/inactive" value="Click to Active">
@@ -174,5 +177,14 @@
 		font-size: 17px;
 	}
 </style>
-
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
 @endsection

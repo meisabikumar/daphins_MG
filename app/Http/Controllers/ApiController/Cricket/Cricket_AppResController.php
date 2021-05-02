@@ -371,6 +371,24 @@ class Cricket_AppResController extends Controller
                     $new_max_remaining_entry=$max_remaining_entry-1;
                     DB::table('football_contests')->where(array("id"=>$contest_id))->update(array("max_remaining_entry"=>$new_max_remaining_entry));
                 }
+                //deducting money from user wallet
+                // $user_id=$req->input('user_id');
+         $match_id = $req->input('contest_id');
+        $user_data = DB::table('users')->where('id', $user_id)->get();
+        foreach($user_data as $ud){
+        $wallet_amount = $ud->wallet;
+        $contest_data = DB::table('user_contests')->where('contest_id', $match_id)->get();
+        foreach($contest_data as $cd){
+        $entry_fee = $cd->entry_fee;
+        $new_wallet_amount = $wallet_amount - $entry_fee;
+        DB::table('users')->where('id', $user_id)->update(array('wallet' => $new_wallet_amount));
+        DB::table('transaction_details')->insert(array(
+            'user_id' => $user_id,
+            'amount' => $entry_fee,
+            'status' => 'deducted'
+        ));
+    }
+    }
 
                 return response()->json(["status" => 1,"message" => "Success"]);
             }else
@@ -379,13 +397,32 @@ class Cricket_AppResController extends Controller
             }
         }
     }
+    public function deduct(Request $req){
+         $user_id=$req->input('user_id');
+         $match_id = $req->input('contest_id');
+        $user_data = DB::table('users')->where('id', $user_id)->get();
+        foreach($user_data as $ud){
+        $wallet_amount = $ud->wallet;
+        $contest_data = DB::table('user_contests')->where('contest_id', $match_id)->get();
+        foreach($contest_data as $cd){
+        $entry_fee = $cd->entry_fee;
+        $new_wallet_amount = $wallet_amount - $entry_fee;
+        DB::table('users')->where('id', $user_id)->update(array('wallet' => $new_wallet_amount));
+        DB::table('transaction_details')->insert(array(
+            'user_id' => $user_id,
+            'amount' => $entry_fee,
+            'status' => 'deducted'
+        ));
+    }
+    }
+    }
     // User Contest Teams
 
     public function Cricket_User_Teams(Request $request)
     {
         $user_id=$request->post('user_id');
 
-        $team[]=$request->post('team');
+        $team=$request->post('team');
         $match_id=$request->post('match_id');
         // $data=array(
         //     'user_id'=>$request->post('user_id'),
@@ -400,15 +437,39 @@ class Cricket_AppResController extends Controller
         $CricMatch=new CricMatch();
         $res_user_team=$CricMatch->Cricket_User_Teams_Model($user_id,$team_json,$match_id);
         // return $data;
+        $res=DB::table('cric_user_team')->where(array("user_id"=>$user_id,"match_id"=>$match_id))->get();
+        foreach ($res as $value_team) {
+         $team_id=$value_team->id;
+        }
+        $obj=json_decode($team_json);
+        foreach ($obj as $value) {
 
+        $data=array(
+            'user_id'=>$user_id,
+            'team_id'=>$team_id,
+            'match_id'=>$match_id,
+            'player_id'=>$value->id,
+            "type"=>$value->type,
+            "is_cap"=>$value->is_cap,
+            "is_vcap"=>$value->is_vcap
 
-        // return response()->json(["status" => 1,"message" => "Success"]);
-
-
+        );
+        $ret=DB::table('cricket_player_team')->insert(array(
+            'user_id'=>$data['user_id'],
+            'team_id'=>$data['team_id'],
+            'match_id'=>$data['match_id'],
+            'player_id'=>$data['player_id'],
+            'type'=>$data['type'],
+            'is_cap'=>$data['is_cap'],
+            'is_vcap'=>$data['is_vcap'],
+        ));
 
     }
-    public function Cricket_User_Teams_get(Request $request)
-    {
+    return response()->json(["status" => 1,"message" => "Success"]);
+    }
+
+
+    public function Cricket_User_Teams_get(Request $request){
         // $user_id=1;
         // $match_id=24915;
         $user_id=$request->post('user_id');

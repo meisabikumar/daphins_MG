@@ -84,11 +84,11 @@
 									@if( $val->active==1 )
 									<td>
 
-										<form method="post" action="/admin/football/update_disable_match">
+										<form method="post" action="{{url('/admin/football/update_disable_match')}}"    >
 											@csrf
 											<input type="hidden" name="match_id" value="{{ $val->match_key }}">
 											<input type="submit" name="active/inactive" value="Click to Inactive">
-											<a href="{{URL::to('admin/cricket_matches/assign_player_price/'.$val['unique_id'])}}" title="Active" class="btn btn-success"><i class="fa fa-money" aria-hidden="true"></i></a>
+											<a href="{{URL::to('admin/football/get_player/' . $val->match_key)}}" title="Active" class="btn btn-success"><i class="fa fa-money" aria-hidden="true"></i></a>
 										</form>
 
 								</tr>
@@ -96,7 +96,7 @@
 								@else
 
 								<td>
-									<form method="post" action="/admin/football/update_active_match">
+									<form method="post" action="{{url('/admin/football/update_active_match')}}">
                                         @csrf
                                         <input type="hidden" name="match_id" value="{{ $val->match_key }}">
                                         <input type="submit" name="active/inactive" value="Click to Active">

@@ -151,21 +151,22 @@
 
 
                     <li class="active ">
-                        <a href="https://www.profeud.com/admin/dashboard">
+                        <a href="http://mgfootball.ml/public/admin/dashboard">
                             <i class="fa fa-home  "></i>Dashboard</a>
                     </li>
 
 
-                    <li class="treeview offer-reports">
-                        <a href="javascript::void(0)"><i class="fa fa-users "></i><i class="fa pull-right fa-angle-left"></i>Users </a>
+                    {{-- <li class="treeview offer-reports">
+                        <a href="javascript::void(0)"><i class="fa fa-users "></i><i class="fa pull-right fa-angle-left"></i>Users </a> --}}
 
-                        <ul class="treeview-menu closed"
-                            style="treeview-menu display:none;">
+                        {{-- <ul class="treeview-menu closed"
+                            style="treeview-menu display:none;"> --}}
+                            {{-- <i class='fa fa-angle-double-right'> --}}
                             <li>
-                                <a href="{{url('/admin/App_Users')}}"><i class='fa fa-angle-double-right'></i>App Users </a>
+                                <a href="{{url('/admin/App_Users')}}"><i class="fa fa-users "></i>App Users </a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="https://www.profeud.com/admin/bot-users"><i class='fa fa-angle-double-right'></i>Bot Users </a>
                             </li>
 
@@ -173,9 +174,9 @@
                                 <a href="https://www.profeud.com/admin/users/2"><i class='fa fa-angle-double-right'></i>Sub Admin </a>
                             </li>
 
-                        </ul>
+                        </ul> --}}
 
-                    </li>
+                    {{-- </li> --}}
 
                     <li class="treeview offer-reports">
                         <a href="javascript::void(0)"><i class="fa fa-users "></i><i class="fa pull-right fa-angle-left"></i>Football Contest </a>
@@ -191,9 +192,9 @@
                             </li>
 
 
-                            <li>
+                            {{-- <li>
                                 <a href="https://www.profeud.com/admin/contests/cric_create"><i class='fa fa-angle-double-right'></i>Create Cricket Contest </a>
-                            </li>
+                            </li> --}}
 
                         </ul>
 
@@ -212,9 +213,9 @@
                                 <a href="{{URL::to('admin/cricket/all_matchs')}}"><i class='fa fa-angle-double-right'></i>All Matchs </a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="https://www.profeud.com/admin/contests/cric_create"><i class='fa fa-angle-double-right'></i>Create Cricket Contest </a>
-                            </li>
+                            </li> --}}
 
                         </ul>
 
@@ -236,7 +237,7 @@
                         <a href="https://www.profeud.com/admin/series"><i class="fa fa-trophy "></i>Series</a>
                     </li> --}}
 
-                    <li class="treeview offer-reports">
+                    {{-- <li class="treeview offer-reports">
                         <a href="javascript::void(0)"><i class="fa fa-handshake-o  "></i><i class="fa pull-right fa-angle-left"></i>Contests </a>
 
                         <ul class="treeview-menu closed"
@@ -275,17 +276,17 @@
 
                     <li class="">
                         <a href="https://www.profeud.com/admin/cricket_matches"><i class="fa fa-money "></i>Cricket Matches</a>
+                    </li> --}}
+
+                    <li class="">
+                        <a href="{{url('/admin/foot-players')}}"><i class="fa fa-user-o "></i>Football Players</a>
                     </li>
 
                     <li class="">
-                        <a href="https://www.profeud.com/admin/players"><i class="fa fa-user-o "></i>Players</a>
+                        <a href="{{url('/admin/cric-players')}}"><i class="fa fa-user-o "></i>Cricket Players</a>
                     </li>
 
-                    <li class="">
-                        <a href="https://www.profeud.com/admin/cricket_players"><i class="fa fa-user-o "></i>Cricket Players</a>
-                    </li>
-
-                    <li class="">
+                    {{-- <li class="">
                         <a href="https://www.profeud.com/admin/add_new_player"><i class="fa fa-user-o "></i>Add new Cricket Player</a>
                     </li>
 
@@ -330,7 +331,7 @@
 
                     </li>
 
-                </ul>
+                </ul> --}}
 
 
 

@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
-                    <a href="{{ URL::to('/admin/football/contest/create') }}"
+                    <a href="{{ URL::to('/admin/Cric-Create') }}"
                        class="btn btn-success btn-small  pull-right"
                        style="margin:0;">{{ trans('Add New Contest') }} </a>
                 </div>
@@ -44,7 +44,6 @@
 
             <div class="col-md-2 col-sm-2">
                 <div class="form-group ">
-                    {{-- {{ Form::text('name', isset($searchVariable['name']) ? $searchVariable['name'] : '', ['class' => 'form-control', 'placeholder' => 'Name']) }} --}}
                     <input class="form-control" id="myInput" type="text" placeholder="Search..">
                 </div>
             </div>
@@ -133,17 +132,17 @@
 
                                 <td>
 
-                                    <a class="btn btn-primary" href="{{url('/admin/football/contest/view/' . $record->id)}}" title="View"><i class="fa fa-lg fa-eye"></i></a>
+                                    <a class="btn btn-primary" href="{{url('/admin/cricket/contest/view/' . $record->id) }}" title="View"><i class="fa fa-lg fa-eye"></i></a>
 
                                     @if($record->game_status == 1)
 
-                                    <a class="btn btn-primary" href="{{url('/admin/football/contest/edit/'. $record->id )}}" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
+                                    <a class="btn btn-primary" href="{{url('/admin/cricket/contest/edit/' . $record->id) }}" title="Edit"><i class="fa fa-lg fa-edit"></i></a>
                                     @if($record->game_status != 'live')
-                                        <a class="btn btn-primary delete" href="{{url('/admin/football/contest/delete/' .$record->id )}}" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                                        <a class="btn btn-primary delete" href="{{url('/admin/cricket/contest/delete/'. $record->id) }}" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                                     @endif
 
 
-                                    <a href="{{url('/admin/football/contest/cancel/' . $record->id) }}" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <a href="{{url('/admin/cricket/contest/cancel/'. $record->id) }}" title="Cancel" class="btn btn-danger"  onclick="return confirm('Are you sure?');"><i class="fa fa-times" aria-hidden="true"></i></a>
 
                                     @endif
                                         </td>

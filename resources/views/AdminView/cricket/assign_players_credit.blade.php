@@ -37,7 +37,7 @@
 							<thead>
 								<tr style="float:right;">
 									<td colspan="2">
-										<input type="submit" value="{{ trans('Save') }}" class="btn btn-danger">
+
 
 										{{-- <a href="{{URL::to('admin/cricket_matches/assign_player_price/'.$id)}}" class="btn btn-primary"><i class=\"icon-refresh\"></i> {{ trans("Reset") }}</a> --}}
 										{{-- <a href="{{URL::to('admin/cricket_matches')}}" class="btn btn-info"><i class=\"icon-refresh\"></i> {{ trans("Cancel") }}</a> --}}
@@ -57,7 +57,7 @@
 							<tbody>
 
 								@if(!empty($teams))
-                               
+
 
 								@foreach($teams as $key => $val)
 
@@ -103,6 +103,7 @@
 							</tbody>
 						</table>
 					</div>
+                    <input type="submit" value="{{ trans('Save') }}" class="btn btn-danger" style="margin-top: 2cm;">
                     </form>
 
 
