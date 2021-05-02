@@ -38,6 +38,28 @@ class FootballController extends Controller
     }
     public function cancel($id){
         DB::update('update football_contests set game_status = ?  where id=?',[0, $id]);
+        $contest_data = DB::table('football_contests')->where('id',$id)->get();
+        foreach($contest_data as $cd){
+            // return $cd
+            $entry_fee = $cd->entry_fee;
+            $user_data = DB::table('user_contests')->where(array('contest_id'=> $id, 'game_type' => 'football'))->get();
+            if(!empty($user_data)){
+            foreach($user_data as $ud){
+                $user_id = $ud->user_id;
+                $user_wallet = DB::table('users')->where('id', $user_id)->get();
+                foreach($user_wallet as $uw){
+                    $wallet_amount = $uw->wallet;
+                    $new_wallet_amount = $wallet_amount + $entry_fee;
+                    DB::table('users')->where('id', $user_id)->update(array('wallet'=> $new_wallet_amount));
+                    DB::table('transaction_details')->insert(array(
+                        'user_id' => $user_id,
+                        'amount' => $entry_fee,
+                        'status' => 'refunded'
+                    ));
+                }
+            }
+        }
+        }
         return redirect('/admin/football/contest');
     }
     public function add(Request $req){

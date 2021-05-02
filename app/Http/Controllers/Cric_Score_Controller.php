@@ -417,6 +417,40 @@ class Cric_Score_Controller extends Controller
             DB::table('cric_cron_record')->insert(array('status' => 'User team given points'));
             return response()->json(['success' =>"Data Updated Successfully"], 200);
         }
+        public function add(){
+
+        $api_fetch_fixtures = "https://cricket.sportmonks.com/api/v2.0/players?api_token=Vs99FDycm6GHwRj4Cr9x67QC8d1S2ShJVQ7crytfZ7DBhrI4FFM1irajfKv3";
+        // API Call to fetch data and convert to json
+        $jsons = file_get_contents($api_fetch_fixtures);
+        // $fixtures = json_decode($jsons, true)["data"];
+        // $array = json_decode($jsons, true)["data"];
+        $data = json_decode($jsons, true)["data"][0];
+        foreach($data as $d){
+            $name = $d->fullname;
+            $img = $d->display_image;
+            $country = $d->country_id;
+            $battingstyle = $d->battingstyle;
+            $bowlingstyle = $d->bowlingstyle;
+            $position = $d->position->name;
+            $dob = $d->dateofbirth;
+            DB::table('cric_players')->insert(array(
+                'name' => $name,
+                'display_img' => $img,
+                'country_id' => $country,
+                'batting_style' => $battingstyle,
+                'bowlingstyle' => $bowlingstyle,
+                'position' => $position,
+                'dob' => $dob
+
+            ));
+        }
+        }
+        public function view($id){
+
+            $contest1 = DB::table('cricket_contests')->where(array('id' => $id))->get();
+            $contest = $contest1[0];
+            return  View::make('AdminView.cricket.view', ['contest' => $contest]);
+        }
         }
 
 

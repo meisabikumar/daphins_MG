@@ -24,26 +24,28 @@
 
 
 
-					{{ Form::open(['role' => 'form','url' => 'admin/cricket_matches/assign_player_price/'.$id,'class' => 'mws-form','files'=>'true']) }}
+					{{-- {{ Form::open(['role' => 'form','url' => 'admin/cricket_matches/assign_player_price/'.$id,'class' => 'mws-form','files'=>'true']) }}
 					{{Form::label('Tournament:', '')}}
-					{{ Form::text('tournament','', array('placeholder' => 'Tournmanet Name'))}}
+					{{ Form::text('tournament','', array('placeholder' => 'Tournmanet Name'))}} --}}
+
+                    <form method="post" action="{{url('/admin/cricket/get_player/' . $mat_id)}}">
+                        @csrf
+
 					<div class="table-responsive">
 						<table class="table">
 
 							<thead>
-
 								<tr style="float:right;">
 									<td colspan="2">
-										<input type="submit" value="{{ trans('Save') }}" class="btn btn-danger">
-										<a href="{{URL::to('admin/cricket_matches/assign_player_price/'.$id)}}" class="btn btn-primary"><i class=\"icon-refresh\"></i> {{ trans("Reset") }}</a>
-										<a href="{{URL::to('admin/cricket_matches')}}" class="btn btn-info"><i class=\"icon-refresh\"></i> {{ trans("Cancel") }}</a>
+
+
+										{{-- <a href="{{URL::to('admin/cricket_matches/assign_player_price/'.$id)}}" class="btn btn-primary"><i class=\"icon-refresh\"></i> {{ trans("Reset") }}</a> --}}
+										{{-- <a href="{{URL::to('admin/cricket_matches')}}" class="btn btn-info"><i class=\"icon-refresh\"></i> {{ trans("Cancel") }}</a> --}}
 
 										<div class="loaderRefresh">
 											<h2 class="text-center" id="refresh-text">Refreshing Data..</h2>
 											<img src="https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="">
 										</div>
-
-
 									</td>
 
 								</tr>
@@ -54,28 +56,33 @@
 							</thead>
 							<tbody>
 
-								@if(!empty($result))
+								@if(!empty($teams))
 
-								@foreach($result as $ky => $val)
+
+								@foreach($teams as $key => $val)
 
 
 
 								<tr style="background-color:#3c3f44; color:white;">
-									<th width="30%" height="50%" class="" colspan="2" style="font-size:14px;">{{$val['name']}} <?php
-																																// $results = DB::select('select * from cric_flags where team = ?', [$val['name']]);
-																																// var_dump($results);
-																																?> <img src=""></th>
+									<th width="30%" height="50%" class="" colspan="2" style="font-size:14px;">{{$val->team_name}} </th>
 								</tr>
 
-								@if(!empty($val['players']))
-								@foreach($val['players'] as $ky1 => $val1)
+								@if(!empty($val->players))
+								@foreach(json_decode($val->players) as $key1 => $val1)
 
 
 								<tr>
-									<th width="30%" class="">{{ $val1['name']}}( <?php
-																					echo $val1['position'];
-																					?>)</th>
-									<td data-th='Full Name' class="txtFntSze">{{ Form::text('player['.$ky.']['.$val1['id'].']',  $result_price_arr[$val1['id']] ,['class' => 'form-control', 'onkeypress' => "return isNumberKey(event)"]) }}</td>
+									<th width="30%" class="">{{ $val1->name}} ({{ $val1->role}}) </th>
+									<td data-th='Full Name' class="txtFntSze">
+
+                                        {{-- <input type="number" step="0.1" name="player[{{$val['team_id']}}][{{$key}}][{{$val1['id']}}]" value="0.0"> --}}
+
+                                        <input type="number" step="0.1" name="player[{{$key}}][{{$val->match_key}}][{{$key1}}][{{$val1->key}}]" value="0.0">
+                                        {{-- <input type="hidden" step="0.1" name="player[{{$key}}][{{$key1}}][team_id]" value="{{$val['team_id']}}"> --}}
+
+                                        {{-- <input type="hidden" step="0.1" name="player[{{$key}}][{{$key1}}][player_name]" value="{{$val1['fullname']}}">
+                                        <input type="hidden" step="0.1" name="player[{{$key}}][{{$key1}}][player_id]" value="{{$val1['id']}}">
+                                        <input type="number" step="0.1" name="player[{{$key}}][{{$key1}}][credit]" value="0.0"> --}}
 								</tr>
 								@endforeach
 								@else
@@ -87,25 +94,20 @@
 								@endforeach
 
 
-
-
-
 								@else
-
 								<tr>
 									<td colspan="2" style="text-align: center;">No Data found.</td>
 								</tr>
-
 								@endif
-
-
 
 							</tbody>
 						</table>
 					</div>
+                    <input type="submit" value="{{ trans('Save') }}" class="btn btn-danger" style="margin-top: 2cm;">
+                    </form>
 
 
-					{{ Form::close() }}
+					{{-- {{ Form::close() }} --}}
 					<br><br>
 					<button class="btn btn-danger" style="float:right;margin-right:10px;" onclick="HardRefreshData();"><i class="fa fa-refresh"></i>&nbsp;Hard Refresh</button>
 					<button class="btn btn-primary" style="float:right;margin-right:10px;" onclick="refreshData();"><i class="fa fa-link"></i>&nbsp; Associate Players</button>

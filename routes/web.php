@@ -11,7 +11,7 @@ use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
 // -------
 use App\Http\Controllers\AdminController\Cricket\Admin_Cricket_web_Controller;
 use App\Http\Controllers\AdminController\Football\Admin_Football_web_Controller;
-
+use App\Http\Controllers\Cric_Score_Controller;
 use App\Http\Controllers\FootballController;
 
 Route::get('migrate-refresh', function () {
@@ -65,6 +65,9 @@ Route::post('/admin/football/update_disable_match',[Admin_Football_web_Controlle
 Route::get('/admin/football/get_player/{match_id}',[Admin_Football_web_Controller::class,'get_player']);
 Route::post('/admin/football/get_player/{match_id}',[Admin_Football_web_Controller::class,'assign_player_credit']);
 //Routes by Vansh
+//users
+Route::get('admin/users/view-user/{id}',[HomeController::class, 'view_user']);
+Route::get('admin/users/delete-user/{id}',[HomeController::class, 'delete']);
 //Football
 Route::get('/admin/football/contest/create',[FootballController::class, 'create']);
 Route::post('/admin/football/contest/create',[FootballController::class, 'add']);
@@ -79,6 +82,12 @@ Route::get('/admin/cricket/contest/cancel/{id}',[Cricket_Contest_Controller::cla
 Route::get('/admin/cricket/contest/edit/{id}',[Cricket_Contest_Controller::class, 'editContestCategory']);
 Route::post('/admin/cricket/contest/edit/{id}',[Cricket_Contest_Controller::class, 'postUpdate']);
 Route::get('/admin/cricket/contest/view/{id}',[Cricket_Contest_Controller::class, 'view']);
+Route::get('/admin/cric-players', function () {
+    return view('AdminView.cricket.cric_players');
+});
+Route::get('/admin/foot-players', function () {
+    return view('AdminView.cricket.cric_players');
+});
 //Routes by Vansh ends
 // Cricket part
 // Routes by Amir

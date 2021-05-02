@@ -27,7 +27,7 @@
 
 			<h4>Cricket Match Data </h4>
 
-
+            <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width: 6cm">
 			<button class="btn btn-primary" style="float:right;margin:5px;" onclick="refreshData();"><i class="fa fa-refresh"></i> Refresh Matches</button>
 			<div class="loaderRefresh">
 				<h2 class="text-center" id="refresh-text">Refreshing Data..</h2>
@@ -47,7 +47,7 @@
 
 
 
-							<tbody>
+							<tbody id="myTable">
 
 								<tr>
 
@@ -177,5 +177,14 @@
 		font-size: 17px;
 	}
 </style>
-
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
 @endsection

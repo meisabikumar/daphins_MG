@@ -77,11 +77,11 @@
                                     @foreach ($res2 as $i)
 
                                         @if ($i->match_key == $r->match_id)
-                                            <option value="{{ $i->match_key }}" selected>{{ $i->match_name }}</option>
+                                            <option value="{{ $i->match_key }}" selected>{{ $i->match_name }}({{ $i->match_key }})</option>
 
                                         @endif
 
-                                        <option value="{{ $i->match_key }}">{{ $i->match_name }}</option>
+                                        <option value="{{ $i->match_key }}">{{ $i->match_name }}({{ $i->match_key }})</option>
 
 
                                     @endforeach

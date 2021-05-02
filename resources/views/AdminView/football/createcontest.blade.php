@@ -83,7 +83,7 @@
                                     @foreach ($res2 as $i)
 
                                         {{-- <option value="{{ $i->fixture_id }}">{{$i->localteam_data['name'] }} vs {{$i->visitorteam_data['name']}} ({{$i->type}}) ({{ $i->fixture_id }}) </option> --}}
-                                        <option value="{{ $i->match_key }}">{{ $i->match_name }}</option>
+                                        <option value="{{ $i->match_key }}">{{ $i->match_name }}({{ $i->match_key }})</option>
 
 
                                     @endforeach

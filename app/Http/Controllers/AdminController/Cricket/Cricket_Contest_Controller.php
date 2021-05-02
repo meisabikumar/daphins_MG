@@ -83,7 +83,7 @@ class Cricket_Contest_Controller extends Controller
         DB::table('cricket_contests')->insert([
             'match_id' => $match,
             'contest_name' => $contest_name,
-            'game_type' => 'Football',
+            'game_type' => 'Cricket',
             'category' => $contest_category,
             'entry_per_user' => $entry_per_user,
             'entry_fee' => $entry_fee,
@@ -120,6 +120,28 @@ class Cricket_Contest_Controller extends Controller
     }
     public function cancel($id){
         DB::update('update cricket_contests set game_status = ?  where id=?',[0, $id]);
+        $contest_data = DB::table('cricket_contests')->where('id',$id)->get();
+        foreach($contest_data as $cd){
+            // return $cd
+            $entry_fee = $cd->entry_fee;
+            $user_data = DB::table('user_contests')->where(array('contest_id'=> $id, 'game_type' => 'cricket'))->get();
+            if(!empty($user_data)){
+            foreach($user_data as $ud){
+                $user_id = $ud->user_id;
+                $user_wallet = DB::table('users')->where('id', $user_id)->get();
+                foreach($user_wallet as $uw){
+                    $wallet_amount = $uw->wallet;
+                    $new_wallet_amount = $wallet_amount + $entry_fee;
+                    DB::table('users')->where('id', $user_id)->update(array('wallet'=> $new_wallet_amount));
+                    DB::table('transaction_details')->insert(array(
+                        'user_id' => $user_id,
+                        'amount' => $entry_fee,
+                        'status' => 'refunded'
+                    ));
+                }
+            }
+        }
+        }
         return redirect('/admin/cricket/contest');
     }
     public function editContestCategory($id)
@@ -215,10 +237,5 @@ class Cricket_Contest_Controller extends Controller
         ]);
         return redirect('/admin/cricket/contest');
         }
-        public function view($id){
 
-            $contest1 = DB::table('cricket_contests')->where(array('id' => $id))->get();
-            $contest = $contest1[0];
-            return  View::make('AdminView.cricket.view', ['contest' => $contest]);
-        }
 }

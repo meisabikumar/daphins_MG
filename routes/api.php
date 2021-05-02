@@ -25,6 +25,7 @@ use App\Http\Controllers\Cric_Score_Controller;
 // -- Admin Contest ---
 use App\Http\Controllers\AdminController\Cricket\Cricket_Contest_Controller;
 use App\Http\Controllers\AdminController\Football\Football_Contest_Controller;
+use App\Http\Controllers\AdminController\HomeController;
 // -------
 
 // -- User ---
@@ -125,7 +126,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('/Testing_Score',[Cric_Score_Controller::class,'Testing_Score']);
     Route::get('/Update_Score',[Cric_Score_Controller::class,'score_update']);
     Route::get('/user_point_details',[Cric_Score_Controller::class,'user_point_update']);
-
+    Route::get('/player-add',[Cric_Score_Controller::class,'add'] );
+    Route::post('/test', [Cricket_AppResController::class, 'deduct']);
+    Route::get('/cancel-by-date', [HomeController::class, 'check']);
 
 
 
